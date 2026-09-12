@@ -48,7 +48,8 @@ struct Stats {
 impl Stats {
     fn record(&mut self, record: Record, sample_rate: u64) {
         match record {
-            Record::SourcePulse { .. }
+            Record::Udp { .. }
+            | Record::SourcePulse { .. }
             | Record::Pulse { .. }
             | Record::RenderWake { .. }
             | Record::KernelPosition { .. } => {}
@@ -449,6 +450,8 @@ mod tests {
         stats.record(
             Record::Capture {
                 sequence: 0,
+                wake_time_100ns: None,
+                get_buffer_start_100ns: None,
                 first_sample: 0,
                 device_position: 0,
                 device_position_valid: false,

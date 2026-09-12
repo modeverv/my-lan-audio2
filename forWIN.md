@@ -2,6 +2,10 @@
 
 2026-09-12。Windows側Codex向け。作業ブランチは **master**。
 
+Windows側の実施結果と次の同時収録手順は
+[Windows送信側のLAN遅延調査](docs/windows-sender-latency.md)に追記した。
+1ワーカー不足説は今回のWindows実測では支持せず、Mac到着との同時照合は未検証。
+
 ## 依頼
 
 Macの受信スレッド起床待ちは改善したが、受信バッファ5msではまだ欠落がある。

@@ -41,6 +41,50 @@ Session IDs combine launch UNIX nanoseconds and PID; they are local run identifi
 not cryptographically random IDs. No audio sample data or content is written.
 File serialization is entirely outside the capture thread.
 
+### Windows UDP correlation (2026-09-12)
+
+`--events --output FILE --udp-to HOST:PORT` enables fixed-size `udp` records in the
+existing bounded reporter queue. It stores no PCM and performs no file I/O or
+variable-size allocation in capture/send loops. Full queues increment the shared
+`telemetry_dropped` counter; this includes UDP metadata loss. GUI defaults leave
+packet tracing disabled.
+
+Join `udp.wire_session` + `sequence` + `first_sample` with the receiver's wire
+`session_id` + `sequence` + `first_sample`. The sender's ordinary `session_id`
+is the local recording ID and must not be used for this join. Preserve unsigned
+64-bit IDs when reading JSON (the supplied Node analyzer reads session IDs as strings).
+
+`acquired_100ns`, `published_100ns`, `dequeued_100ns`, `send_start_100ns`, and
+`send_end_100ns` all use Windows QPC converted to 100ns. Publication is stamped
+just before header encoding and queue push, so its interval includes that small
+producer tail. `worker_resume_100ns` is the last return from park (initially worker
+startup), not a fresh wake for every packet in a drained batch. Do not interpret
+resume minus publication as a wait for packets published after that resume.
+
+`outcome` is `sent`, `deadline`, `would_block`, `send_error`, `short_send`,
+`pool_exhausted`, or `queue_full`. A field for a stage never reached is null.
+Send start is stamped immediately before writing the wire send timestamp and
+calling the API; send end is captured immediately on return, **before bookkeeping**.
+The old `send_call_us` also included result handling and histogram updates;
+comparisons across this change must disclose that measurement boundary correction.
+Elapsed API time still includes OS preemption. The 5ms check remains an admission
+deadline, not a completion/delivery guarantee.
+
+Worker summaries add `cpu_ms`, `p99_9`, and strict `over_1ms`/`over_5ms` counts.
+CPU is per worker from GetThreadTimes (null if unavailable); the 10ms histogram
+overflow bucket is a lower bound for percentiles, while max remains exact to 1us.
+Success-only acquire/publish-to-send summaries retain their existing meaning;
+use the events and drop counters for unsuccessful packets.
+Capture records add `wake_time_100ns` and `get_buffer_start_100ns` (null for KS).
+Subtract each wake timestamp from its first GetBuffer start to isolate
+dispatch-to-call time; do not call this the time the OS signaled the event.
+
+`scripts/analyze-sender-latency.mjs` reports the whole run and a separately labeled
+window excluding the first five seconds. Missing packet tracing produces empty
+distributions, not inferred zero latency. Its optional Mac input joins metadata
+without subtracting clocks. Packet arrival excess is an interval difference;
+unmatched sends alone are not proof of loss because recording windows can differ.
+
 | Event | Meaning |
 | --- | --- |
 | `startup` | Endpoint, format, backend attempted/selected, fallback error, periods, tap status, MMCSS and requested duration |
@@ -63,7 +107,9 @@ Negative values are retained in raw records and counted, but excluded from age p
 
 `get_buffer_us` measures the GetBuffer call. `capture_to_record_us` measures acquisition through
 ReleaseBuffer to the point immediately before constructing/enqueuing the timing record.
-It does **not** measure PCM publication, UDP send, queue residence or disk I/O. A 0us result
+With UDP enabled it includes PCM copying/publication; optional level/onset scans are
+also included. It does not wait for UDP completion and does not measure network
+queue residence or disk I/O. A 0us result
 can be less than the rounding resolution and does not mean zero work. `callback_drain_us`
 includes all packet work and capture-record queue pushes for that wake, but not pushing the wake record.
 

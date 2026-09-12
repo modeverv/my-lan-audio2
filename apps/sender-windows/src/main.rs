@@ -37,6 +37,9 @@ pub enum Mute {
     about = "Event-driven WASAPI capture diagnostics and optional bounded UDP PCM sender"
 )]
 pub struct Options {
+    /// Record bounded UDP metadata (no PCM) in --output for cross-host correlation.
+    #[arg(long, requires = "output", requires = "udp_to")]
+    events: bool,
     /// Parent GUI control: stop gracefully on a 'stop' line or stdin EOF.
     #[arg(long, hide = true)]
     control_stdin: bool,

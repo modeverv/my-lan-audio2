@@ -334,6 +334,10 @@ pub fn list_devices() -> Result<()> {
 #[derive(Clone, Copy, Serialize)]
 #[serde(tag = "event", rename_all = "snake_case")]
 pub enum Record {
+    Udp {
+        #[serde(flatten)]
+        packet: crate::udp::PacketEvent,
+    },
     KernelPosition {
         time_100ns: u64,
         play_offset: u64,
@@ -355,6 +359,8 @@ pub enum Record {
         offset_frames: u32,
     },
     Capture {
+        wake_time_100ns: Option<u64>,
+        get_buffer_start_100ns: Option<u64>,
         sequence: u64,
         first_sample: u64,
         device_position: u64,
@@ -390,7 +396,7 @@ impl Shared {
             stop: AtomicBool::new(false),
         }
     }
-    fn push(&self, record: Record) {
+    pub(crate) fn push(&self, record: Record) {
         if self.queue.push(record).is_err() {
             self.dropped.fetch_add(1, Ordering::Relaxed);
         }
@@ -420,7 +426,7 @@ impl Qpc {
     }
 }
 
-fn thread_cpu_100ns() -> Result<u64> {
+pub(crate) fn thread_cpu_100ns() -> Result<u64> {
     let (mut creation, mut exit, mut kernel, mut user) = (
         FILETIME::default(),
         FILETIME::default(),
@@ -492,7 +498,7 @@ fn min_initialize(client: &IAudioClient, format: &MixFormat, flags: u32) -> Resu
     }
 }
 
-pub fn run(options: &Options, shared: &Shared, startup: Sender<Value>) -> Result<Value> {
+pub fn run(options: &Options, shared: &Arc<Shared>, startup: Sender<Value>) -> Result<Value> {
     if matches!(options.backend, Backend::Ks) {
         return kernel::run(options, shared, startup);
     }
@@ -623,12 +629,13 @@ pub fn run(options: &Options, shared: &Shared, startup: Sender<Value>) -> Result
                 options.stream_id,
                 (*format.0).nSamplesPerSec,
                 (*format.0).nChannels,
+                options.events.then(|| shared.clone()),
             )?)
         } else {
             None
         };
         let metadata = json!({"event":"startup","device_name":device_name,"device_id":device_id,
-            "udp_destination":options.udp_to.map(|v|v.to_string()),"udp_workers":options.udp_workers,
+            "udp_events":options.events,"udp_destination":options.udp_to.map(|v|v.to_string()),"udp_workers":options.udp_workers,
             "udp_deadline_ms":options.udp_deadline_ms,"udp_max_frames":options.udp_frames,"udp_protocol_version":1,
             "requested_backend":format!("{:?}",options.backend),"selected_backend":if process {"process loopback"} else if requested.is_some(){"IAudioClient3 minimum"}else{"legacy endpoint loopback"},
             "process_target_pid":target_pid,"format_source":if process {"requested endpoint-reference format; AUTOCONVERTPCM enabled"}else{"native endpoint mix"},
@@ -760,6 +767,8 @@ pub fn run(options: &Options, shared: &Shared, startup: Sender<Value>) -> Result
                 capture.ReleaseBuffer(frames)?;
                 let recorded = qpc.now();
                 shared.push(Record::Capture {
+                    wake_time_100ns: Some(wake),
+                    get_buffer_start_100ns: Some(begin),
                     sequence,
                     first_sample,
                     device_position: position,

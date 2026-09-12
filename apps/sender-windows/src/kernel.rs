@@ -362,6 +362,8 @@ pub(super) fn run(options: &Options, shared: &Shared, startup: Sender<Value>) ->
                 let timestamp = ((info.PerformanceCounterValue as u128 * 10_000_000)
                     / qpc.frequency as u128) as u64;
                 shared.push(Record::Capture {
+                    wake_time_100ns: None,
+                    get_buffer_start_100ns: None,
                     sequence,
                     first_sample,
                     device_position: first_sample,

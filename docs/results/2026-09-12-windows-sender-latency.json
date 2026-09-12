@@ -1,0 +1,5201 @@
+{
+  "manifest": {
+    "date": "2026-09-12T14:52:55.5683992+09:00",
+    "commit": "aba88e50c0d209c6ee247e0323e425dd96b84203",
+    "branch": "master",
+    "original_sender": "process-include pid 17844, 192.168.11.65:40100, defaults workers=1 deadline=5ms frames=128",
+    "binaries": [
+      {
+        "Path": "D:\\work\\my-lan-audio2\\runs\\sender-latency\\baseline.exe",
+        "Hash": "75A7A58C6688CD1E0835DF9A9275165D5BCF7FF8056691AC4141C3CA7BEF328D"
+      },
+      {
+        "Path": "D:\\work\\my-lan-audio2\\runs\\sender-latency\\instrumented.exe",
+        "Hash": "6DE1C2DAFBCBF89C583D1128E2CC8758FEC4E8EE13183C3F89F681882458AD7A"
+      }
+    ],
+    "nic": [
+      {
+        "Name": "イーサネット",
+        "InterfaceDescription": "Realtek Gaming USB 2.5GbE Family Controller",
+        "Status": "Up",
+        "LinkSpeed": "2.5 Gbps",
+        "DriverInformation": "Driver Date 2016-03-30 Version 11.19.602.2025 NDIS 6.89"
+      },
+      {
+        "Name": "Wi-Fi",
+        "InterfaceDescription": "Intel(R) Wi-Fi 6 AX201 160MHz",
+        "Status": "Disconnected",
+        "LinkSpeed": "961 Mbps",
+        "DriverInformation": "Driver Date 2022-07-19 Version 22.160.0.3 NDIS 6.60"
+      },
+      {
+        "Name": "Bluetooth ネットワーク接続",
+        "InterfaceDescription": "Bluetooth Device (Personal Area Network)",
+        "Status": "Disconnected",
+        "LinkSpeed": "3 Mbps",
+        "DriverInformation": "Driver Date 2006-06-21 Version 10.0.26100.8972 NDIS 6.30"
+      }
+    ],
+    "nic_properties": [
+      {
+        "DisplayName": "IPv4 Checksum Offload",
+        "DisplayValue": "Rx & Tx Enabled"
+      },
+      {
+        "DisplayName": "Priority & VLAN",
+        "DisplayValue": "Priority & VLAN Enabled"
+      },
+      {
+        "DisplayName": "Speed & Duplex",
+        "DisplayValue": "Auto Negotiation"
+      },
+      {
+        "DisplayName": "TCP Checksum Offload (IPv4)",
+        "DisplayValue": "Rx & Tx Enabled"
+      },
+      {
+        "DisplayName": "TCP Checksum Offload (IPv6)",
+        "DisplayValue": "Rx & Tx Enabled"
+      },
+      {
+        "DisplayName": "UDP Checksum Offload (IPv4)",
+        "DisplayValue": "Rx & Tx Enabled"
+      },
+      {
+        "DisplayName": "UDP Checksum Offload (IPv6)",
+        "DisplayValue": "Rx & Tx Enabled"
+      },
+      {
+        "DisplayName": "Network Address",
+        "DisplayValue": null
+      },
+      {
+        "DisplayName": "Receive URBs",
+        "DisplayValue": "6"
+      },
+      {
+        "DisplayName": "Transmit URBs",
+        "DisplayValue": "3"
+      },
+      {
+        "DisplayName": "Receive Buffers",
+        "DisplayValue": "16"
+      },
+      {
+        "DisplayName": "VLAN ID",
+        "DisplayValue": null
+      },
+      {
+        "DisplayName": "Transmit Buffers",
+        "DisplayValue": "18"
+      }
+    ],
+    "ipv4": [
+      {
+        "InterfaceAlias": "イーサネット",
+        "IPAddress": "192.168.11.29"
+      },
+      {
+        "InterfaceAlias": "Bluetooth ネットワーク接続",
+        "IPAddress": "169.254.55.76"
+      },
+      {
+        "InterfaceAlias": "ローカル エリア接続* 10",
+        "IPAddress": "169.254.113.119"
+      },
+      {
+        "InterfaceAlias": "ローカル エリア接続* 1",
+        "IPAddress": "169.254.131.52"
+      },
+      {
+        "InterfaceAlias": "Wi-Fi",
+        "IPAddress": "192.168.11.28"
+      },
+      {
+        "InterfaceAlias": "Loopback Pseudo-Interface 1",
+        "IPAddress": "127.0.0.1"
+      }
+    ],
+    "mac_events": "not provided",
+    "source": "existing Chrome playback, --measure-level, content not fixed test tone",
+    "commands": [
+      "baseline.exe --backend process-include --pid 17844 --udp-to 192.168.11.65:40100 --udp-workers 1 --udp-deadline-ms 5 --udp-frames 128 --seconds 90 --measure-level --output runs/sender-latency/baseline-{1,2}.jsonl",
+      "instrumented.exe same arguments plus --events, output instrumented-{1,2}.jsonl"
+    ]
+  },
+  "previous_gui": {
+    "sha256": "9da6e426958a05f0f88f0a101b310dc06174d758c8967a773a899a48589d7292",
+    "startup": {
+      "accepted_period_frames": null,
+      "capture_buffer_frames": 480,
+      "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+      "current_engine_period_frames": null,
+      "device_default_period_100ns": 100000,
+      "device_id": "{0.0.0.00000000}.{07dce926-d0c4-42c5-810f-6dd7c0408d89}",
+      "device_minimum_period_100ns": 30000,
+      "device_name": "スピーカー (Realtek(R) Audio)",
+      "duration_requested_seconds": 86400,
+      "endpoint_mute_during_run": true,
+      "endpoint_mute_original": true,
+      "event": "startup",
+      "fallback_reason": null,
+      "format": {
+        "bits_per_sample": 32,
+        "block_align": 8,
+        "channels": 2,
+        "format_tag": 65534,
+        "sample_format": "f32_le",
+        "sample_rate": 48000,
+        "subformat": "00000003-0000-0010-8000-00AA00389B71"
+      },
+      "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+      "measure_level": false,
+      "mmcss_error": null,
+      "mmcss_task": "Pro Audio",
+      "pre_volume_pre_mute_verified": false,
+      "process_target_pid": 17844,
+      "qpc_frequency": 10000000,
+      "reported_stream_latency_100ns": null,
+      "requested_backend": "ProcessInclude",
+      "requested_period_frames": null,
+      "selected_backend": "process loopback",
+      "shared_engine_period_query_error": null,
+      "shared_engine_periods": {
+        "default_frames": 480,
+        "fundamental_frames": 480,
+        "maximum_frames": 480,
+        "minimum_frames": 480
+      },
+      "tap_mode": "Default",
+      "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+      "telemetry_queue_capacity": 32768,
+      "test_tone": false,
+      "udp_deadline_ms": 5,
+      "udp_destination": "192.168.11.65:40100",
+      "udp_max_frames": 128,
+      "udp_protocol_version": 1,
+      "udp_workers": 1
+    },
+    "end": {
+      "cancelled": true,
+      "capture_thread_cpu_ms": 9218.75,
+      "capture_thread_cpu_one_core_percent": 0.24732843258710013,
+      "captured_frames": 178911360,
+      "captured_packets": 372732,
+      "elapsed_seconds": 3727.331267,
+      "empty_wakes": 0,
+      "end_qpc_100ns": 19774397593925,
+      "event": "capture_end",
+      "max_packets_per_wake": 1,
+      "start_qpc_100ns": 19737124279160,
+      "telemetry_dropped": 0,
+      "time_to_first_wake_us": 20147,
+      "trailing_no_event_us": 991,
+      "udp": {
+        "acquire_to_publish_us": {
+          "count": 1490928,
+          "max": 315,
+          "min": 0,
+          "overflow_ge_10000us": 0,
+          "p50": 6,
+          "p99": 23
+        },
+        "pool_drops": 0,
+        "pool_slots": 64,
+        "published_packets": 1490928,
+        "session_restarts": 0,
+        "workers": [
+          {
+            "acquire_to_send_us": {
+              "count": 1490928,
+              "max": 539,
+              "min": 4,
+              "overflow_ge_10000us": 0,
+              "p50": 81,
+              "p99": 157
+            },
+            "bytes": 1538637696,
+            "deadline_drops": 0,
+            "last_os_error": null,
+            "mmcss_error": null,
+            "publish_to_send_us": {
+              "count": 1490928,
+              "max": 532,
+              "min": 0,
+              "overflow_ge_10000us": 0,
+              "p50": 73,
+              "p99": 144
+            },
+            "send_call_us": {
+              "count": 1490928,
+              "max": 506,
+              "min": 2,
+              "overflow_ge_10000us": 0,
+              "p50": 4,
+              "p99": 95
+            },
+            "send_errors": 0,
+            "sent": 1490928,
+            "would_block_drops": 0
+          }
+        ]
+      },
+      "wait_timeouts": 0,
+      "wake_count": 372732
+    },
+    "summary": {
+      "audio_blocks_ge_500ms": 0,
+      "callback_drain_us": {
+        "count": 372732,
+        "max": 345,
+        "mean": 18.26754343603447,
+        "min": 5,
+        "p50": 15,
+        "p95": 32,
+        "p99": 48
+      },
+      "callback_gaps_ge_100ms": 0,
+      "callback_gaps_ge_500ms": 0,
+      "callback_interval_us": {
+        "count": 372731,
+        "max": 13549,
+        "mean": 9999.550624981555,
+        "min": 6302,
+        "p50": 10065,
+        "p95": 11059,
+        "p99": 11395
+      },
+      "callbacks_containing_ge_500ms_audio": 0,
+      "capture_overrun_count": null,
+      "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+      "capture_success": true,
+      "capture_to_record_us": {
+        "count": 372732,
+        "max": 316,
+        "mean": 9.321743236427245,
+        "min": 2,
+        "p50": 8,
+        "p95": 22,
+        "p99": 25
+      },
+      "complete_telemetry": true,
+      "device_position_gap_frames": 0,
+      "device_position_regressions": 0,
+      "discontinuities": 0,
+      "event": "summary",
+      "first_packet_discontinuities": 0,
+      "first_sample_age_us": {
+        "count": 372732,
+        "max": 14454,
+        "mean": 11262.929295043088,
+        "min": 10195,
+        "p50": 11213,
+        "p95": 12054,
+        "p99": 12202
+      },
+      "frames_per_callback": {
+        "count": 372732,
+        "max": 480,
+        "mean": 480,
+        "min": 480,
+        "p50": 480,
+        "p95": 480,
+        "p99": 480
+      },
+      "frames_per_packet": {
+        "count": 372732,
+        "max": 480,
+        "mean": 480,
+        "min": 480,
+        "p50": 480,
+        "p95": 480,
+        "p99": 480
+      },
+      "get_buffer_us": {
+        "count": 372732,
+        "max": 298,
+        "mean": 4.900405653391713,
+        "min": 1,
+        "p50": 4,
+        "p95": 11,
+        "p99": 20
+      },
+      "level_packets": 0,
+      "negative_first_sample_ages": 0,
+      "nonempty_callback_interval_us": {
+        "count": 372731,
+        "max": 13549,
+        "mean": 9999.550624981555,
+        "min": 6302,
+        "p50": 10065,
+        "p95": 11059,
+        "p99": 11395
+      },
+      "nonzero_packets": 0,
+      "observed_frames": 178911360,
+      "observed_packets": 372732,
+      "packet_audio_duration_us": {
+        "count": 372732,
+        "max": 10000,
+        "mean": 10000,
+        "min": 10000,
+        "p50": 10000,
+        "p95": 10000,
+        "p99": 10000
+      },
+      "peak_max": 0,
+      "silent_frames": 0,
+      "telemetry_dropped": 0,
+      "test_tone_success": true,
+      "timestamp_errors": 0,
+      "udp": {
+        "acquire_to_publish_us": {
+          "count": 1490928,
+          "max": 315,
+          "min": 0,
+          "overflow_ge_10000us": 0,
+          "p50": 6,
+          "p99": 23
+        },
+        "pool_drops": 0,
+        "pool_slots": 64,
+        "published_packets": 1490928,
+        "session_restarts": 0,
+        "workers": [
+          {
+            "acquire_to_send_us": {
+              "count": 1490928,
+              "max": 539,
+              "min": 4,
+              "overflow_ge_10000us": 0,
+              "p50": 81,
+              "p99": 157
+            },
+            "bytes": 1538637696,
+            "deadline_drops": 0,
+            "last_os_error": null,
+            "mmcss_error": null,
+            "publish_to_send_us": {
+              "count": 1490928,
+              "max": 532,
+              "min": 0,
+              "overflow_ge_10000us": 0,
+              "p50": 73,
+              "p99": 144
+            },
+            "send_call_us": {
+              "count": 1490928,
+              "max": 506,
+              "min": 2,
+              "overflow_ge_10000us": 0,
+              "p50": 4,
+              "p99": 95
+            },
+            "send_errors": 0,
+            "sent": 1490928,
+            "would_block_drops": 0
+          }
+        ]
+      },
+      "unavailable_device_positions": 372732
+    }
+  },
+  "runs": [
+    {
+      "label": "baseline-1",
+      "startup": {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{07dce926-d0c4-42c5-810f-6dd7c0408d89}",
+        "device_minimum_period_100ns": 30000,
+        "device_name": "スピーカー (Realtek(R) Audio)",
+        "duration_requested_seconds": 90,
+        "endpoint_mute_during_run": true,
+        "endpoint_mute_original": true,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 17844,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d47cb0e22abcbc-67a0",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 480,
+          "maximum_frames": 480,
+          "minimum_frames": 480
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false,
+        "udp_deadline_ms": 5,
+        "udp_destination": "192.168.11.65:40100",
+        "udp_max_frames": 128,
+        "udp_protocol_version": 1,
+        "udp_workers": 1
+      },
+      "end": {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 93.75,
+        "capture_thread_cpu_one_core_percent": 0.10416455039021791,
+        "captured_frames": 4319040,
+        "captured_packets": 8998,
+        "elapsed_seconds": 90.0018285,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19775523924384,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d47cb0e22abcbc-67a0",
+        "start_qpc_100ns": 19774623904204,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 20850,
+        "trailing_no_event_us": 10459,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 35992,
+            "max": 273,
+            "min": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 7,
+            "p99": 23
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 35992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 35992,
+                "max": 402,
+                "min": 6,
+                "overflow_ge_10000us": 0,
+                "p50": 77,
+                "p99": 189
+              },
+              "bytes": 37143744,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 35992,
+                "max": 387,
+                "min": 5,
+                "overflow_ge_10000us": 0,
+                "p50": 68,
+                "p99": 174
+              },
+              "send_call_us": {
+                "count": 35992,
+                "max": 304,
+                "min": 2,
+                "overflow_ge_10000us": 0,
+                "p50": 5,
+                "p99": 102
+              },
+              "send_errors": 0,
+              "sent": 35992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "wait_timeouts": 2,
+        "wake_count": 8998
+      },
+      "summary": {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 8998,
+          "max": 283,
+          "mean": 20.480773505223382,
+          "min": 6,
+          "p50": 19,
+          "p95": 33,
+          "p99": 52
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 8997,
+          "max": 11967,
+          "mean": 9999.630654662666,
+          "min": 7858,
+          "p50": 10024,
+          "p95": 11318,
+          "p99": 11615
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 8998,
+          "max": 274,
+          "mean": 10.49833296288064,
+          "min": 3,
+          "p50": 9,
+          "p95": 22,
+          "p99": 26
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 8998,
+          "max": 12891,
+          "mean": 11189.969771060236,
+          "min": 10437,
+          "p50": 10986,
+          "p95": 12187,
+          "p99": 12387
+        },
+        "frames_per_callback": {
+          "count": 8998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 8998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 8998,
+          "max": 266,
+          "mean": 5.699488775283396,
+          "min": 1,
+          "p50": 5,
+          "p95": 15,
+          "p99": 21
+        },
+        "level_packets": 8998,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 8997,
+          "max": 11967,
+          "mean": 9999.630654662666,
+          "min": 7858,
+          "p50": 10024,
+          "p95": 11318,
+          "p99": 11615
+        },
+        "nonzero_packets": 8944,
+        "observed_frames": 4319040,
+        "observed_packets": 8998,
+        "packet_audio_duration_us": {
+          "count": 8998,
+          "max": 10000,
+          "mean": 10000,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.8655061721801758,
+        "schema_version": 1,
+        "session_id": "18d47cb0e22abcbc-67a0",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 35992,
+            "max": 273,
+            "min": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 7,
+            "p99": 23
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 35992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 35992,
+                "max": 402,
+                "min": 6,
+                "overflow_ge_10000us": 0,
+                "p50": 77,
+                "p99": 189
+              },
+              "bytes": 37143744,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 35992,
+                "max": 387,
+                "min": 5,
+                "overflow_ge_10000us": 0,
+                "p50": 68,
+                "p99": 174
+              },
+              "send_call_us": {
+                "count": 35992,
+                "max": 304,
+                "min": 2,
+                "overflow_ge_10000us": 0,
+                "p50": 5,
+                "p99": 102
+              },
+              "send_errors": 0,
+              "sent": 35992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "unavailable_device_positions": 8998
+      },
+      "all": {
+        "capture_packets": 8998,
+        "captured_frames": 4319040,
+        "nonzero_packets": 8944,
+        "zero_peak_packets": 3,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 8998
+        },
+        "packets_per_wake": {
+          "1": 8998
+        },
+        "frames_per_wake": {
+          "480": 8998
+        },
+        "wake_interval_us": {
+          "count": 8997,
+          "p50": 10024.4,
+          "p99": 11615.4,
+          "p99_9": 11885.6,
+          "max": 11967.9,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "active_wake_interval_us": {
+          "count": 8997,
+          "p50": 10024.4,
+          "p99": 11615.4,
+          "p99_9": 11885.6,
+          "max": 11967.9,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "capture_interval_us": {
+          "count": 8997,
+          "p50": 10024,
+          "p99": 11616.3,
+          "p99_9": 11895.6,
+          "max": 11968.8,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "get_buffer_us": {
+          "count": 8998,
+          "p50": 5,
+          "p99": 21,
+          "p99_9": 24,
+          "max": 266,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 8998,
+          "p50": 19,
+          "p99": 52,
+          "p99_9": 89,
+          "max": 283,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {},
+        "acquire_to_send_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "after_first_5s": {
+        "capture_packets": 8500,
+        "captured_frames": 4080000,
+        "nonzero_packets": 8449,
+        "zero_peak_packets": 0,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 8500
+        },
+        "packets_per_wake": {
+          "1": 8500
+        },
+        "frames_per_wake": {
+          "480": 8500
+        },
+        "wake_interval_us": {
+          "count": 8499,
+          "p50": 10024.7,
+          "p99": 11617.2,
+          "p99_9": 11885.6,
+          "max": 11967.9,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "active_wake_interval_us": {
+          "count": 8499,
+          "p50": 10024.7,
+          "p99": 11617.2,
+          "p99_9": 11885.6,
+          "max": 11967.9,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "capture_interval_us": {
+          "count": 8499,
+          "p50": 10024.1,
+          "p99": 11617.4,
+          "p99_9": 11895.6,
+          "max": 11968.8,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "get_buffer_us": {
+          "count": 8500,
+          "p50": 5,
+          "p99": 21,
+          "p99_9": 24,
+          "max": 266,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 8500,
+          "p50": 19,
+          "p99": 51,
+          "p99_9": 88,
+          "max": 283,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {},
+        "acquire_to_send_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "worst_send_calls": [],
+      "worst_wakes": [
+        {
+          "drain_us": 21,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11967,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cb0e22abcbc-67a0",
+          "time_100ns": 19775074131343
+        },
+        {
+          "drain_us": 22,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11964,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cb0e22abcbc-67a0",
+          "time_100ns": 19775002832989
+        },
+        {
+          "drain_us": 31,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11958,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cb0e22abcbc-67a0",
+          "time_100ns": 19774936033447
+        },
+        {
+          "drain_us": 20,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11922,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cb0e22abcbc-67a0",
+          "time_100ns": 19774706233554
+        },
+        {
+          "drain_us": 21,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11916,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cb0e22abcbc-67a0",
+          "time_100ns": 19775475032925
+        }
+      ],
+      "source": {
+        "path": "runs/sender-latency/baseline-1.jsonl",
+        "sha256": "ab0afc6a109d4b239ac3c74d120221059085f3e7d77b56519396c65db57e2842"
+      }
+    },
+    {
+      "label": "baseline-2",
+      "startup": {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{07dce926-d0c4-42c5-810f-6dd7c0408d89}",
+        "device_minimum_period_100ns": 30000,
+        "device_name": "スピーカー (Realtek(R) Audio)",
+        "duration_requested_seconds": 90,
+        "endpoint_mute_during_run": true,
+        "endpoint_mute_original": true,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 17844,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d47cc5e2eb72a8-3bcc",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 480,
+          "maximum_frames": 480,
+          "minimum_frames": 480
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false,
+        "udp_deadline_ms": 5,
+        "udp_destination": "192.168.11.65:40100",
+        "udp_max_frames": 128,
+        "udp_protocol_version": 1,
+        "udp_workers": 1
+      },
+      "end": {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 203.125,
+        "capture_thread_cpu_one_core_percent": 0.22569248769057615,
+        "captured_frames": 4319040,
+        "captured_packets": 8998,
+        "elapsed_seconds": 90.0007803,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19776425954713,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d47cc5e2eb72a8-3bcc",
+        "start_qpc_100ns": 19775525943402,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 22854,
+        "trailing_no_event_us": 7370,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 35992,
+            "max": 248,
+            "min": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 6,
+            "p99": 23
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 35992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 35992,
+                "max": 615,
+                "min": 6,
+                "overflow_ge_10000us": 0,
+                "p50": 80,
+                "p99": 190
+              },
+              "bytes": 37143744,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 35992,
+                "max": 606,
+                "min": 5,
+                "overflow_ge_10000us": 0,
+                "p50": 71,
+                "p99": 177
+              },
+              "send_call_us": {
+                "count": 35992,
+                "max": 583,
+                "min": 2,
+                "overflow_ge_10000us": 0,
+                "p50": 5,
+                "p99": 104
+              },
+              "send_errors": 0,
+              "sent": 35992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "wait_timeouts": 1,
+        "wake_count": 8998
+      },
+      "summary": {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 8998,
+          "max": 259,
+          "mean": 20.580351189153145,
+          "min": 6,
+          "p50": 18,
+          "p95": 34,
+          "p99": 51
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 8997,
+          "max": 11941,
+          "mean": 9999.652995442926,
+          "min": 8066,
+          "p50": 10053,
+          "p95": 11048,
+          "p99": 11417
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 8998,
+          "max": 250,
+          "mean": 10.555567903978663,
+          "min": 3,
+          "p50": 9,
+          "p95": 23,
+          "p99": 26
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 8998,
+          "max": 11198,
+          "mean": 9879.911424761058,
+          "min": 9045,
+          "p50": 9803,
+          "p95": 10716,
+          "p99": 10873
+        },
+        "frames_per_callback": {
+          "count": 8998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 8998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 8998,
+          "max": 151,
+          "mean": 5.637586130251167,
+          "min": 1,
+          "p50": 4,
+          "p95": 18,
+          "p99": 21
+        },
+        "level_packets": 8998,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 8997,
+          "max": 11941,
+          "mean": 9999.652995442926,
+          "min": 8066,
+          "p50": 10053,
+          "p95": 11048,
+          "p99": 11417
+        },
+        "nonzero_packets": 8795,
+        "observed_frames": 4319040,
+        "observed_packets": 8998,
+        "packet_audio_duration_us": {
+          "count": 8998,
+          "max": 10000,
+          "mean": 10000,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.8685948252677917,
+        "schema_version": 1,
+        "session_id": "18d47cc5e2eb72a8-3bcc",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 35992,
+            "max": 248,
+            "min": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 6,
+            "p99": 23
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 35992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 35992,
+                "max": 615,
+                "min": 6,
+                "overflow_ge_10000us": 0,
+                "p50": 80,
+                "p99": 190
+              },
+              "bytes": 37143744,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 35992,
+                "max": 606,
+                "min": 5,
+                "overflow_ge_10000us": 0,
+                "p50": 71,
+                "p99": 177
+              },
+              "send_call_us": {
+                "count": 35992,
+                "max": 583,
+                "min": 2,
+                "overflow_ge_10000us": 0,
+                "p50": 5,
+                "p99": 104
+              },
+              "send_errors": 0,
+              "sent": 35992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "unavailable_device_positions": 8998
+      },
+      "all": {
+        "capture_packets": 8998,
+        "captured_frames": 4319040,
+        "nonzero_packets": 8795,
+        "zero_peak_packets": 9,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 8998
+        },
+        "packets_per_wake": {
+          "1": 8998
+        },
+        "frames_per_wake": {
+          "480": 8998
+        },
+        "wake_interval_us": {
+          "count": 8997,
+          "p50": 10053.1,
+          "p99": 11417,
+          "p99_9": 11696.5,
+          "max": 11941.5,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "active_wake_interval_us": {
+          "count": 8997,
+          "p50": 10053.1,
+          "p99": 11417,
+          "p99_9": 11696.5,
+          "max": 11941.5,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "capture_interval_us": {
+          "count": 8997,
+          "p50": 10052.8,
+          "p99": 11424.6,
+          "p99_9": 11698.7,
+          "max": 11938.4,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "get_buffer_us": {
+          "count": 8998,
+          "p50": 4,
+          "p99": 21,
+          "p99_9": 43,
+          "max": 151,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 8998,
+          "p50": 18,
+          "p99": 51,
+          "p99_9": 88,
+          "max": 259,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {},
+        "acquire_to_send_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "after_first_5s": {
+        "capture_packets": 8500,
+        "captured_frames": 4080000,
+        "nonzero_packets": 8500,
+        "zero_peak_packets": 0,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 8500
+        },
+        "packets_per_wake": {
+          "1": 8500
+        },
+        "frames_per_wake": {
+          "480": 8500
+        },
+        "wake_interval_us": {
+          "count": 8499,
+          "p50": 10053.2,
+          "p99": 11417,
+          "p99_9": 11696.5,
+          "max": 11941.5,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "active_wake_interval_us": {
+          "count": 8499,
+          "p50": 10053.2,
+          "p99": 11417,
+          "p99_9": 11696.5,
+          "max": 11941.5,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "capture_interval_us": {
+          "count": 8499,
+          "p50": 10053.5,
+          "p99": 11424.6,
+          "p99_9": 11698.7,
+          "max": 11938.4,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "get_buffer_us": {
+          "count": 8500,
+          "p50": 4,
+          "p99": 21,
+          "p99_9": 43,
+          "max": 151,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 8500,
+          "p50": 18,
+          "p99": 51,
+          "p99_9": 88,
+          "max": 259,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {},
+        "acquire_to_send_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "worst_send_calls": [],
+      "worst_wakes": [
+        {
+          "drain_us": 12,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11941,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cc5e2eb72a8-3bcc",
+          "time_100ns": 19775636390499
+        },
+        {
+          "drain_us": 14,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11814,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cc5e2eb72a8-3bcc",
+          "time_100ns": 19776098889398
+        },
+        {
+          "drain_us": 15,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11770,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cc5e2eb72a8-3bcc",
+          "time_100ns": 19776094188717
+        },
+        {
+          "drain_us": 13,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11764,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cc5e2eb72a8-3bcc",
+          "time_100ns": 19775955588158
+        },
+        {
+          "drain_us": 11,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11729,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cc5e2eb72a8-3bcc",
+          "time_100ns": 19775646089945
+        }
+      ],
+      "source": {
+        "path": "runs/sender-latency/baseline-2.jsonl",
+        "sha256": "ef105cfeea5eebdcea7478693fa0a5d92f2515a327db5577d5ce9713bf61a7ff"
+      }
+    },
+    {
+      "label": "instrumented-1",
+      "startup": {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{07dce926-d0c4-42c5-810f-6dd7c0408d89}",
+        "device_minimum_period_100ns": 30000,
+        "device_name": "スピーカー (Realtek(R) Audio)",
+        "duration_requested_seconds": 90,
+        "endpoint_mute_during_run": true,
+        "endpoint_mute_original": true,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 17844,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d47ce9282236b8-60e4",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 480,
+          "maximum_frames": 480,
+          "minimum_frames": 480
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false,
+        "udp_deadline_ms": 5,
+        "udp_destination": "192.168.11.65:40100",
+        "udp_events": true,
+        "udp_max_frames": 128,
+        "udp_protocol_version": 1,
+        "udp_workers": 1
+      },
+      "end": {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 171.875,
+        "capture_thread_cpu_one_core_percent": 0.1909698671393829,
+        "captured_frames": 4319040,
+        "captured_packets": 8998,
+        "elapsed_seconds": 90.0011099,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19777940845445,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d47ce9282236b8-60e4",
+        "start_qpc_100ns": 19777040832155,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 23196,
+        "trailing_no_event_us": 8089,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 35992,
+            "max": 273,
+            "min": 0,
+            "over_1ms": 0,
+            "over_5ms": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 7,
+            "p99": 23,
+            "p99_9": 37
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 35992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 35992,
+                "max": 390,
+                "min": 8,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 81,
+                "p99": 194,
+                "p99_9": 282
+              },
+              "bytes": 37143744,
+              "cpu_ms": 750,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 35992,
+                "max": 375,
+                "min": 1,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 72,
+                "p99": 180,
+                "p99_9": 257
+              },
+              "send_call_us": {
+                "count": 35992,
+                "max": 308,
+                "min": 2,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 4,
+                "p99": 101,
+                "p99_9": 191
+              },
+              "send_errors": 0,
+              "sent": 35992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "wait_timeouts": 1,
+        "wake_count": 8998
+      },
+      "summary": {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 8998,
+          "max": 286,
+          "mean": 20.884307623916428,
+          "min": 8,
+          "p50": 19,
+          "p95": 34,
+          "p99": 51
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 8997,
+          "max": 12095,
+          "mean": 9999.556518839614,
+          "min": 8133,
+          "p50": 10065,
+          "p95": 11002,
+          "p99": 11408
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 8998,
+          "max": 275,
+          "mean": 10.528339631029118,
+          "min": 4,
+          "p50": 9,
+          "p95": 22,
+          "p99": 26
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 8998,
+          "max": 11162,
+          "mean": 9894.840742387198,
+          "min": 9058,
+          "p50": 9850,
+          "p95": 10711,
+          "p99": 10863
+        },
+        "frames_per_callback": {
+          "count": 8998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 8998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 8998,
+          "max": 54,
+          "mean": 5.7973994220937985,
+          "min": 2,
+          "p50": 5,
+          "p95": 18,
+          "p99": 21
+        },
+        "level_packets": 8998,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 8997,
+          "max": 12095,
+          "mean": 9999.556518839614,
+          "min": 8133,
+          "p50": 10065,
+          "p95": 11002,
+          "p99": 11408
+        },
+        "nonzero_packets": 8718,
+        "observed_frames": 4319040,
+        "observed_packets": 8998,
+        "packet_audio_duration_us": {
+          "count": 8998,
+          "max": 10000,
+          "mean": 10000,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.8706937432289124,
+        "schema_version": 1,
+        "session_id": "18d47ce9282236b8-60e4",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 35992,
+            "max": 273,
+            "min": 0,
+            "over_1ms": 0,
+            "over_5ms": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 7,
+            "p99": 23,
+            "p99_9": 37
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 35992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 35992,
+                "max": 390,
+                "min": 8,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 81,
+                "p99": 194,
+                "p99_9": 282
+              },
+              "bytes": 37143744,
+              "cpu_ms": 750,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 35992,
+                "max": 375,
+                "min": 1,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 72,
+                "p99": 180,
+                "p99_9": 257
+              },
+              "send_call_us": {
+                "count": 35992,
+                "max": 308,
+                "min": 2,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 4,
+                "p99": 101,
+                "p99_9": 191
+              },
+              "send_errors": 0,
+              "sent": 35992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "unavailable_device_positions": 8998
+      },
+      "all": {
+        "capture_packets": 8998,
+        "captured_frames": 4319040,
+        "nonzero_packets": 8718,
+        "zero_peak_packets": 9,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 8998
+        },
+        "packets_per_wake": {
+          "1": 8998
+        },
+        "frames_per_wake": {
+          "480": 8998
+        },
+        "wake_interval_us": {
+          "count": 8997,
+          "p50": 10065.9,
+          "p99": 11408.1,
+          "p99_9": 11682.1,
+          "max": 12095.8,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "active_wake_interval_us": {
+          "count": 8997,
+          "p50": 10065.9,
+          "p99": 11408.1,
+          "p99_9": 11682.1,
+          "max": 12095.8,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "capture_interval_us": {
+          "count": 8997,
+          "p50": 10066,
+          "p99": 11407.8,
+          "p99_9": 11680.2,
+          "max": 12094.5,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "get_buffer_us": {
+          "count": 8998,
+          "p50": 5,
+          "p99": 21,
+          "p99_9": 35,
+          "max": 54,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 8998,
+          "p50": 19,
+          "p99": 51,
+          "p99_9": 86,
+          "max": 286,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 8998,
+          "p50": 2,
+          "p99": 15.9,
+          "p99_9": 56.1,
+          "max": 215.7,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {
+          "sent": 35992
+        },
+        "acquire_to_send_us": {
+          "count": 35992,
+          "p50": 81.5,
+          "p99": 194.4,
+          "p99_9": 282.7,
+          "max": 390.8,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 35992,
+          "p50": 72.7,
+          "p99": 180.3,
+          "p99_9": 257.4,
+          "max": 375.4,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 35992,
+          "p50": 7,
+          "p99": 23.6,
+          "p99_9": 37.9,
+          "max": 273.6,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 35992,
+          "p50": 72.7,
+          "p99": 180.2,
+          "p99_9": 257.4,
+          "max": 375.2,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 35992,
+          "p50": 4.9,
+          "p99": 101.6,
+          "p99_9": 191.5,
+          "max": 308.8,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "after_first_5s": {
+        "capture_packets": 8500,
+        "captured_frames": 4080000,
+        "nonzero_packets": 8223,
+        "zero_peak_packets": 6,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 8500
+        },
+        "packets_per_wake": {
+          "1": 8500
+        },
+        "frames_per_wake": {
+          "480": 8500
+        },
+        "wake_interval_us": {
+          "count": 8499,
+          "p50": 10064.8,
+          "p99": 11409.9,
+          "p99_9": 11682.1,
+          "max": 12095.8,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "active_wake_interval_us": {
+          "count": 8499,
+          "p50": 10064.8,
+          "p99": 11409.9,
+          "p99_9": 11682.1,
+          "max": 12095.8,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "capture_interval_us": {
+          "count": 8499,
+          "p50": 10064.6,
+          "p99": 11410.5,
+          "p99_9": 11680.2,
+          "max": 12094.5,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "get_buffer_us": {
+          "count": 8500,
+          "p50": 5,
+          "p99": 21,
+          "p99_9": 35,
+          "max": 54,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 8500,
+          "p50": 19,
+          "p99": 51,
+          "p99_9": 86,
+          "max": 286,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 8500,
+          "p50": 2,
+          "p99": 15.9,
+          "p99_9": 56.1,
+          "max": 215.7,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {
+          "sent": 34000
+        },
+        "acquire_to_send_us": {
+          "count": 34000,
+          "p50": 81.4,
+          "p99": 194.2,
+          "p99_9": 283.2,
+          "max": 390.8,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 34000,
+          "p50": 72.5,
+          "p99": 180.3,
+          "p99_9": 259.1,
+          "max": 375.4,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 34000,
+          "p50": 7,
+          "p99": 23.6,
+          "p99_9": 44.4,
+          "max": 273.6,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 34000,
+          "p50": 72.5,
+          "p99": 180.2,
+          "p99_9": 258.8,
+          "max": 375.2,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 34000,
+          "p50": 4.8,
+          "p99": 101.3,
+          "p99_9": 191.8,
+          "max": 308.8,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "worst_send_calls": [
+        {
+          "packet": {
+            "acquired_100ns": 19777432668509,
+            "dequeued_100ns": 19777432668800,
+            "event": "udp",
+            "first_sample": "1879680",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19777432668536,
+            "schema_version": 1,
+            "send_end_100ns": 19777432671889,
+            "send_start_100ns": 19777432668801,
+            "sequence": "15664",
+            "session_id": "18d47ce9282236b8-60e4",
+            "wire_session": "10620088052643856489",
+            "worker": 0,
+            "worker_resume_100ns": 19777432668791
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19777432569216,
+              "dequeued_100ns": 19777432569953,
+              "event": "udp",
+              "first_sample": "1879456",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777432569294,
+              "schema_version": 1,
+              "send_end_100ns": 19777432569989,
+              "send_start_100ns": 19777432569953,
+              "sequence": "15662",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777432569363
+            },
+            {
+              "acquired_100ns": 19777432569216,
+              "dequeued_100ns": 19777432569992,
+              "event": "udp",
+              "first_sample": "1879584",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777432569297,
+              "schema_version": 1,
+              "send_end_100ns": 19777432570042,
+              "send_start_100ns": 19777432569992,
+              "sequence": "15663",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777432569363
+            },
+            {
+              "acquired_100ns": 19777432668509,
+              "dequeued_100ns": 19777432668800,
+              "event": "udp",
+              "first_sample": "1879680",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777432668536,
+              "schema_version": 1,
+              "send_end_100ns": 19777432671889,
+              "send_start_100ns": 19777432668801,
+              "sequence": "15664",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777432668791
+            },
+            {
+              "acquired_100ns": 19777432668509,
+              "dequeued_100ns": 19777432671903,
+              "event": "udp",
+              "first_sample": "1879808",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777432668685,
+              "schema_version": 1,
+              "send_end_100ns": 19777432671981,
+              "send_start_100ns": 19777432671904,
+              "sequence": "15665",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777432668791
+            },
+            {
+              "acquired_100ns": 19777432668509,
+              "dequeued_100ns": 19777432671983,
+              "event": "udp",
+              "first_sample": "1879936",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777432668700,
+              "schema_version": 1,
+              "send_end_100ns": 19777432672025,
+              "send_start_100ns": 19777432671985,
+              "sequence": "15666",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777432668791
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19777573069831,
+            "dequeued_100ns": 19777573070798,
+            "event": "udp",
+            "first_sample": "2553984",
+            "frames": 96,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19777573069939,
+            "schema_version": 1,
+            "send_end_100ns": 19777573073851,
+            "send_start_100ns": 19777573070799,
+            "sequence": "21283",
+            "session_id": "18d47ce9282236b8-60e4",
+            "wire_session": "10620088052643856489",
+            "worker": 0,
+            "worker_resume_100ns": 19777573070037
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19777573069831,
+              "dequeued_100ns": 19777573070667,
+              "event": "udp",
+              "first_sample": "2553728",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777573069933,
+              "schema_version": 1,
+              "send_end_100ns": 19777573070741,
+              "send_start_100ns": 19777573070667,
+              "sequence": "21281",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777573070037
+            },
+            {
+              "acquired_100ns": 19777573069831,
+              "dequeued_100ns": 19777573070744,
+              "event": "udp",
+              "first_sample": "2553856",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777573069937,
+              "schema_version": 1,
+              "send_end_100ns": 19777573070796,
+              "send_start_100ns": 19777573070744,
+              "sequence": "21282",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777573070037
+            },
+            {
+              "acquired_100ns": 19777573069831,
+              "dequeued_100ns": 19777573070798,
+              "event": "udp",
+              "first_sample": "2553984",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777573069939,
+              "schema_version": 1,
+              "send_end_100ns": 19777573073851,
+              "send_start_100ns": 19777573070799,
+              "sequence": "21283",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777573070037
+            },
+            {
+              "acquired_100ns": 19777573168407,
+              "dequeued_100ns": 19777573168559,
+              "event": "udp",
+              "first_sample": "2554080",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777573168423,
+              "schema_version": 1,
+              "send_end_100ns": 19777573169255,
+              "send_start_100ns": 19777573168559,
+              "sequence": "21284",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777573168558
+            },
+            {
+              "acquired_100ns": 19777573168407,
+              "dequeued_100ns": 19777573169260,
+              "event": "udp",
+              "first_sample": "2554208",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777573168475,
+              "schema_version": 1,
+              "send_end_100ns": 19777573169385,
+              "send_start_100ns": 19777573169260,
+              "sequence": "21285",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777573168558
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19777360863775,
+            "dequeued_100ns": 19777360865473,
+            "event": "udp",
+            "first_sample": "1535424",
+            "frames": 96,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19777360863947,
+            "schema_version": 1,
+            "send_end_100ns": 19777360868425,
+            "send_start_100ns": 19777360865475,
+            "sequence": "12795",
+            "session_id": "18d47ce9282236b8-60e4",
+            "wire_session": "10620088052643856489",
+            "worker": 0,
+            "worker_resume_100ns": 19777360863991
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19777360863775,
+              "dequeued_100ns": 19777360864653,
+              "event": "udp",
+              "first_sample": "1535168",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777360863944,
+              "schema_version": 1,
+              "send_end_100ns": 19777360865424,
+              "send_start_100ns": 19777360864654,
+              "sequence": "12793",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777360863991
+            },
+            {
+              "acquired_100ns": 19777360863775,
+              "dequeued_100ns": 19777360865426,
+              "event": "udp",
+              "first_sample": "1535296",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777360863945,
+              "schema_version": 1,
+              "send_end_100ns": 19777360865470,
+              "send_start_100ns": 19777360865427,
+              "sequence": "12794",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777360863991
+            },
+            {
+              "acquired_100ns": 19777360863775,
+              "dequeued_100ns": 19777360865473,
+              "event": "udp",
+              "first_sample": "1535424",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777360863947,
+              "schema_version": 1,
+              "send_end_100ns": 19777360868425,
+              "send_start_100ns": 19777360865475,
+              "sequence": "12795",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777360863991
+            },
+            {
+              "acquired_100ns": 19777360973912,
+              "dequeued_100ns": 19777360974191,
+              "event": "udp",
+              "first_sample": "1535520",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777360974068,
+              "schema_version": 1,
+              "send_end_100ns": 19777360974704,
+              "send_start_100ns": 19777360974191,
+              "sequence": "12796",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777360974190
+            },
+            {
+              "acquired_100ns": 19777360973912,
+              "dequeued_100ns": 19777360974707,
+              "event": "udp",
+              "first_sample": "1535648",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777360974113,
+              "schema_version": 1,
+              "send_end_100ns": 19777360974754,
+              "send_start_100ns": 19777360974708,
+              "sequence": "12797",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777360974190
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19777575767007,
+            "dequeued_100ns": 19777575767344,
+            "event": "udp",
+            "first_sample": "2566560",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19777575767081,
+            "schema_version": 1,
+            "send_end_100ns": 19777575770203,
+            "send_start_100ns": 19777575767345,
+            "sequence": "21388",
+            "session_id": "18d47ce9282236b8-60e4",
+            "wire_session": "10620088052643856489",
+            "worker": 0,
+            "worker_resume_100ns": 19777575767330
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19777575673830,
+              "dequeued_100ns": 19777575674674,
+              "event": "udp",
+              "first_sample": "2566336",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777575673898,
+              "schema_version": 1,
+              "send_end_100ns": 19777575674707,
+              "send_start_100ns": 19777575674675,
+              "sequence": "21386",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777575673975
+            },
+            {
+              "acquired_100ns": 19777575673830,
+              "dequeued_100ns": 19777575674710,
+              "event": "udp",
+              "first_sample": "2566464",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777575673899,
+              "schema_version": 1,
+              "send_end_100ns": 19777575674742,
+              "send_start_100ns": 19777575674711,
+              "sequence": "21387",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777575673975
+            },
+            {
+              "acquired_100ns": 19777575767007,
+              "dequeued_100ns": 19777575767344,
+              "event": "udp",
+              "first_sample": "2566560",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777575767081,
+              "schema_version": 1,
+              "send_end_100ns": 19777575770203,
+              "send_start_100ns": 19777575767345,
+              "sequence": "21388",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777575767330
+            },
+            {
+              "acquired_100ns": 19777575767007,
+              "dequeued_100ns": 19777575770221,
+              "event": "udp",
+              "first_sample": "2566688",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777575767212,
+              "schema_version": 1,
+              "send_end_100ns": 19777575770286,
+              "send_start_100ns": 19777575770223,
+              "sequence": "21389",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777575767330
+            },
+            {
+              "acquired_100ns": 19777575767007,
+              "dequeued_100ns": 19777575770289,
+              "event": "udp",
+              "first_sample": "2566816",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777575767221,
+              "schema_version": 1,
+              "send_end_100ns": 19777575770330,
+              "send_start_100ns": 19777575770289,
+              "sequence": "21390",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777575767330
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19777781177336,
+            "dequeued_100ns": 19777781177760,
+            "event": "udp",
+            "first_sample": "3552480",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19777781177415,
+            "schema_version": 1,
+            "send_end_100ns": 19777781180549,
+            "send_start_100ns": 19777781177761,
+            "sequence": "29604",
+            "session_id": "18d47ce9282236b8-60e4",
+            "wire_session": "10620088052643856489",
+            "worker": 0,
+            "worker_resume_100ns": 19777781177744
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19777781078582,
+              "dequeued_100ns": 19777781079473,
+              "event": "udp",
+              "first_sample": "3552256",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777781078671,
+              "schema_version": 1,
+              "send_end_100ns": 19777781079509,
+              "send_start_100ns": 19777781079474,
+              "sequence": "29602",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777781078826
+            },
+            {
+              "acquired_100ns": 19777781078582,
+              "dequeued_100ns": 19777781079510,
+              "event": "udp",
+              "first_sample": "3552384",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777781078673,
+              "schema_version": 1,
+              "send_end_100ns": 19777781079549,
+              "send_start_100ns": 19777781079512,
+              "sequence": "29603",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777781078826
+            },
+            {
+              "acquired_100ns": 19777781177336,
+              "dequeued_100ns": 19777781177760,
+              "event": "udp",
+              "first_sample": "3552480",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777781177415,
+              "schema_version": 1,
+              "send_end_100ns": 19777781180549,
+              "send_start_100ns": 19777781177761,
+              "sequence": "29604",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777781177744
+            },
+            {
+              "acquired_100ns": 19777781177336,
+              "dequeued_100ns": 19777781180565,
+              "event": "udp",
+              "first_sample": "3552608",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777781177605,
+              "schema_version": 1,
+              "send_end_100ns": 19777781180658,
+              "send_start_100ns": 19777781180566,
+              "sequence": "29605",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777781177744
+            },
+            {
+              "acquired_100ns": 19777781177336,
+              "dequeued_100ns": 19777781180661,
+              "event": "udp",
+              "first_sample": "3552736",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777781177612,
+              "schema_version": 1,
+              "send_end_100ns": 19777781180706,
+              "send_start_100ns": 19777781180663,
+              "sequence": "29606",
+              "session_id": "18d47ce9282236b8-60e4",
+              "wire_session": "10620088052643856489",
+              "worker": 0,
+              "worker_resume_100ns": 19777781177744
+            }
+          ]
+        }
+      ],
+      "worst_wakes": [
+        {
+          "drain_us": 12,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 12095,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47ce9282236b8-60e4",
+          "time_100ns": 19777409784094
+        },
+        {
+          "drain_us": 19,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11788,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47ce9282236b8-60e4",
+          "time_100ns": 19777303483227
+        },
+        {
+          "drain_us": 18,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11785,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47ce9282236b8-60e4",
+          "time_100ns": 19777496082330
+        },
+        {
+          "drain_us": 30,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11783,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47ce9282236b8-60e4",
+          "time_100ns": 19777280180986
+        },
+        {
+          "drain_us": 17,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11743,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47ce9282236b8-60e4",
+          "time_100ns": 19777687281791
+        }
+      ],
+      "source": {
+        "path": "runs/sender-latency/instrumented-1.jsonl",
+        "sha256": "d3220b12a3f7cf121e1cacde7b4145bcfa3410ec358b0c44fb3ed5d0233d6c92"
+      }
+    },
+    {
+      "label": "instrumented-2",
+      "startup": {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{07dce926-d0c4-42c5-810f-6dd7c0408d89}",
+        "device_minimum_period_100ns": 30000,
+        "device_name": "スピーカー (Realtek(R) Audio)",
+        "duration_requested_seconds": 90,
+        "endpoint_mute_during_run": true,
+        "endpoint_mute_original": true,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 17844,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d47cfe27fec2e0-3534",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 480,
+          "maximum_frames": 480,
+          "minimum_frames": 480
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false,
+        "udp_deadline_ms": 5,
+        "udp_destination": "192.168.11.65:40100",
+        "udp_events": true,
+        "udp_max_frames": 128,
+        "udp_protocol_version": 1,
+        "udp_workers": 1
+      },
+      "end": {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 171.875,
+        "capture_thread_cpu_one_core_percent": 0.1909699791737224,
+        "captured_frames": 4319040,
+        "captured_packets": 8998,
+        "elapsed_seconds": 90.0010571,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19778842739013,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d47cfe27fec2e0-3534",
+        "start_qpc_100ns": 19777942726190,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 21065,
+        "trailing_no_event_us": 9135,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 35992,
+            "max": 275,
+            "min": 0,
+            "over_1ms": 0,
+            "over_5ms": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 7,
+            "p99": 24,
+            "p99_9": 41
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 35992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 35992,
+                "max": 435,
+                "min": 6,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 78,
+                "p99": 189,
+                "p99_9": 325
+              },
+              "bytes": 37143744,
+              "cpu_ms": 687.5,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 35992,
+                "max": 419,
+                "min": 6,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 69,
+                "p99": 173,
+                "p99_9": 286
+              },
+              "send_call_us": {
+                "count": 35992,
+                "max": 390,
+                "min": 2,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 5,
+                "p99": 101,
+                "p99_9": 185
+              },
+              "send_errors": 0,
+              "sent": 35992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "wait_timeouts": 1,
+        "wake_count": 8998
+      },
+      "summary": {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 8998,
+          "max": 286,
+          "mean": 20.902756168037342,
+          "min": 5,
+          "p50": 19,
+          "p95": 33,
+          "p99": 53
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 8997,
+          "max": 12360,
+          "mean": 9999.670223407802,
+          "min": 7875,
+          "p50": 10067,
+          "p95": 11093,
+          "p99": 11403
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 8998,
+          "max": 276,
+          "mean": 11.024338741942653,
+          "min": 3,
+          "p50": 9,
+          "p95": 24,
+          "p99": 27
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 8998,
+          "max": 11916,
+          "mean": 10283.646143587464,
+          "min": 9373,
+          "p50": 10311,
+          "p95": 11072,
+          "p99": 11293
+        },
+        "frames_per_callback": {
+          "count": 8998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 8998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 8998,
+          "max": 197,
+          "mean": 5.344076461435875,
+          "min": 1,
+          "p50": 4,
+          "p95": 15,
+          "p99": 20
+        },
+        "level_packets": 8998,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 8997,
+          "max": 12360,
+          "mean": 9999.670223407802,
+          "min": 7875,
+          "p50": 10067,
+          "p95": 11093,
+          "p99": 11403
+        },
+        "nonzero_packets": 8995,
+        "observed_frames": 4319040,
+        "observed_packets": 8998,
+        "packet_audio_duration_us": {
+          "count": 8998,
+          "max": 10000,
+          "mean": 10000,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.8597584962844849,
+        "schema_version": 1,
+        "session_id": "18d47cfe27fec2e0-3534",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 35992,
+            "max": 275,
+            "min": 0,
+            "over_1ms": 0,
+            "over_5ms": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 7,
+            "p99": 24,
+            "p99_9": 41
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 35992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 35992,
+                "max": 435,
+                "min": 6,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 78,
+                "p99": 189,
+                "p99_9": 325
+              },
+              "bytes": 37143744,
+              "cpu_ms": 687.5,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 35992,
+                "max": 419,
+                "min": 6,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 69,
+                "p99": 173,
+                "p99_9": 286
+              },
+              "send_call_us": {
+                "count": 35992,
+                "max": 390,
+                "min": 2,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 5,
+                "p99": 101,
+                "p99_9": 185
+              },
+              "send_errors": 0,
+              "sent": 35992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "unavailable_device_positions": 8998
+      },
+      "all": {
+        "capture_packets": 8998,
+        "captured_frames": 4319040,
+        "nonzero_packets": 8995,
+        "zero_peak_packets": 3,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 8998
+        },
+        "packets_per_wake": {
+          "1": 8998
+        },
+        "frames_per_wake": {
+          "480": 8998
+        },
+        "wake_interval_us": {
+          "count": 8997,
+          "p50": 10067.7,
+          "p99": 11403.8,
+          "p99_9": 11969.9,
+          "max": 12360.1,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "active_wake_interval_us": {
+          "count": 8997,
+          "p50": 10067.7,
+          "p99": 11403.8,
+          "p99_9": 11969.9,
+          "max": 12360.1,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "capture_interval_us": {
+          "count": 8997,
+          "p50": 10068.6,
+          "p99": 11404.6,
+          "p99_9": 11969,
+          "max": 12360.6,
+          "over_1ms": 8997,
+          "over_5ms": 8997
+        },
+        "get_buffer_us": {
+          "count": 8998,
+          "p50": 4,
+          "p99": 20,
+          "p99_9": 33,
+          "max": 197,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 8998,
+          "p50": 19,
+          "p99": 53,
+          "p99_9": 100,
+          "max": 286,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 8998,
+          "p50": 2,
+          "p99": 15.3,
+          "p99_9": 66.5,
+          "max": 214.3,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {
+          "sent": 35992
+        },
+        "acquire_to_send_us": {
+          "count": 35992,
+          "p50": 78.8,
+          "p99": 189.7,
+          "p99_9": 325.6,
+          "max": 435.9,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 35992,
+          "p50": 69.3,
+          "p99": 173,
+          "p99_9": 286.4,
+          "max": 419.6,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 35992,
+          "p50": 7.4,
+          "p99": 24.4,
+          "p99_9": 41.3,
+          "max": 275,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 35992,
+          "p50": 69.3,
+          "p99": 172.8,
+          "p99_9": 286.4,
+          "max": 419.5,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 35992,
+          "p50": 5,
+          "p99": 101.8,
+          "p99_9": 185.7,
+          "max": 390.1,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "after_first_5s": {
+        "capture_packets": 8500,
+        "captured_frames": 4080000,
+        "nonzero_packets": 8500,
+        "zero_peak_packets": 0,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 8500
+        },
+        "packets_per_wake": {
+          "1": 8500
+        },
+        "frames_per_wake": {
+          "480": 8500
+        },
+        "wake_interval_us": {
+          "count": 8499,
+          "p50": 10069.6,
+          "p99": 11403.8,
+          "p99_9": 11969.9,
+          "max": 12360.1,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "active_wake_interval_us": {
+          "count": 8499,
+          "p50": 10069.6,
+          "p99": 11403.8,
+          "p99_9": 11969.9,
+          "max": 12360.1,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "capture_interval_us": {
+          "count": 8499,
+          "p50": 10069.2,
+          "p99": 11404.6,
+          "p99_9": 11969,
+          "max": 12360.6,
+          "over_1ms": 8499,
+          "over_5ms": 8499
+        },
+        "get_buffer_us": {
+          "count": 8500,
+          "p50": 4,
+          "p99": 20,
+          "p99_9": 33,
+          "max": 197,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 8500,
+          "p50": 19,
+          "p99": 53,
+          "p99_9": 100,
+          "max": 286,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 8500,
+          "p50": 2,
+          "p99": 15.3,
+          "p99_9": 58.4,
+          "max": 214.3,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {
+          "sent": 34000
+        },
+        "acquire_to_send_us": {
+          "count": 34000,
+          "p50": 79,
+          "p99": 187.4,
+          "p99_9": 295.2,
+          "max": 435.9,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 34000,
+          "p50": 69.4,
+          "p99": 170.7,
+          "p99_9": 273.7,
+          "max": 418.9,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 34000,
+          "p50": 7.4,
+          "p99": 24.5,
+          "p99_9": 40.6,
+          "max": 275,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 34000,
+          "p50": 69.4,
+          "p99": 170.6,
+          "p99_9": 273.7,
+          "max": 418.8,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 34000,
+          "p50": 5,
+          "p99": 100.4,
+          "p99_9": 180.7,
+          "max": 364.1,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "worst_send_calls": [
+        {
+          "packet": {
+            "acquired_100ns": 19777947436555,
+            "dequeued_100ns": 19777947436786,
+            "event": "udp",
+            "first_sample": "21600",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19777947436584,
+            "schema_version": 1,
+            "send_end_100ns": 19777947440687,
+            "send_start_100ns": 19777947436786,
+            "sequence": "180",
+            "session_id": "18d47cfe27fec2e0-3534",
+            "wire_session": "9246938822878291128",
+            "worker": 0,
+            "worker_resume_100ns": 19777947436778
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19777947349674,
+              "dequeued_100ns": 19777947350356,
+              "event": "udp",
+              "first_sample": "21376",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777947349720,
+              "schema_version": 1,
+              "send_end_100ns": 19777947350393,
+              "send_start_100ns": 19777947350357,
+              "sequence": "178",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19777947349781
+            },
+            {
+              "acquired_100ns": 19777947349674,
+              "dequeued_100ns": 19777947350395,
+              "event": "udp",
+              "first_sample": "21504",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777947349722,
+              "schema_version": 1,
+              "send_end_100ns": 19777947350437,
+              "send_start_100ns": 19777947350395,
+              "sequence": "179",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19777947349781
+            },
+            {
+              "acquired_100ns": 19777947436555,
+              "dequeued_100ns": 19777947436786,
+              "event": "udp",
+              "first_sample": "21600",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777947436584,
+              "schema_version": 1,
+              "send_end_100ns": 19777947440687,
+              "send_start_100ns": 19777947436786,
+              "sequence": "180",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19777947436778
+            },
+            {
+              "acquired_100ns": 19777947436555,
+              "dequeued_100ns": 19777947440697,
+              "event": "udp",
+              "first_sample": "21728",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777947436650,
+              "schema_version": 1,
+              "send_end_100ns": 19777947440800,
+              "send_start_100ns": 19777947440698,
+              "sequence": "181",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19777947436778
+            },
+            {
+              "acquired_100ns": 19777947436555,
+              "dequeued_100ns": 19777947440802,
+              "event": "udp",
+              "first_sample": "21856",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777947436655,
+              "schema_version": 1,
+              "send_end_100ns": 19777947440844,
+              "send_start_100ns": 19777947440802,
+              "sequence": "182",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19777947436778
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19778621143204,
+            "dequeued_100ns": 19778621143469,
+            "event": "udp",
+            "first_sample": "3255360",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19778621143244,
+            "schema_version": 1,
+            "send_end_100ns": 19778621147111,
+            "send_start_100ns": 19778621143470,
+            "sequence": "27128",
+            "session_id": "18d47cfe27fec2e0-3534",
+            "wire_session": "9246938822878291128",
+            "worker": 0,
+            "worker_resume_100ns": 19778621143458
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19778621045382,
+              "dequeued_100ns": 19778621047010,
+              "event": "udp",
+              "first_sample": "3255136",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778621045482,
+              "schema_version": 1,
+              "send_end_100ns": 19778621047085,
+              "send_start_100ns": 19778621047010,
+              "sequence": "27126",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778621045561
+            },
+            {
+              "acquired_100ns": 19778621045382,
+              "dequeued_100ns": 19778621047086,
+              "event": "udp",
+              "first_sample": "3255264",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778621045484,
+              "schema_version": 1,
+              "send_end_100ns": 19778621047122,
+              "send_start_100ns": 19778621047087,
+              "sequence": "27127",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778621045561
+            },
+            {
+              "acquired_100ns": 19778621143204,
+              "dequeued_100ns": 19778621143469,
+              "event": "udp",
+              "first_sample": "3255360",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778621143244,
+              "schema_version": 1,
+              "send_end_100ns": 19778621147111,
+              "send_start_100ns": 19778621143470,
+              "sequence": "27128",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778621143458
+            },
+            {
+              "acquired_100ns": 19778621143204,
+              "dequeued_100ns": 19778621147129,
+              "event": "udp",
+              "first_sample": "3255488",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778621143365,
+              "schema_version": 1,
+              "send_end_100ns": 19778621147233,
+              "send_start_100ns": 19778621147129,
+              "sequence": "27129",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778621143458
+            },
+            {
+              "acquired_100ns": 19778621143204,
+              "dequeued_100ns": 19778621147238,
+              "event": "udp",
+              "first_sample": "3255616",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778621143369,
+              "schema_version": 1,
+              "send_end_100ns": 19778621147560,
+              "send_start_100ns": 19778621147240,
+              "sequence": "27130",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778621143458
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19777942937017,
+            "dequeued_100ns": 19777942937188,
+            "event": "udp",
+            "first_sample": "0",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19777942937040,
+            "schema_version": 1,
+            "send_end_100ns": 19777942940824,
+            "send_start_100ns": 19777942937189,
+            "sequence": "0",
+            "session_id": "18d47cfe27fec2e0-3534",
+            "wire_session": "9246938822878291128",
+            "worker": 0,
+            "worker_resume_100ns": 19777942937183
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19777942937017,
+              "dequeued_100ns": 19777942937188,
+              "event": "udp",
+              "first_sample": "0",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777942937040,
+              "schema_version": 1,
+              "send_end_100ns": 19777942940824,
+              "send_start_100ns": 19777942937189,
+              "sequence": "0",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19777942937183
+            },
+            {
+              "acquired_100ns": 19777942937017,
+              "dequeued_100ns": 19777942940850,
+              "event": "udp",
+              "first_sample": "128",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777942937118,
+              "schema_version": 1,
+              "send_end_100ns": 19777942941123,
+              "send_start_100ns": 19777942940852,
+              "sequence": "1",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19777942937183
+            },
+            {
+              "acquired_100ns": 19777942937017,
+              "dequeued_100ns": 19777942941129,
+              "event": "udp",
+              "first_sample": "256",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19777942937121,
+              "schema_version": 1,
+              "send_end_100ns": 19777942941313,
+              "send_start_100ns": 19777942941129,
+              "sequence": "2",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19777942937183
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19778687549412,
+            "dequeued_100ns": 19778687549569,
+            "event": "udp",
+            "first_sample": "3574080",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19778687549434,
+            "schema_version": 1,
+            "send_end_100ns": 19778687553188,
+            "send_start_100ns": 19778687549570,
+            "sequence": "29784",
+            "session_id": "18d47cfe27fec2e0-3534",
+            "wire_session": "9246938822878291128",
+            "worker": 0,
+            "worker_resume_100ns": 19778687549564
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19778687450394,
+              "dequeued_100ns": 19778687452368,
+              "event": "udp",
+              "first_sample": "3573856",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778687450647,
+              "schema_version": 1,
+              "send_end_100ns": 19778687452405,
+              "send_start_100ns": 19778687452368,
+              "sequence": "29782",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778687450741
+            },
+            {
+              "acquired_100ns": 19778687450394,
+              "dequeued_100ns": 19778687452406,
+              "event": "udp",
+              "first_sample": "3573984",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778687450652,
+              "schema_version": 1,
+              "send_end_100ns": 19778687452784,
+              "send_start_100ns": 19778687452407,
+              "sequence": "29783",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778687450741
+            },
+            {
+              "acquired_100ns": 19778687549412,
+              "dequeued_100ns": 19778687549569,
+              "event": "udp",
+              "first_sample": "3574080",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778687549434,
+              "schema_version": 1,
+              "send_end_100ns": 19778687553188,
+              "send_start_100ns": 19778687549570,
+              "sequence": "29784",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778687549564
+            },
+            {
+              "acquired_100ns": 19778687549412,
+              "dequeued_100ns": 19778687553197,
+              "event": "udp",
+              "first_sample": "3574208",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778687549504,
+              "schema_version": 1,
+              "send_end_100ns": 19778687553255,
+              "send_start_100ns": 19778687553198,
+              "sequence": "29785",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778687549564
+            },
+            {
+              "acquired_100ns": 19778687549412,
+              "dequeued_100ns": 19778687553258,
+              "event": "udp",
+              "first_sample": "3574336",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778687549507,
+              "schema_version": 1,
+              "send_end_100ns": 19778687553306,
+              "send_start_100ns": 19778687553258,
+              "sequence": "29786",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778687549564
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19778003246135,
+            "dequeued_100ns": 19778003246346,
+            "event": "udp",
+            "first_sample": "289440",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19778003246155,
+            "schema_version": 1,
+            "send_end_100ns": 19778003249315,
+            "send_start_100ns": 19778003246346,
+            "sequence": "2412",
+            "session_id": "18d47cfe27fec2e0-3534",
+            "wire_session": "9246938822878291128",
+            "worker": 0,
+            "worker_resume_100ns": 19778003246337
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19778003137363,
+              "dequeued_100ns": 19778003138275,
+              "event": "udp",
+              "first_sample": "289216",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778003137604,
+              "schema_version": 1,
+              "send_end_100ns": 19778003138311,
+              "send_start_100ns": 19778003138275,
+              "sequence": "2410",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778003137677
+            },
+            {
+              "acquired_100ns": 19778003137363,
+              "dequeued_100ns": 19778003138313,
+              "event": "udp",
+              "first_sample": "289344",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778003137604,
+              "schema_version": 1,
+              "send_end_100ns": 19778003138351,
+              "send_start_100ns": 19778003138313,
+              "sequence": "2411",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778003137677
+            },
+            {
+              "acquired_100ns": 19778003246135,
+              "dequeued_100ns": 19778003246346,
+              "event": "udp",
+              "first_sample": "289440",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778003246155,
+              "schema_version": 1,
+              "send_end_100ns": 19778003249315,
+              "send_start_100ns": 19778003246346,
+              "sequence": "2412",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778003246337
+            },
+            {
+              "acquired_100ns": 19778003246135,
+              "dequeued_100ns": 19778003249329,
+              "event": "udp",
+              "first_sample": "289568",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778003246226,
+              "schema_version": 1,
+              "send_end_100ns": 19778003249421,
+              "send_start_100ns": 19778003249331,
+              "sequence": "2413",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778003246337
+            },
+            {
+              "acquired_100ns": 19778003246135,
+              "dequeued_100ns": 19778003249424,
+              "event": "udp",
+              "first_sample": "289696",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19778003246229,
+              "schema_version": 1,
+              "send_end_100ns": 19778003249463,
+              "send_start_100ns": 19778003249424,
+              "sequence": "2414",
+              "session_id": "18d47cfe27fec2e0-3534",
+              "wire_session": "9246938822878291128",
+              "worker": 0,
+              "worker_resume_100ns": 19778003246337
+            }
+          ]
+        }
+      ],
+      "worst_wakes": [
+        {
+          "drain_us": 23,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 12360,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cfe27fec2e0-3534",
+          "time_100ns": 19778335259954
+        },
+        {
+          "drain_us": 18,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 12264,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cfe27fec2e0-3534",
+          "time_100ns": 19778219859902
+        },
+        {
+          "drain_us": 13,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 12261,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cfe27fec2e0-3534",
+          "time_100ns": 19778494160062
+        },
+        {
+          "drain_us": 21,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 12207,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cfe27fec2e0-3534",
+          "time_100ns": 19778135858647
+        },
+        {
+          "drain_us": 26,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 12121,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47cfe27fec2e0-3534",
+          "time_100ns": 19778706359088
+        }
+      ],
+      "source": {
+        "path": "runs/sender-latency/instrumented-2.jsonl",
+        "sha256": "1f3ce42d8217cd52ec9495e0dfca373cf5a3587247418c7ace746c7006da28ee"
+      }
+    },
+    {
+      "label": "long/run-1",
+      "startup": {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{07dce926-d0c4-42c5-810f-6dd7c0408d89}",
+        "device_minimum_period_100ns": 30000,
+        "device_name": "スピーカー (Realtek(R) Audio)",
+        "duration_requested_seconds": 600,
+        "endpoint_mute_during_run": true,
+        "endpoint_mute_original": true,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 17844,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d47d1e86f0b34c-670c",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 480,
+          "maximum_frames": 480,
+          "minimum_frames": 480
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false,
+        "udp_deadline_ms": 5,
+        "udp_destination": "192.168.11.65:40100",
+        "udp_events": true,
+        "udp_max_frames": 128,
+        "udp_protocol_version": 1,
+        "udp_workers": 1
+      },
+      "end": {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 1265.625,
+        "capture_thread_cpu_one_core_percent": 0.2109370434267695,
+        "captured_frames": 28799040,
+        "captured_packets": 59998,
+        "elapsed_seconds": 600.0012987,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19785333071717,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d47d1e86f0b34c-670c",
+        "start_qpc_100ns": 19779333055670,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 20666,
+        "trailing_no_event_us": 9531,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 239992,
+            "max": 280,
+            "min": 0,
+            "over_1ms": 0,
+            "over_5ms": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 6,
+            "p99": 23,
+            "p99_9": 42
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 239992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 239992,
+                "max": 486,
+                "min": 5,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 81,
+                "p99": 191,
+                "p99_9": 296
+              },
+              "bytes": 247671744,
+              "cpu_ms": 4609.375,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 239992,
+                "max": 476,
+                "min": 2,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 72,
+                "p99": 175,
+                "p99_9": 276
+              },
+              "send_call_us": {
+                "count": 239992,
+                "max": 377,
+                "min": 2,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 4,
+                "p99": 100,
+                "p99_9": 187
+              },
+              "send_errors": 0,
+              "sent": 239992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "wait_timeouts": 1,
+        "wake_count": 59998
+      },
+      "summary": {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 59998,
+          "max": 332,
+          "mean": 20.690073002433415,
+          "min": 5,
+          "p50": 19,
+          "p95": 33,
+          "p99": 50
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 59997,
+          "max": 11990,
+          "mean": 9999.57222861143,
+          "min": 7894,
+          "p50": 10073,
+          "p95": 11131,
+          "p99": 11428
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 59998,
+          "max": 282,
+          "mean": 10.604486816227208,
+          "min": 2,
+          "p50": 9,
+          "p95": 23,
+          "p99": 26
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 59998,
+          "max": 13134,
+          "mean": 11316.042384746159,
+          "min": 10219,
+          "p50": 11251,
+          "p95": 12119,
+          "p99": 12249
+        },
+        "frames_per_callback": {
+          "count": 59998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 59998,
+          "max": 480,
+          "mean": 480,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 59998,
+          "max": 181,
+          "mean": 5.611653721790726,
+          "min": 1,
+          "p50": 5,
+          "p95": 18,
+          "p99": 20
+        },
+        "level_packets": 59998,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 59997,
+          "max": 11990,
+          "mean": 9999.57222861143,
+          "min": 7894,
+          "p50": 10073,
+          "p95": 11131,
+          "p99": 11428
+        },
+        "nonzero_packets": 59164,
+        "observed_frames": 28799040,
+        "observed_packets": 59998,
+        "packet_audio_duration_us": {
+          "count": 59998,
+          "max": 10000,
+          "mean": 10000,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.871417760848999,
+        "schema_version": 1,
+        "session_id": "18d47d1e86f0b34c-670c",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "udp": {
+          "acquire_to_publish_us": {
+            "count": 239992,
+            "max": 280,
+            "min": 0,
+            "over_1ms": 0,
+            "over_5ms": 0,
+            "overflow_ge_10000us": 0,
+            "p50": 6,
+            "p99": 23,
+            "p99_9": 42
+          },
+          "pool_drops": 0,
+          "pool_slots": 64,
+          "published_packets": 239992,
+          "session_restarts": 0,
+          "workers": [
+            {
+              "acquire_to_send_us": {
+                "count": 239992,
+                "max": 486,
+                "min": 5,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 81,
+                "p99": 191,
+                "p99_9": 296
+              },
+              "bytes": 247671744,
+              "cpu_ms": 4609.375,
+              "deadline_drops": 0,
+              "last_os_error": null,
+              "mmcss_error": null,
+              "publish_to_send_us": {
+                "count": 239992,
+                "max": 476,
+                "min": 2,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 72,
+                "p99": 175,
+                "p99_9": 276
+              },
+              "send_call_us": {
+                "count": 239992,
+                "max": 377,
+                "min": 2,
+                "over_1ms": 0,
+                "over_5ms": 0,
+                "overflow_ge_10000us": 0,
+                "p50": 4,
+                "p99": 100,
+                "p99_9": 187
+              },
+              "send_errors": 0,
+              "sent": 239992,
+              "would_block_drops": 0
+            }
+          ]
+        },
+        "unavailable_device_positions": 59998
+      },
+      "all": {
+        "capture_packets": 59998,
+        "captured_frames": 28799040,
+        "nonzero_packets": 59164,
+        "zero_peak_packets": 21,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 59998
+        },
+        "packets_per_wake": {
+          "1": 59998
+        },
+        "frames_per_wake": {
+          "480": 59998
+        },
+        "wake_interval_us": {
+          "count": 59997,
+          "p50": 10073.4,
+          "p99": 11428.5,
+          "p99_9": 11683.9,
+          "max": 11990.1,
+          "over_1ms": 59997,
+          "over_5ms": 59997
+        },
+        "active_wake_interval_us": {
+          "count": 59997,
+          "p50": 10073.4,
+          "p99": 11428.5,
+          "p99_9": 11683.9,
+          "max": 11990.1,
+          "over_1ms": 59997,
+          "over_5ms": 59997
+        },
+        "capture_interval_us": {
+          "count": 59997,
+          "p50": 10073.5,
+          "p99": 11426.3,
+          "p99_9": 11680.9,
+          "max": 11987.2,
+          "over_1ms": 59997,
+          "over_5ms": 59997
+        },
+        "get_buffer_us": {
+          "count": 59998,
+          "p50": 5,
+          "p99": 20,
+          "p99_9": 25,
+          "max": 181,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 59998,
+          "p50": 19,
+          "p99": 50,
+          "p99_9": 93,
+          "max": 332,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 59998,
+          "p50": 2.1,
+          "p99": 16,
+          "p99_9": 38.5,
+          "max": 317.3,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {
+          "sent": 239992
+        },
+        "acquire_to_send_us": {
+          "count": 239992,
+          "p50": 81.3,
+          "p99": 191.2,
+          "p99_9": 296.1,
+          "max": 486.3,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 239992,
+          "p50": 72.2,
+          "p99": 175.4,
+          "p99_9": 276.1,
+          "max": 476.4,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 239992,
+          "p50": 6.9,
+          "p99": 23.6,
+          "p99_9": 42,
+          "max": 280.6,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 239992,
+          "p50": 72.1,
+          "p99": 175.3,
+          "p99_9": 276,
+          "max": 476.1,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 239992,
+          "p50": 4.8,
+          "p99": 100.8,
+          "p99_9": 187.2,
+          "max": 377.6,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "after_first_5s": {
+        "capture_packets": 59500,
+        "captured_frames": 28560000,
+        "nonzero_packets": 58669,
+        "zero_peak_packets": 18,
+        "discontinuities": 0,
+        "timestamp_errors": 0,
+        "valid_device_positions": 0,
+        "frames_per_capture": {
+          "480": 59500
+        },
+        "packets_per_wake": {
+          "1": 59500
+        },
+        "frames_per_wake": {
+          "480": 59500
+        },
+        "wake_interval_us": {
+          "count": 59499,
+          "p50": 10073.4,
+          "p99": 11429.1,
+          "p99_9": 11682.8,
+          "max": 11990.1,
+          "over_1ms": 59499,
+          "over_5ms": 59499
+        },
+        "active_wake_interval_us": {
+          "count": 59499,
+          "p50": 10073.4,
+          "p99": 11429.1,
+          "p99_9": 11682.8,
+          "max": 11990.1,
+          "over_1ms": 59499,
+          "over_5ms": 59499
+        },
+        "capture_interval_us": {
+          "count": 59499,
+          "p50": 10073.5,
+          "p99": 11426.3,
+          "p99_9": 11680.7,
+          "max": 11987.2,
+          "over_1ms": 59499,
+          "over_5ms": 59499
+        },
+        "get_buffer_us": {
+          "count": 59500,
+          "p50": 5,
+          "p99": 20,
+          "p99_9": 25,
+          "max": 181,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "drain_us": {
+          "count": 59500,
+          "p50": 19,
+          "p99": 50,
+          "p99_9": 91,
+          "max": 332,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "wake_to_first_get_buffer_us": {
+          "count": 59500,
+          "p50": 2.1,
+          "p99": 16,
+          "p99_9": 38.4,
+          "max": 317.3,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "outcomes": {
+          "sent": 238000
+        },
+        "acquire_to_send_us": {
+          "count": 238000,
+          "p50": 81.3,
+          "p99": 191.1,
+          "p99_9": 295.9,
+          "max": 486.3,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_send_us": {
+          "count": 238000,
+          "p50": 72.2,
+          "p99": 175.2,
+          "p99_9": 275.8,
+          "max": 476.4,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "acquire_to_publish_us": {
+          "count": 238000,
+          "p50": 6.9,
+          "p99": 23.6,
+          "p99_9": 42,
+          "max": 280.6,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "publish_to_dequeue_us": {
+          "count": 238000,
+          "p50": 72.2,
+          "p99": 175.2,
+          "p99_9": 275.7,
+          "max": 476.1,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "send_call_us": {
+          "count": 238000,
+          "p50": 4.8,
+          "p99": 100.8,
+          "p99_9": 187,
+          "max": 377.6,
+          "over_1ms": 0,
+          "over_5ms": 0
+        },
+        "expired_age_us": {
+          "count": 0,
+          "p50": null,
+          "p99": null,
+          "p99_9": null,
+          "max": null,
+          "over_1ms": 0,
+          "over_5ms": 0
+        }
+      },
+      "worst_send_calls": [
+        {
+          "packet": {
+            "acquired_100ns": 19780757064522,
+            "dequeued_100ns": 19780757064823,
+            "event": "udp",
+            "first_sample": "6834240",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19780757064577,
+            "schema_version": 1,
+            "send_end_100ns": 19780757068600,
+            "send_start_100ns": 19780757064824,
+            "sequence": "56952",
+            "session_id": "18d47d1e86f0b34c-670c",
+            "wire_session": "12952731603993984472",
+            "worker": 0,
+            "worker_resume_100ns": 19780757064817
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19780756964917,
+              "dequeued_100ns": 19780756965824,
+              "event": "udp",
+              "first_sample": "6834016",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19780756964991,
+              "schema_version": 1,
+              "send_end_100ns": 19780756965878,
+              "send_start_100ns": 19780756965824,
+              "sequence": "56950",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19780756965174
+            },
+            {
+              "acquired_100ns": 19780756964917,
+              "dequeued_100ns": 19780756965881,
+              "event": "udp",
+              "first_sample": "6834144",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19780756964994,
+              "schema_version": 1,
+              "send_end_100ns": 19780756965933,
+              "send_start_100ns": 19780756965881,
+              "sequence": "56951",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19780756965174
+            },
+            {
+              "acquired_100ns": 19780757064522,
+              "dequeued_100ns": 19780757064823,
+              "event": "udp",
+              "first_sample": "6834240",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19780757064577,
+              "schema_version": 1,
+              "send_end_100ns": 19780757068600,
+              "send_start_100ns": 19780757064824,
+              "sequence": "56952",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19780757064817
+            },
+            {
+              "acquired_100ns": 19780757064522,
+              "dequeued_100ns": 19780757068719,
+              "event": "udp",
+              "first_sample": "6834368",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19780757064695,
+              "schema_version": 1,
+              "send_end_100ns": 19780757068993,
+              "send_start_100ns": 19780757068720,
+              "sequence": "56953",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19780757064817
+            },
+            {
+              "acquired_100ns": 19780757064522,
+              "dequeued_100ns": 19780757068997,
+              "event": "udp",
+              "first_sample": "6834496",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19780757064698,
+              "schema_version": 1,
+              "send_end_100ns": 19780757069054,
+              "send_start_100ns": 19780757068998,
+              "sequence": "56954",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19780757064817
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19784844265825,
+            "dequeued_100ns": 19784844265983,
+            "event": "udp",
+            "first_sample": "26452800",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19784844265845,
+            "schema_version": 1,
+            "send_end_100ns": 19784844269704,
+            "send_start_100ns": 19784844265984,
+            "sequence": "220440",
+            "session_id": "18d47d1e86f0b34c-670c",
+            "wire_session": "12952731603993984472",
+            "worker": 0,
+            "worker_resume_100ns": 19784844265971
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19784844173914,
+              "dequeued_100ns": 19784844174768,
+              "event": "udp",
+              "first_sample": "26452576",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19784844173973,
+              "schema_version": 1,
+              "send_end_100ns": 19784844174807,
+              "send_start_100ns": 19784844174768,
+              "sequence": "220438",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19784844174035
+            },
+            {
+              "acquired_100ns": 19784844173914,
+              "dequeued_100ns": 19784844174807,
+              "event": "udp",
+              "first_sample": "26452704",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19784844173974,
+              "schema_version": 1,
+              "send_end_100ns": 19784844174844,
+              "send_start_100ns": 19784844174808,
+              "sequence": "220439",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19784844174035
+            },
+            {
+              "acquired_100ns": 19784844265825,
+              "dequeued_100ns": 19784844265983,
+              "event": "udp",
+              "first_sample": "26452800",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19784844265845,
+              "schema_version": 1,
+              "send_end_100ns": 19784844269704,
+              "send_start_100ns": 19784844265984,
+              "sequence": "220440",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19784844265971
+            },
+            {
+              "acquired_100ns": 19784844265825,
+              "dequeued_100ns": 19784844269718,
+              "event": "udp",
+              "first_sample": "26452928",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19784844265926,
+              "schema_version": 1,
+              "send_end_100ns": 19784844269798,
+              "send_start_100ns": 19784844269719,
+              "sequence": "220441",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19784844265971
+            },
+            {
+              "acquired_100ns": 19784844265825,
+              "dequeued_100ns": 19784844269800,
+              "event": "udp",
+              "first_sample": "26453056",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19784844265931,
+              "schema_version": 1,
+              "send_end_100ns": 19784844269846,
+              "send_start_100ns": 19784844269802,
+              "sequence": "220442",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19784844265971
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19781857068941,
+            "dequeued_100ns": 19781857069103,
+            "event": "udp",
+            "first_sample": "12114240",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19781857068962,
+            "schema_version": 1,
+            "send_end_100ns": 19781857072822,
+            "send_start_100ns": 19781857069104,
+            "sequence": "100952",
+            "session_id": "18d47d1e86f0b34c-670c",
+            "wire_session": "12952731603993984472",
+            "worker": 0,
+            "worker_resume_100ns": 19781857069098
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19781856977181,
+              "dequeued_100ns": 19781856978044,
+              "event": "udp",
+              "first_sample": "12114016",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781856977247,
+              "schema_version": 1,
+              "send_end_100ns": 19781856978081,
+              "send_start_100ns": 19781856978044,
+              "sequence": "100950",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781856977324
+            },
+            {
+              "acquired_100ns": 19781856977181,
+              "dequeued_100ns": 19781856978082,
+              "event": "udp",
+              "first_sample": "12114144",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781856977248,
+              "schema_version": 1,
+              "send_end_100ns": 19781856978118,
+              "send_start_100ns": 19781856978082,
+              "sequence": "100951",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781856977324
+            },
+            {
+              "acquired_100ns": 19781857068941,
+              "dequeued_100ns": 19781857069103,
+              "event": "udp",
+              "first_sample": "12114240",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781857068962,
+              "schema_version": 1,
+              "send_end_100ns": 19781857072822,
+              "send_start_100ns": 19781857069104,
+              "sequence": "100952",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781857069098
+            },
+            {
+              "acquired_100ns": 19781857068941,
+              "dequeued_100ns": 19781857072832,
+              "event": "udp",
+              "first_sample": "12114368",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781857069027,
+              "schema_version": 1,
+              "send_end_100ns": 19781857072981,
+              "send_start_100ns": 19781857072833,
+              "sequence": "100953",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781857069098
+            },
+            {
+              "acquired_100ns": 19781857068941,
+              "dequeued_100ns": 19781857072983,
+              "event": "udp",
+              "first_sample": "12114496",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781857069029,
+              "schema_version": 1,
+              "send_end_100ns": 19781857073026,
+              "send_start_100ns": 19781857072983,
+              "sequence": "100954",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781857069098
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19781246662879,
+            "dequeued_100ns": 19781246663032,
+            "event": "udp",
+            "first_sample": "9184320",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19781246662898,
+            "schema_version": 1,
+            "send_end_100ns": 19781246666717,
+            "send_start_100ns": 19781246663033,
+            "sequence": "76536",
+            "session_id": "18d47d1e86f0b34c-670c",
+            "wire_session": "12952731603993984472",
+            "worker": 0,
+            "worker_resume_100ns": 19781246663027
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19781246564358,
+              "dequeued_100ns": 19781246565073,
+              "event": "udp",
+              "first_sample": "9184096",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781246564414,
+              "schema_version": 1,
+              "send_end_100ns": 19781246565109,
+              "send_start_100ns": 19781246565073,
+              "sequence": "76534",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781246564477
+            },
+            {
+              "acquired_100ns": 19781246564358,
+              "dequeued_100ns": 19781246565110,
+              "event": "udp",
+              "first_sample": "9184224",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781246564417,
+              "schema_version": 1,
+              "send_end_100ns": 19781246565145,
+              "send_start_100ns": 19781246565110,
+              "sequence": "76535",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781246564477
+            },
+            {
+              "acquired_100ns": 19781246662879,
+              "dequeued_100ns": 19781246663032,
+              "event": "udp",
+              "first_sample": "9184320",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781246662898,
+              "schema_version": 1,
+              "send_end_100ns": 19781246666717,
+              "send_start_100ns": 19781246663033,
+              "sequence": "76536",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781246663027
+            },
+            {
+              "acquired_100ns": 19781246662879,
+              "dequeued_100ns": 19781246666730,
+              "event": "udp",
+              "first_sample": "9184448",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781246662959,
+              "schema_version": 1,
+              "send_end_100ns": 19781246666805,
+              "send_start_100ns": 19781246666732,
+              "sequence": "76537",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781246663027
+            },
+            {
+              "acquired_100ns": 19781246662879,
+              "dequeued_100ns": 19781246666807,
+              "event": "udp",
+              "first_sample": "9184576",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781246662961,
+              "schema_version": 1,
+              "send_end_100ns": 19781246666848,
+              "send_start_100ns": 19781246666809,
+              "sequence": "76538",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781246663027
+            }
+          ]
+        },
+        {
+          "packet": {
+            "acquired_100ns": 19781152873051,
+            "dequeued_100ns": 19781152873205,
+            "event": "udp",
+            "first_sample": "8734080",
+            "frames": 128,
+            "os_error": null,
+            "outcome": "sent",
+            "published_100ns": 19781152873074,
+            "schema_version": 1,
+            "send_end_100ns": 19781152876862,
+            "send_start_100ns": 19781152873206,
+            "sequence": "72784",
+            "session_id": "18d47d1e86f0b34c-670c",
+            "wire_session": "12952731603993984472",
+            "worker": 0,
+            "worker_resume_100ns": 19781152873194
+          },
+          "neighbors": [
+            {
+              "acquired_100ns": 19781152770372,
+              "dequeued_100ns": 19781152771263,
+              "event": "udp",
+              "first_sample": "8733856",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781152770442,
+              "schema_version": 1,
+              "send_end_100ns": 19781152771382,
+              "send_start_100ns": 19781152771263,
+              "sequence": "72782",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781152770519
+            },
+            {
+              "acquired_100ns": 19781152770372,
+              "dequeued_100ns": 19781152771384,
+              "event": "udp",
+              "first_sample": "8733984",
+              "frames": 96,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781152770444,
+              "schema_version": 1,
+              "send_end_100ns": 19781152771419,
+              "send_start_100ns": 19781152771384,
+              "sequence": "72783",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781152770519
+            },
+            {
+              "acquired_100ns": 19781152873051,
+              "dequeued_100ns": 19781152873205,
+              "event": "udp",
+              "first_sample": "8734080",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781152873074,
+              "schema_version": 1,
+              "send_end_100ns": 19781152876862,
+              "send_start_100ns": 19781152873206,
+              "sequence": "72784",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781152873194
+            },
+            {
+              "acquired_100ns": 19781152873051,
+              "dequeued_100ns": 19781152876876,
+              "event": "udp",
+              "first_sample": "8734208",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781152873138,
+              "schema_version": 1,
+              "send_end_100ns": 19781152876971,
+              "send_start_100ns": 19781152876877,
+              "sequence": "72785",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781152873194
+            },
+            {
+              "acquired_100ns": 19781152873051,
+              "dequeued_100ns": 19781152876973,
+              "event": "udp",
+              "first_sample": "8734336",
+              "frames": 128,
+              "os_error": null,
+              "outcome": "sent",
+              "published_100ns": 19781152873140,
+              "schema_version": 1,
+              "send_end_100ns": 19781152877013,
+              "send_start_100ns": 19781152876974,
+              "sequence": "72786",
+              "session_id": "18d47d1e86f0b34c-670c",
+              "wire_session": "12952731603993984472",
+              "worker": 0,
+              "worker_resume_100ns": 19781152873194
+            }
+          ]
+        }
+      ],
+      "worst_wakes": [
+        {
+          "drain_us": 13,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11990,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47d1e86f0b34c-670c",
+          "time_100ns": 19781661281611
+        },
+        {
+          "drain_us": 15,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11977,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47d1e86f0b34c-670c",
+          "time_100ns": 19781157981649
+        },
+        {
+          "drain_us": 13,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11953,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47d1e86f0b34c-670c",
+          "time_100ns": 19781799380858
+        },
+        {
+          "drain_us": 14,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11921,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47d1e86f0b34c-670c",
+          "time_100ns": 19783687181092
+        },
+        {
+          "drain_us": 21,
+          "event": "wake",
+          "frames": 480,
+          "interval_us": 11915,
+          "packets": 1,
+          "schema_version": 1,
+          "session_id": "18d47d1e86f0b34c-670c",
+          "time_100ns": 19780848980522
+        }
+      ],
+      "source": {
+        "path": "D:\\work\\my-lan-audio2\\runs\\sender-latency\\long\\run-1.jsonl",
+        "sha256": "9a1545329de80d2f1d01a7bbbd2f402e275d1c8f67138d1731c4761ccde6d953"
+      }
+    }
+  ],
+  "long_manifest": {
+    "commit": "aba88e50c0d209c6ee247e0323e425dd96b84203",
+    "diff_stat": " apps/sender-windows/src/capture.rs |  17 ++-\r\n apps/sender-windows/src/kernel.rs  |   2 +\r\n apps/sender-windows/src/main.rs    |   3 +\r\n apps/sender-windows/src/report.rs  |   5 +-\r\n apps/sender-windows/src/udp.rs     | 213 +++++++++++++++++++++++++++++++++----\r\n docs/telemetry.md                  |  48 ++++++++-\r\n 6 files changed, 264 insertions(+), 24 deletions(-)\r\n",
+    "executable": "D:\\work\\my-lan-audio2\\runs\\sender-latency\\instrumented.exe",
+    "sha256": "6DE1C2DAFBCBF89C583D1128E2CC8758FEC4E8EE13183C3F89F681882458AD7A",
+    "source_pid": 17844,
+    "destination": "192.168.11.65:40100",
+    "nic": [
+      {
+        "Name": "イーサネット",
+        "InterfaceDescription": "Realtek Gaming USB 2.5GbE Family Controller",
+        "Status": "Up",
+        "LinkSpeed": "2.5 Gbps",
+        "DriverInformation": "Driver Date 2016-03-30 Version 11.19.602.2025 NDIS 6.89"
+      },
+      {
+        "Name": "Wi-Fi",
+        "InterfaceDescription": "Intel(R) Wi-Fi 6 AX201 160MHz",
+        "Status": "Disconnected",
+        "LinkSpeed": "961 Mbps",
+        "DriverInformation": "Driver Date 2022-07-19 Version 22.160.0.3 NDIS 6.60"
+      },
+      {
+        "Name": "Bluetooth ネットワーク接続",
+        "InterfaceDescription": "Bluetooth Device (Personal Area Network)",
+        "Status": "Disconnected",
+        "LinkSpeed": "3 Mbps",
+        "DriverInformation": "Driver Date 2006-06-21 Version 10.0.26100.8972 NDIS 6.30"
+      }
+    ],
+    "addresses": [
+      {
+        "InterfaceAlias": "イーサネット",
+        "IPAddress": "192.168.11.29"
+      },
+      {
+        "InterfaceAlias": "Bluetooth ネットワーク接続",
+        "IPAddress": "169.254.55.76"
+      },
+      {
+        "InterfaceAlias": "ローカル エリア接続* 10",
+        "IPAddress": "169.254.113.119"
+      },
+      {
+        "InterfaceAlias": "ローカル エリア接続* 1",
+        "IPAddress": "169.254.131.52"
+      },
+      {
+        "InterfaceAlias": "Wi-Fi",
+        "IPAddress": "192.168.11.28"
+      },
+      {
+        "InterfaceAlias": "Loopback Pseudo-Interface 1",
+        "IPAddress": "127.0.0.1"
+      }
+    ],
+    "runs": [
+      {
+        "started": "2026-09-12T14:55:21.9684395+09:00",
+        "ended": "2026-09-12T15:05:22.1035333+09:00",
+        "arguments": [
+          "--backend",
+          "process-include",
+          "--pid",
+          "17844",
+          "--udp-to",
+          "192.168.11.65:40100",
+          "--udp-workers",
+          "1",
+          "--udp-deadline-ms",
+          "5",
+          "--udp-frames",
+          "128",
+          "--seconds",
+          "600",
+          "--measure-level",
+          "--output",
+          "\"D:\\work\\my-lan-audio2\\runs\\sender-latency\\long\\run-1.jsonl\"",
+          "--events"
+        ],
+        "exit_code": 0,
+        "process_cpu_ms": 14984.375
+      }
+    ]
+  }
+}

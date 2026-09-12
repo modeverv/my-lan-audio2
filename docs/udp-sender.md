@@ -1,5 +1,8 @@
 # Chrome取得経路の採用とUDP送信
 
+有線LAN条件での追試・packet単位の送信計測追加は
+[Windows送信側のLAN遅延調査](windows-sender-latency.md)を参照。
+
 2026-09-12。このPCの既定VB-Audio経路では、Chrome親PIDを指定する**process-includeを採用**する。
 残る候補で改善を確認できなかったため、ユーザー指示に従ってUDP送信を実装し、Chromeテスト音→localhost受信を実測した。
 これは現在の構成での採用判断であり、Windows／Chromeの理論的な最小遅延を確定したものではない。
