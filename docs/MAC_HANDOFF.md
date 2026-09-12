@@ -1,5 +1,7 @@
 # macOS作業の開始点
 
+**2026-09-12更新:** この引き継ぎに基づくMac受信・CoreAudio出力・GUI・ASRC・シミュレータを実装し、有線LAN/RMEで聴取確認済みです。現在の起動手順と測定結果は[macos-receiver.md](macos-receiver.md)を参照。以下は作業開始時点の記録です。
+
 Windows側の今回の範囲（Chrome取得、UDP送信、開始／停止GUI、localhost検証）は完了。
 次はこのリポジトリでmacOS受信側を実装する。Windowsの取得方式を再調査する必要はない。
 

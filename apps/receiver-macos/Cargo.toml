@@ -1,0 +1,13 @@
+[package]
+name = "receiver-macos"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+build = "build.rs"
+[dependencies]
+receiver-core = { path = "../../crates/receiver-core" }
+anyhow.workspace = true
+serde_json.workspace = true
+clap = { version = "4", features = ["derive"] }
+crossbeam-queue = "0.3"
+ctrlc = "3"

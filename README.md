@@ -1,6 +1,15 @@
 # Windows → macOS low-latency network audio
 
-**Mac側の作業開始:** [macOSへの引き継ぎ](docs/MAC_HANDOFF.md)。WindowsのChrome取得・GUI・UDP送信はlocalhost検証まで完了しています。
+**Mac受信アプリを実装済み:** Windows → 有線LAN → Mac → RMEで再生・聴取確認済みです。[Macの起動手順・実測](docs/macos-receiver.md)。
+
+```sh
+scripts/build-macos.sh
+open "dist/LAN Audio Receiver.app"
+```
+
+このMacの宛先は192.168.11.65:40100。RME再生1/2、受信20ms、CoreAudio 128 framesを初期設定とします。
+受信方式はリアルタイムを既定にし、GUIで標準QoSと切り替えられます。[受信待ち改善の実測](docs/receiver-wakeup.md)。
+有線LANで20msの60秒試験は欠落0。10/5/2msは同じ条件で欠落が出たため実験設定です。総遅延の20ms未満を証明した値ではありません。
 
 ## ダブルクリックで起動
 
@@ -9,12 +18,12 @@
 起動中の対象アプリを自動検索します。ChromeとChromeアプリは同じ親プロセス配下をまとめて取得します。送信エンジンはexe内に同梱済みです。[GUIの詳細](docs/windows-gui.md)
 exeはGit対象外のローカル成果物です。新しいWindowsチェックアウトでは `scripts/build-gui.ps1` で生成してください。
 
-現在の実装は **Windowsキャプチャ経路の比較診断とUDP PCM送信** です。
+現在の実装は **Windowsキャプチャ診断・UDP PCM送信とmacOS CoreAudio受信再生** です。
 Chromeの取得にはprocess-includeを採用し、localhost受信まで実測しました。
 PCMはファイルに保存しません。`--udp-to`を指定した場合だけネットワーク送信します。
 
 ```powershell
-# PIDと宛先は使用環境に置き換える。macOS受信・再生はまだ未実装。
+# PIDと宛先は使用環境に置き換える。Mac側で受信アプリを起動しておく。
 .\target\release\sender-windows.exe --backend process-include --pid 12345 --udp-to 192.168.1.20:40100 --seconds 60 --output runs\udp.jsonl
 
 # 専用Chromeのテスト音 → UDP → localhost受信を自動測定

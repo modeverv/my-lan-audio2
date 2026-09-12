@@ -1453,3 +1453,15 @@ plus `docs/protocol-v1-golden.hex` before implementing the macOS receiver.
 Network PCM is opt-in with `--udp-to IP:PORT`; no LAN destination was used in these tests.
 Next: macOS diagnostic receive, sample-index placement, session reset/loss/reorder handling,
 then the single receiver buffer and Core Audio output. No macOS output or LAN end-to-end latency is claimed.
+
+
+# 32. macOS progress — 2026-09-12
+
+Implemented Rust receiver-core, UDP diagnostic/CoreAudio receiver, native Mac app,
+relative sender/output clock estimation and linear ASRC, deterministic simulator,
+and receiver-log analyzer. Real Windows audio reaches the RME and the user confirmed hearing it.
+Windows was switched from Wi-Fi (192.168.11.28) to wired LAN (192.168.11.29).
+The Mac is 192.168.11.65:40100 on en8. Wired 60-second tests passed at 20ms with zero
+late/missing frames; 10/5/2ms showed underruns. This is not a claim of <20ms total latency.
+Read `docs/macos-receiver.md` and the checked-in result summaries for current commands,
+implementation constraints, and remaining hardware/AV-sync validation.

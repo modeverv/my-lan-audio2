@@ -251,6 +251,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "receiver-core"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "receiver-macos"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "crossbeam-queue",
+ "ctrlc",
+ "receiver-core",
+ "serde_json",
+]
+
+[[package]]
 name = "sender-windows"
 version = "0.1.0"
 dependencies = [

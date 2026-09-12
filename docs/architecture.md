@@ -1,4 +1,13 @@
-# Architecture — Experiment 0
+# Architecture
+
+## macOS receiver (2026-09-12)
+
+Implemented in `crates/receiver-core`, `apps/receiver-macos`, and `apps/receiver-gui`.
+Blocking UDP recvmsg on a dedicated thread publishes validated fixed-size packets into a bounded queue.
+The AUHAL callback owns the single sample-index playout ring, deadline/loss decisions, and variable-ratio linear ASRC.
+Metadata queues feed JSONL serialization outside the render thread. Kernel timestamps expose receiver wakeup delay.
+The native AppKit GUI owns the bundled receiver process and its stop/settings lifecycle.
+See [receiver design and measurements](macos-receiver.md). The remaining description records the original Windows stages.
 
 ## Update: UDP sender
 
@@ -81,5 +90,5 @@ sender or network-audio project from this diagnostic executable.
    Complete loss/overrun detection and cursor chronology before making KS a production sender.
 4. Completed: the versioned UDP protocol, immediate bounded packetization, independent nonblocking
    network workers, deadline drops, publication/send timing and the Windows GUI.
-5. Completed: localhost UDP measurements. Next: macOS diagnostic receive, receiver buffering,
-   CoreAudio/RME output and drift/ASRC. See [the Mac handoff](MAC_HANDOFF.md).
+5. Completed: localhost UDP and macOS diagnostic/playout/ASRC/GUI with real LAN/RME measurements.
+   Still pending: long hardware drift runs, physical DAC/end-to-end calibration, and projector AV alignment. See [Mac results](macos-receiver.md).

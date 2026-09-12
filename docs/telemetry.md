@@ -101,3 +101,50 @@ References:
 - [Microsoft: event-driven loopback](https://learn.microsoft.com/en-us/windows/win32/coreaudio/loopback-recording)
 - [Microsoft: shared engine period initialization](https://learn.microsoft.com/en-us/windows/win32/api/audioclient/nf-audioclient-iaudioclient3-initializesharedaudiostream)
 - [Microsoft: driver tap-point capabilities and POST_VOLUME_LOOPBACK](https://learn.microsoft.com/en-us/windows-hardware/drivers/audio/ksproperty-audioloopback)
+
+## macOS receiver events
+
+The receiver writes additive JSONL `schema_version: 1` startup metadata and one-second cumulative summaries.
+`receiver_start` includes actual output device format, requested playout/AV delay, gain and kernel timestamp setup status.
+`receiver_summary` / `receiver_final` include arrivals, same-Windows-clock capture→send and send intervals,
+Mac kernel queue time, callback interval/work time, presentation timestamp lead, invalid/foreign/queue drops,
+and sample-ring/ASRC metrics. `receiver_stopped` confirms orderly shutdown; the final summary may be a
+regular summary when stopping interactively between reporting intervals.
+
+`--events` adds `receive` and `playout` metadata. No event contains PCM. `receive_time_ns` and `render_time_ns`
+are relative to this receiver run's monotonic epoch; `session_id` is the **binary wire** session, suitable
+for matching audio packet metadata. `playout.sequence` identifies the last available source packet in the
+callback; `first_sample` is the source cursor at callback start, and `output_frames` belongs to the output clock.
+Do not assume the full callback belongs to that one packet, especially across holes or ASRC boundaries.
+
+`arrival_excess_ms` is change in receive time minus change in send-attempt QPC for adjacent arriving packets.
+It measures interval expansion/contraction, **not absolute one-way latency**. Reorder may make it signed.
+`kernel_queue_ms` is kernel receive timestamp→recvmsg completion on the same Mac. A negative value in an
+individual event means unavailable; aggregate positive histograms omit unavailable values.
+`interface_index` identifies the ingress interface (13/en8 in this experiment).
+`presentation_lead_ms` is AUHAL's output host timestamp minus callback-entry host time; it is a reported
+scheduling lead, not an acoustic DAC measurement. Do not add hardware buffer/device/safety values again
+without accounting for overlap with this lead.
+
+`fill_ms` is newest sample end minus playback cursor, including any holes. `missing_frames` counts output
+frames zero-filled after startup; `underruns` counts affected callbacks, not network datagrams.
+`receive_to_render_*` measures per available sample from kernel arrival to its assigned time in the render
+block, excluding presentation lead. `startup_late_frames`, `skipped_source_frames`, `callback_discontinuities`
+and `rebases` expose freshness recovery instead of silently growing latency.
+`sender_clock_ppm` and `receiver_clock_ppm` are relative to Mac monotonic time; `drift_ppm` is their difference.
+`asrc_ratio` includes the nominal input/output sample-rate ratio and the smoothly bounded correction.
+
+Histograms report their resolution and saturation threshold; callback-work resolution is 0.001ms in the final
+app and other intervals 0.05ms. Earlier result files used 0.05ms for callback work too, so their displayed zero
+percentiles mean below rounding resolution. Exact observed maxima remain separately recorded.
+Offline `scripts/analyze-receiver.py` computes sequence holes only when per-packet events are available;
+incomplete logs/telemetry drops are not proof of network loss. `one_way_latency_ms` remains null.
+
+
+### Receiver scheduling update
+
+`receiver_scheduling` records requested mode, QoS/set/get status, whether the readback is the default
+policy, and period/computation/constraint in milliseconds. A successful readback confirms configuration,
+not a hard deadline guarantee. `handoff_batch_max_ms` aggregates the maximum packet queue wait in each
+nonempty render callback. `handoff_packets` counts consumed packet descriptors. These separate socket
+receipt wait from the subsequent audio-callback phase wait. See [A/B measurements](receiver-wakeup.md).

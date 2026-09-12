@@ -1,5 +1,5 @@
 [workspace]
-members = ["apps/sender-windows", "crates/telemetry"]
+members = ["apps/sender-windows", "crates/telemetry", "crates/receiver-core", "apps/receiver-macos"]
 resolver = "2"
 
 [workspace.package]

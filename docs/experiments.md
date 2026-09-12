@@ -1,5 +1,7 @@
 # Experiment 0 — Windows実機キャプチャ測定
 
+**Mac工程の更新 (2026-09-12):** 受信・CoreAudio/RME・GUIを実装し、聴取確認済み。送信側をWi-Fiから有線へ切り替えた後、受信20msの60秒試験で欠落0。10ms以下は欠落あり。[詳細・再現手順](macos-receiver.md)。
+
 **採用判断の更新:** Chromeの最終PRE/exclude/min/POST比較とVB直接KS試行を経て、現在の既定経路ではprocess-includeを採用。
 [根拠とUDP送信の実測](udp-sender.md)を参照。UDP送信まで実装済みで、以下は初期診断の記録。
 

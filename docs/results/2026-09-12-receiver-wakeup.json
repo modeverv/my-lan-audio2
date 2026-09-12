@@ -1,0 +1,500 @@
+{
+  "buffer_ms": 5.0,
+  "callback_frames": 128,
+  "runs": [
+    {
+      "run": "qos-1",
+      "seconds": 90.028729417,
+      "policy": {
+        "computation_ms": 5.0,
+        "constraint_ms": 10.0,
+        "event": "receiver_scheduling",
+        "get_status": 0,
+        "is_default": true,
+        "period_ms": 0.0,
+        "qos_status": 0,
+        "requested": "Qos",
+        "set_status": 0
+      },
+      "cpu_percent_one_core": 2.2387931197653947,
+      "kernel_wait_ms": {
+        "count": 35920,
+        "p50": 0.071,
+        "p99": 1.927,
+        "p999": 4.765,
+        "max": 9.352,
+        "over_1ms": 885,
+        "over_5ms": 20,
+        "over_10ms": 0
+      },
+      "kernel_wait_after_10s_ms": {
+        "count": 32012,
+        "p50": 0.07,
+        "p99": 1.969,
+        "p999": 4.751,
+        "max": 6.768,
+        "over_1ms": 829,
+        "over_5ms": 16,
+        "over_10ms": 0
+      },
+      "handoff_batch_max_ms": {
+        "count": 9056,
+        "histogram_cap_ms": 100.0,
+        "max": 2.7077910000059546,
+        "p50": 1.36,
+        "p95": 2.5500000000000003,
+        "p99": 2.65,
+        "resolution_ms": 0.01
+      },
+      "callback_interval_ms": {
+        "count": 33674,
+        "histogram_cap_ms": 500.0,
+        "max": 2.719833000000449,
+        "p50": 2.6500000000000004,
+        "p95": 2.7,
+        "p99": 2.7,
+        "resolution_ms": 0.05
+      },
+      "callback_work_ms": {
+        "count": 33675,
+        "histogram_cap_ms": 10.0,
+        "max": 0.028166999999967857,
+        "p50": 0.002,
+        "p95": 0.004,
+        "p99": 0.008,
+        "resolution_ms": 0.001
+      },
+      "received": 35920,
+      "invalid": 0,
+      "queue_drops": 0,
+      "telemetry_drops": 0,
+      "late_packets": 61,
+      "missing_frames": 4791,
+      "underrun_callbacks": 61,
+      "sessions": 1,
+      "callback_discontinuities": 0,
+      "arrival_interval_ms": {
+        "count": 35919,
+        "histogram_cap_ms": 500.0,
+        "max": 25.483041999997624,
+        "p50": 0.0,
+        "p95": 10.65,
+        "p99": 11.3,
+        "resolution_ms": 0.05
+      },
+      "worst_interval_expansions": [
+        {
+          "arrival_excess_ms": 15.091841999997625,
+          "event": "receive",
+          "first_sample": 106866720,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.21,
+          "receive_time_ns": 32780660667,
+          "sender_capture_to_send_ms": 0.0629,
+          "sender_send_interval_ms": 10.3912,
+          "sequence": 890556,
+          "session_id": 13635948928762615234
+        },
+        {
+          "arrival_excess_ms": 12.43528300000819,
+          "event": "receive",
+          "first_sample": 109479360,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.177,
+          "receive_time_ns": 87206479083,
+          "sender_capture_to_send_ms": 0.0149,
+          "sender_send_interval_ms": 8.9403,
+          "sequence": 912328,
+          "session_id": 13635948928762615234
+        },
+        {
+          "arrival_excess_ms": 10.919175000000047,
+          "event": "receive",
+          "first_sample": 105388800,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.126,
+          "receive_time_ns": 1991001917,
+          "sender_capture_to_send_ms": 0.0165,
+          "sender_send_interval_ms": 10.9992,
+          "sequence": 878240,
+          "session_id": 13635948928762615234
+        }
+      ]
+    },
+    {
+      "run": "realtime-1",
+      "seconds": 90.040238167,
+      "policy": {
+        "computation_ms": 0.5,
+        "constraint_ms": 1.0,
+        "event": "receiver_scheduling",
+        "get_status": 0,
+        "is_default": false,
+        "period_ms": 0.0,
+        "qos_status": 0,
+        "requested": "Realtime",
+        "set_status": 0
+      },
+      "cpu_percent_one_core": 2.3577725283917172,
+      "kernel_wait_ms": {
+        "count": 35924,
+        "p50": 0.064,
+        "p99": 0.194,
+        "p999": 0.228,
+        "max": 0.274,
+        "over_1ms": 0,
+        "over_5ms": 0,
+        "over_10ms": 0
+      },
+      "kernel_wait_after_10s_ms": {
+        "count": 32016,
+        "p50": 0.064,
+        "p99": 0.194,
+        "p999": 0.228,
+        "max": 0.269,
+        "over_1ms": 0,
+        "over_5ms": 0,
+        "over_10ms": 0
+      },
+      "handoff_batch_max_ms": {
+        "count": 9051,
+        "histogram_cap_ms": 100.0,
+        "max": 2.693749999998829,
+        "p50": 1.32,
+        "p95": 2.5500000000000003,
+        "p99": 2.65,
+        "resolution_ms": 0.01
+      },
+      "callback_interval_ms": {
+        "count": 33678,
+        "histogram_cap_ms": 500.0,
+        "max": 2.8315420000026847,
+        "p50": 2.6500000000000004,
+        "p95": 2.7,
+        "p99": 2.7,
+        "resolution_ms": 0.05
+      },
+      "callback_work_ms": {
+        "count": 33679,
+        "histogram_cap_ms": 10.0,
+        "max": 0.026708999999985883,
+        "p50": 0.002,
+        "p95": 0.005,
+        "p99": 0.008,
+        "resolution_ms": 0.001
+      },
+      "received": 35924,
+      "invalid": 0,
+      "queue_drops": 0,
+      "telemetry_drops": 0,
+      "late_packets": 39,
+      "missing_frames": 3576,
+      "underrun_callbacks": 39,
+      "sessions": 1,
+      "callback_discontinuities": 0,
+      "arrival_interval_ms": {
+        "count": 35923,
+        "histogram_cap_ms": 500.0,
+        "max": 24.480791000002,
+        "p50": 0.0,
+        "p95": 10.600000000000001,
+        "p99": 11.15,
+        "resolution_ms": 0.05
+      },
+      "worst_interval_expansions": [
+        {
+          "arrival_excess_ms": 14.129591000002,
+          "event": "receive",
+          "first_sample": 112721280,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.084,
+          "receive_time_ns": 64256292125,
+          "sender_capture_to_send_ms": 0.0154,
+          "sender_send_interval_ms": 10.3512,
+          "sequence": 939344,
+          "session_id": 13635948928762615234
+        },
+        {
+          "arrival_excess_ms": 12.273500000003539,
+          "event": "receive",
+          "first_sample": 113105760,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.07,
+          "receive_time_ns": 72263837417,
+          "sender_capture_to_send_ms": 0.0181,
+          "sender_send_interval_ms": 8.8605,
+          "sequence": 942548,
+          "session_id": 13635948928762615234
+        },
+        {
+          "arrival_excess_ms": 10.832666999998349,
+          "event": "receive",
+          "first_sample": 110418720,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.05,
+          "receive_time_ns": 16283964542,
+          "sender_capture_to_send_ms": 0.014,
+          "sender_send_interval_ms": 10.3625,
+          "sequence": 920156,
+          "session_id": 13635948928762615234
+        }
+      ]
+    },
+    {
+      "run": "realtime-2",
+      "seconds": 90.030079834,
+      "policy": {
+        "computation_ms": 0.5,
+        "constraint_ms": 1.0,
+        "event": "receiver_scheduling",
+        "get_status": 0,
+        "is_default": false,
+        "period_ms": 0.0,
+        "qos_status": 0,
+        "requested": "Realtime",
+        "set_status": 0
+      },
+      "cpu_percent_one_core": 2.421838350049508,
+      "kernel_wait_ms": {
+        "count": 35920,
+        "p50": 0.065,
+        "p99": 0.195,
+        "p999": 0.228,
+        "max": 0.368,
+        "over_1ms": 0,
+        "over_5ms": 0,
+        "over_10ms": 0
+      },
+      "kernel_wait_after_10s_ms": {
+        "count": 32012,
+        "p50": 0.065,
+        "p99": 0.193,
+        "p999": 0.225,
+        "max": 0.279,
+        "over_1ms": 0,
+        "over_5ms": 0,
+        "over_10ms": 0
+      },
+      "handoff_batch_max_ms": {
+        "count": 9047,
+        "histogram_cap_ms": 100.0,
+        "max": 2.6998749999975757,
+        "p50": 1.32,
+        "p95": 2.5500000000000003,
+        "p99": 2.65,
+        "resolution_ms": 0.01
+      },
+      "callback_interval_ms": {
+        "count": 33675,
+        "histogram_cap_ms": 500.0,
+        "max": 2.7228330000070855,
+        "p50": 2.6500000000000004,
+        "p95": 2.7,
+        "p99": 2.7,
+        "resolution_ms": 0.05
+      },
+      "callback_work_ms": {
+        "count": 33676,
+        "histogram_cap_ms": 10.0,
+        "max": 0.030333999999992978,
+        "p50": 0.002,
+        "p95": 0.005,
+        "p99": 0.009000000000000001,
+        "resolution_ms": 0.001
+      },
+      "received": 35920,
+      "invalid": 0,
+      "queue_drops": 0,
+      "telemetry_drops": 0,
+      "late_packets": 16,
+      "missing_frames": 1493,
+      "underrun_callbacks": 16,
+      "sessions": 1,
+      "callback_discontinuities": 0,
+      "arrival_interval_ms": {
+        "count": 35919,
+        "histogram_cap_ms": 500.0,
+        "max": 21.126708000000605,
+        "p50": 0.0,
+        "p95": 10.55,
+        "p99": 11.0,
+        "resolution_ms": 0.05
+      },
+      "worst_interval_expansions": [
+        {
+          "arrival_excess_ms": 11.491908000000604,
+          "event": "receive",
+          "first_sample": 114382080,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.128,
+          "receive_time_ns": 8359352542,
+          "sender_capture_to_send_ms": 0.0142,
+          "sender_send_interval_ms": 9.6348,
+          "sequence": 953184,
+          "session_id": 13635948928762615234
+        },
+        {
+          "arrival_excess_ms": 10.530809000000591,
+          "event": "receive",
+          "first_sample": 114846720,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.063,
+          "receive_time_ns": 18037478834,
+          "sender_capture_to_send_ms": 0.0257,
+          "sender_send_interval_ms": 10.1949,
+          "sequence": 957056,
+          "session_id": 13635948928762615234
+        },
+        {
+          "arrival_excess_ms": 8.488500000003135,
+          "event": "receive",
+          "first_sample": 116785920,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.134,
+          "receive_time_ns": 58434642959,
+          "sender_capture_to_send_ms": 0.0138,
+          "sender_send_interval_ms": 9.564,
+          "sequence": 973216,
+          "session_id": 13635948928762615234
+        }
+      ]
+    },
+    {
+      "run": "qos-2",
+      "seconds": 90.01224925,
+      "policy": {
+        "computation_ms": 5.0,
+        "constraint_ms": 10.0,
+        "event": "receiver_scheduling",
+        "get_status": 0,
+        "is_default": true,
+        "period_ms": 0.0,
+        "qos_status": 0,
+        "requested": "Qos",
+        "set_status": 0
+      },
+      "cpu_percent_one_core": 2.360062122322757,
+      "kernel_wait_ms": {
+        "count": 35916,
+        "p50": 0.074,
+        "p99": 2.714,
+        "p999": 5.154,
+        "max": 7.874,
+        "over_1ms": 1288,
+        "over_5ms": 39,
+        "over_10ms": 0
+      },
+      "kernel_wait_after_10s_ms": {
+        "count": 32008,
+        "p50": 0.074,
+        "p99": 2.719,
+        "p999": 4.875,
+        "max": 7.219,
+        "over_1ms": 1127,
+        "over_5ms": 31,
+        "over_10ms": 0
+      },
+      "handoff_batch_max_ms": {
+        "count": 9055,
+        "histogram_cap_ms": 100.0,
+        "max": 2.908415999996805,
+        "p50": 1.34,
+        "p95": 2.56,
+        "p99": 2.66,
+        "resolution_ms": 0.01
+      },
+      "callback_interval_ms": {
+        "count": 33667,
+        "histogram_cap_ms": 500.0,
+        "max": 2.7180000000015525,
+        "p50": 2.6500000000000004,
+        "p95": 2.7,
+        "p99": 2.7,
+        "resolution_ms": 0.05
+      },
+      "callback_work_ms": {
+        "count": 33668,
+        "histogram_cap_ms": 10.0,
+        "max": 0.09129100000038193,
+        "p50": 0.002,
+        "p95": 0.005,
+        "p99": 0.008,
+        "resolution_ms": 0.001
+      },
+      "received": 35916,
+      "invalid": 0,
+      "queue_drops": 0,
+      "telemetry_drops": 0,
+      "late_packets": 83,
+      "missing_frames": 6430,
+      "underrun_callbacks": 83,
+      "sessions": 1,
+      "callback_discontinuities": 0,
+      "arrival_interval_ms": {
+        "count": 35915,
+        "histogram_cap_ms": 500.0,
+        "max": 25.70425000000398,
+        "p50": 0.0,
+        "p95": 10.4,
+        "p99": 11.100000000000001,
+        "resolution_ms": 0.05
+      },
+      "worst_interval_expansions": [
+        {
+          "arrival_excess_ms": 16.21940799999905,
+          "event": "receive",
+          "first_sample": 118969440,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.118,
+          "receive_time_ns": 13441353666,
+          "sender_capture_to_send_ms": 0.0129,
+          "sender_send_interval_ms": 9.0963,
+          "sequence": 991412,
+          "session_id": 13635948928762615234
+        },
+        {
+          "arrival_excess_ms": 16.15095000000398,
+          "event": "receive",
+          "first_sample": 120258240,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.045,
+          "receive_time_ns": 40287702875,
+          "sender_capture_to_send_ms": 0.0259,
+          "sender_send_interval_ms": 9.5533,
+          "sequence": 1002152,
+          "session_id": 13635948928762615234
+        },
+        {
+          "arrival_excess_ms": 11.589675000003895,
+          "event": "receive",
+          "first_sample": 120241440,
+          "frames": 128,
+          "interface_index": 13,
+          "kernel_queue_ms": 0.066,
+          "receive_time_ns": 39933484208,
+          "sender_capture_to_send_ms": 0.0171,
+          "sender_send_interval_ms": 9.8622,
+          "sequence": 1002012,
+          "session_id": 13635948928762615234
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Sequential Qos / Realtime / Realtime / Qos, same executable and source.",
+    "Kernel timestamps measure kernel timestamp to recvmsg completion, not a scheduler trace.",
+    "CPU includes receiver process and JSONL logging; 100% means one fully occupied core.",
+    "No guarantee of a hard deadline or long-term stability."
+  ]
+}

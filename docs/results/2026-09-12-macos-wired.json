@@ -1,0 +1,506 @@
+[
+  {
+    "file": "runs/mac-wired-20ms.jsonl",
+    "seconds": 60.003,
+    "target_buffer_ms": 20.0,
+    "av_sync_delay_ms": 0.0,
+    "device": {
+      "buffer_frames": 128,
+      "buffer_ms": 2.6666666666666665,
+      "channels": 20,
+      "device_latency_frames": 18,
+      "id": 129,
+      "name": "Fireface UCX II (24100500)",
+      "safety_offset_frames": 24,
+      "sample_rate": 48000.0
+    },
+    "received_packets": 23912,
+    "invalid_packets": 0,
+    "queue_dropped": 0,
+    "telemetry_dropped": 0,
+    "sequence_holes_in_observed_span": 0,
+    "late_packets": 0,
+    "missing_frames": 0,
+    "missing_output_ms": 0.0,
+    "underrun_callbacks": 0,
+    "fill_ms_min_max_final": [
+      5.541666666666667,
+      27.5625,
+      25.5625
+    ],
+    "receive_to_render_mean_ms": 24.448101162579032,
+    "presentation_lead_ms": 3.166333,
+    "drift_ppm": -0.44625918060013703,
+    "asrc_ratio": 0.9999995537408194,
+    "callback_discontinuities": 0,
+    "arrival_interval_ms": {
+      "count": 23911,
+      "max": 22.916791000000103,
+      "p50": 0.0,
+      "p95": 10.65,
+      "p99": 11.3,
+      "resolution_ms": 0.05
+    },
+    "sender_send_interval_ms": {
+      "count": 23911,
+      "max": 11.5228,
+      "p50": 0.05,
+      "p95": 10.5,
+      "p99": 11.05,
+      "resolution_ms": 0.05
+    },
+    "sender_capture_to_send_ms": {
+      "count": 23912,
+      "max": 0.3838,
+      "p50": 0.1,
+      "p95": 0.1,
+      "p99": 0.15,
+      "resolution_ms": 0.05
+    },
+    "kernel_queue_ms": {
+      "count": 23912,
+      "max": 5.265,
+      "p50": 0.1,
+      "p95": 0.75,
+      "p99": 1.9,
+      "resolution_ms": 0.05
+    },
+    "callback_interval_ms": {
+      "count": 22414,
+      "max": 2.762124999996729,
+      "p50": 2.65,
+      "p95": 2.7,
+      "p99": 2.7,
+      "resolution_ms": 0.05
+    },
+    "callback_work_ms": {
+      "count": 22415,
+      "max": 0.03983300000065526,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "resolution_ms": 0.05
+    },
+    "worst_arrival_excess_events": [
+      {
+        "arrival_excess_ms": 12.686291000000104,
+        "event": "receive",
+        "first_sample": 4824960,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.347,
+        "receive_time_ns": 30002826333,
+        "sender_capture_to_send_ms": 0.0158,
+        "sender_send_interval_ms": 10.2305,
+        "sequence": 40208,
+        "session_id": 13635948928762615234
+      },
+      {
+        "arrival_excess_ms": 8.660434000002052,
+        "event": "receive",
+        "first_sample": 4826880,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.201,
+        "receive_time_ns": 30040066792,
+        "sender_capture_to_send_ms": 0.0122,
+        "sender_send_interval_ms": 10.1369,
+        "sequence": 40224,
+        "session_id": 13635948928762615234
+      },
+      {
+        "arrival_excess_ms": 7.325374999998809,
+        "event": "receive",
+        "first_sample": 4825920,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.14,
+        "receive_time_ns": 30020322208,
+        "sender_capture_to_send_ms": 0.0156,
+        "sender_send_interval_ms": 10.1505,
+        "sequence": 40216,
+        "session_id": 13635948928762615234
+      }
+    ],
+    "one_way_latency_ms": null,
+    "note": "Sequence holes require --events and complete telemetry; first/last unseen packets are unknowable. Receive-to-render is per sample and excludes the CoreAudio presentation lead. No physical DAC or end-to-end latency measurement."
+  },
+  {
+    "file": "runs/mac-wired-10ms.jsonl",
+    "seconds": 60.048,
+    "target_buffer_ms": 10.0,
+    "av_sync_delay_ms": 0.0,
+    "device": {
+      "buffer_frames": 128,
+      "buffer_ms": 2.6666666666666665,
+      "channels": 20,
+      "device_latency_frames": 18,
+      "id": 129,
+      "name": "Fireface UCX II (24100500)",
+      "safety_offset_frames": 24,
+      "sample_rate": 48000.0
+    },
+    "received_packets": 23928,
+    "invalid_packets": 0,
+    "queue_dropped": 0,
+    "telemetry_dropped": 0,
+    "sequence_holes_in_observed_span": 0,
+    "late_packets": 8,
+    "missing_frames": 612,
+    "missing_output_ms": 12.75,
+    "underrun_callbacks": 8,
+    "fill_ms_min_max_final": [
+      0.0,
+      17.875,
+      16.25
+    ],
+    "receive_to_render_mean_ms": 14.857486304820268,
+    "presentation_lead_ms": 3.162458,
+    "drift_ppm": 7.5859632317037295,
+    "asrc_ratio": 1.0000075859632318,
+    "callback_discontinuities": 0,
+    "arrival_interval_ms": {
+      "count": 23927,
+      "max": 25.353291999998362,
+      "p50": 0.0,
+      "p95": 10.6,
+      "p99": 11.15,
+      "resolution_ms": 0.05
+    },
+    "sender_send_interval_ms": {
+      "count": 23927,
+      "max": 11.4805,
+      "p50": 0.05,
+      "p95": 10.45,
+      "p99": 10.9,
+      "resolution_ms": 0.05
+    },
+    "sender_capture_to_send_ms": {
+      "count": 23928,
+      "max": 0.4592,
+      "p50": 0.1,
+      "p95": 0.1,
+      "p99": 0.15,
+      "resolution_ms": 0.05
+    },
+    "kernel_queue_ms": {
+      "count": 23928,
+      "max": 10.502,
+      "p50": 0.05,
+      "p95": 0.45,
+      "p99": 2.0,
+      "resolution_ms": 0.05
+    },
+    "callback_interval_ms": {
+      "count": 22431,
+      "max": 2.7402919999985897,
+      "p50": 2.65,
+      "p95": 2.7,
+      "p99": 2.7,
+      "resolution_ms": 0.05
+    },
+    "callback_work_ms": {
+      "count": 22432,
+      "max": 0.23750000000077875,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "resolution_ms": 0.05
+    },
+    "worst_arrival_excess_events": [
+      {
+        "arrival_excess_ms": 15.583691999998361,
+        "event": "receive",
+        "first_sample": 8947200,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.145,
+        "receive_time_ns": 55481070875,
+        "sender_capture_to_send_ms": 0.0124,
+        "sender_send_interval_ms": 9.7696,
+        "sequence": 74560,
+        "session_id": 13635948928762615234
+      },
+      {
+        "arrival_excess_ms": 10.769049999999902,
+        "event": "receive",
+        "first_sample": 6310080,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 10.502,
+        "receive_time_ns": 536718665,
+        "sender_capture_to_send_ms": 0.0118,
+        "sender_send_interval_ms": 9.0117,
+        "sequence": 52584,
+        "session_id": 13635948928762615234
+      },
+      {
+        "arrival_excess_ms": 9.205891999997062,
+        "event": "receive",
+        "first_sample": 7296000,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.435,
+        "receive_time_ns": 21075432333,
+        "sender_capture_to_send_ms": 0.0131,
+        "sender_send_interval_ms": 9.5329,
+        "sequence": 60800,
+        "session_id": 13635948928762615234
+      }
+    ],
+    "one_way_latency_ms": null,
+    "note": "Sequence holes require --events and complete telemetry; first/last unseen packets are unknowable. Receive-to-render is per sample and excludes the CoreAudio presentation lead. No physical DAC or end-to-end latency measurement."
+  },
+  {
+    "file": "runs/mac-wired-5ms.jsonl",
+    "seconds": 60.015,
+    "target_buffer_ms": 5.0,
+    "av_sync_delay_ms": 0.0,
+    "device": {
+      "buffer_frames": 128,
+      "buffer_ms": 2.6666666666666665,
+      "channels": 20,
+      "device_latency_frames": 18,
+      "id": 129,
+      "name": "Fireface UCX II (24100500)",
+      "safety_offset_frames": 24,
+      "sample_rate": 48000.0
+    },
+    "received_packets": 23916,
+    "invalid_packets": 0,
+    "queue_dropped": 0,
+    "telemetry_dropped": 0,
+    "sequence_holes_in_observed_span": 0,
+    "late_packets": 64,
+    "missing_frames": 5748,
+    "missing_output_ms": 119.75,
+    "underrun_callbacks": 61,
+    "fill_ms_min_max_final": [
+      0.0,
+      13.583333333333332,
+      12.770833333333334
+    ],
+    "receive_to_render_mean_ms": 10.285146728383769,
+    "presentation_lead_ms": 3.1645,
+    "drift_ppm": 6.398949721878324,
+    "asrc_ratio": 1.0000063989497219,
+    "callback_discontinuities": 0,
+    "arrival_interval_ms": {
+      "count": 23915,
+      "max": 31.341125000000858,
+      "p50": 0.0,
+      "p95": 10.5,
+      "p99": 11.0,
+      "resolution_ms": 0.05
+    },
+    "sender_send_interval_ms": {
+      "count": 23915,
+      "max": 12.9607,
+      "p50": 0.05,
+      "p95": 10.35,
+      "p99": 10.75,
+      "resolution_ms": 0.05
+    },
+    "sender_capture_to_send_ms": {
+      "count": 23916,
+      "max": 0.3457,
+      "p50": 0.1,
+      "p95": 0.1,
+      "p99": 0.15,
+      "resolution_ms": 0.05
+    },
+    "kernel_queue_ms": {
+      "count": 23916,
+      "max": 4.991,
+      "p50": 0.1,
+      "p95": 0.4,
+      "p99": 1.95,
+      "resolution_ms": 0.05
+    },
+    "callback_interval_ms": {
+      "count": 22419,
+      "max": 2.7598750000024097,
+      "p50": 2.65,
+      "p95": 2.7,
+      "p99": 2.7,
+      "resolution_ms": 0.05
+    },
+    "callback_work_ms": {
+      "count": 22420,
+      "max": 0.038583999995012164,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "resolution_ms": 0.05
+    },
+    "worst_arrival_excess_events": [
+      {
+        "arrival_excess_ms": 21.009725000000856,
+        "event": "receive",
+        "first_sample": 10185600,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.227,
+        "receive_time_ns": 20827234167,
+        "sender_capture_to_send_ms": 0.0146,
+        "sender_send_interval_ms": 10.3314,
+        "sequence": 84880,
+        "session_id": 13635948928762615234
+      },
+      {
+        "arrival_excess_ms": 18.87778299999802,
+        "event": "receive",
+        "first_sample": 9972960,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.184,
+        "receive_time_ns": 16394998625,
+        "sender_capture_to_send_ms": 0.0156,
+        "sender_send_interval_ms": 10.1708,
+        "sequence": 83108,
+        "session_id": 13635948928762615234
+      },
+      {
+        "arrival_excess_ms": 17.60651700000018,
+        "event": "receive",
+        "first_sample": 9968160,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.315,
+        "receive_time_ns": 16293117334,
+        "sender_capture_to_send_ms": 0.0184,
+        "sender_send_interval_ms": 9.6049,
+        "sequence": 83068,
+        "session_id": 13635948928762615234
+      }
+    ],
+    "one_way_latency_ms": null,
+    "note": "Sequence holes require --events and complete telemetry; first/last unseen packets are unknowable. Receive-to-render is per sample and excludes the CoreAudio presentation lead. No physical DAC or end-to-end latency measurement."
+  },
+  {
+    "file": "runs/mac-wired-2ms.jsonl",
+    "seconds": 60.018,
+    "target_buffer_ms": 2.0,
+    "av_sync_delay_ms": 0.0,
+    "device": {
+      "buffer_frames": 128,
+      "buffer_ms": 2.6666666666666665,
+      "channels": 20,
+      "device_latency_frames": 18,
+      "id": 129,
+      "name": "Fireface UCX II (24100500)",
+      "safety_offset_frames": 24,
+      "sample_rate": 48000.0
+    },
+    "received_packets": 23916,
+    "invalid_packets": 0,
+    "queue_dropped": 0,
+    "telemetry_dropped": 0,
+    "sequence_holes_in_observed_span": 0,
+    "late_packets": 1861,
+    "missing_frames": 66781,
+    "missing_output_ms": 1391.2708333333333,
+    "underrun_callbacks": 1859,
+    "fill_ms_min_max_final": [
+      0.0,
+      9.5625,
+      1.3333333333333333
+    ],
+    "receive_to_render_mean_ms": 6.8983854611085595,
+    "presentation_lead_ms": 3.151917,
+    "drift_ppm": 6.84414973080905,
+    "asrc_ratio": 1.0000068441497307,
+    "callback_discontinuities": 0,
+    "arrival_interval_ms": {
+      "count": 23915,
+      "max": 24.395583000000443,
+      "p50": 0.0,
+      "p95": 10.35,
+      "p99": 10.8,
+      "resolution_ms": 0.05
+    },
+    "sender_send_interval_ms": {
+      "count": 23915,
+      "max": 13.1382,
+      "p50": 0.05,
+      "p95": 10.25,
+      "p99": 10.55,
+      "resolution_ms": 0.05
+    },
+    "sender_capture_to_send_ms": {
+      "count": 23916,
+      "max": 0.3794,
+      "p50": 0.1,
+      "p95": 0.1,
+      "p99": 0.15,
+      "resolution_ms": 0.05
+    },
+    "kernel_queue_ms": {
+      "count": 23916,
+      "max": 14.398,
+      "p50": 0.1,
+      "p95": 0.5,
+      "p99": 1.55,
+      "resolution_ms": 0.05
+    },
+    "callback_interval_ms": {
+      "count": 22421,
+      "max": 2.750916000000103,
+      "p50": 2.65,
+      "p95": 2.7,
+      "p99": 2.7,
+      "resolution_ms": 0.05
+    },
+    "callback_work_ms": {
+      "count": 22422,
+      "max": 0.02824999999972988,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0,
+      "resolution_ms": 0.05
+    },
+    "worst_arrival_excess_events": [
+      {
+        "arrival_excess_ms": 14.043183000000443,
+        "event": "receive",
+        "first_sample": 14880000,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 14.398,
+        "receive_time_ns": 58204997708,
+        "sender_capture_to_send_ms": 0.0138,
+        "sender_send_interval_ms": 10.3524,
+        "sequence": 124000,
+        "session_id": 13635948928762615234
+      },
+      {
+        "arrival_excess_ms": 12.055732999995815,
+        "event": "receive",
+        "first_sample": 14384160,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.184,
+        "receive_time_ns": 47872532875,
+        "sender_capture_to_send_ms": 0.0157,
+        "sender_send_interval_ms": 10.2591,
+        "sequence": 119868,
+        "session_id": 13635948928762615234
+      },
+      {
+        "arrival_excess_ms": 10.918025000000661,
+        "event": "receive",
+        "first_sample": 14511840,
+        "frames": 128,
+        "interface_index": 13,
+        "kernel_queue_ms": 0.222,
+        "receive_time_ns": 50538788917,
+        "sender_capture_to_send_ms": 0.0128,
+        "sender_send_interval_ms": 10.0961,
+        "sequence": 120932,
+        "session_id": 13635948928762615234
+      }
+    ],
+    "one_way_latency_ms": null,
+    "note": "Sequence holes require --events and complete telemetry; first/last unseen packets are unknowable. Receive-to-render is per sample and excludes the CoreAudio presentation lead. No physical DAC or end-to-end latency measurement."
+  }
+]
