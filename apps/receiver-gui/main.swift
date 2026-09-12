@@ -24,6 +24,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     var engine: URL { Bundle.main.url(forResource: "receiver-macos", withExtension: nil)! }
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
+        if let iconURL = Bundle.main.url(forResource: "AppIcon", withExtension: "icns"),
+           let icon = NSImage(contentsOf: iconURL) {
+            NSApp.applicationIconImage = icon
+        }
         let menu = NSMenu()
         let appMenu = NSMenuItem(); menu.addItem(appMenu)
         let submenu = NSMenu(); submenu.addItem(withTitle: "LAN Audio Receiverを終了", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q");appMenu.submenu = submenu
