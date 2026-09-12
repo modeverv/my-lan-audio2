@@ -1,6 +1,27 @@
 import AppKit
 import Darwin
 
+private let receiverAccent = NSColor(srgbRed: 0.05, green: 0.80, blue: 0.73, alpha: 1)
+private let receiverBackground = NSColor(srgbRed: 0.045, green: 0.065, blue: 0.075, alpha: 1)
+
+final class ReceiverButton: NSButton {
+    var primary = false
+    override var isEnabled: Bool { didSet { needsDisplay = true } }
+    override func draw(_ dirtyRect: NSRect) {
+        let shape = NSBezierPath(roundedRect: bounds.insetBy(dx: 1, dy: 1), xRadius: 12, yRadius: 12)
+        let fill = primary && isEnabled ? receiverAccent : NSColor(white: 0.13, alpha: 1)
+        (isHighlighted ? fill.blended(withFraction: 0.18, of: .white)! : fill).setFill()
+        shape.fill()
+        let foreground: NSColor = !isEnabled ? NSColor(white: 0.38, alpha: 1) : primary ? receiverBackground : NSColor(white: 0.88, alpha: 1)
+        let attributes: [NSAttributedString.Key: Any] = [.font: NSFont.systemFont(ofSize: 14, weight: .semibold), .foregroundColor: foreground]
+        let size = (title as NSString).size(withAttributes: attributes)
+        (title as NSString).draw(at: NSPoint(x: (bounds.width-size.width)/2, y: (bounds.height-size.height)/2), withAttributes: attributes)
+        if window?.firstResponder === self {
+            receiverAccent.setStroke(); shape.lineWidth = 2; shape.stroke()
+        }
+    }
+}
+
 final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var window: NSWindow!
     var settingsWindow: NSWindow!
@@ -19,8 +40,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     let channel = NSTextField(string: UserDefaults.standard.string(forKey: "channel") ?? "1")
     let delay = NSTextField(string: UserDefaults.standard.string(forKey: "delay") ?? "0")
     let gain = NSTextField(string: UserDefaults.standard.string(forKey: "gain") ?? "-12")
-    let start = NSButton(title: "受信開始", target: nil, action: nil)
-    let stop = NSButton(title: "停止", target: nil, action: nil)
+    let start = ReceiverButton(title: "受信開始", target: nil, action: nil)
+    let stop = ReceiverButton(title: "停止", target: nil, action: nil)
+    let mainStatus = NSTextField(labelWithString: "STOPPED")
+    let mainCaption = NSTextField(labelWithString: "受信停止中")
     let status = NSTextField(labelWithString: "停止中")
     let details = NSTextField(wrappingLabelWithString: "Windowsの送信先はMacのLAN IP、または下記のマルチキャストIPです。\n受信開始で、選択したCoreAudioデバイスへ再生します。")
     let metrics = NSTextField(wrappingLabelWithString: "受信待機")
@@ -41,7 +64,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         submenu.addItem(.separator())
         submenu.addItem(withTitle: "LAN Audio Receiverを終了", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q");appMenu.submenu = submenu
         NSApp.mainMenu = menu
-        window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 260, height: 82), styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
+        window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 340, height: 218), styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
         window.title = "LAN Audio Receiver"
         window.isReleasedWhenClosed = false
         window.delegate = self
@@ -53,20 +76,50 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         settingsButton.symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 20, weight: .regular)
         settingsButton.toolTip = "設定（⌘,）"
         settingsButton.setAccessibilityLabel("設定")
-        let buttons = NSStackView(views: [start, stop, settingsButton])
+        window.appearance = NSAppearance(named: .darkAqua)
+        window.backgroundColor = receiverBackground
+        window.titlebarAppearsTransparent = true
+        let content = window.contentView!
+        let heading = NSTextField(labelWithString: "LAN AUDIO")
+        heading.font = .systemFont(ofSize: 13, weight: .bold)
+        heading.textColor = NSColor(white: 0.60, alpha: 1)
+        mainStatus.font = .systemFont(ofSize: 35, weight: .bold)
+        mainStatus.alignment = .center
+        mainStatus.textColor = NSColor(white: 0.60, alpha: 1)
+        mainCaption.font = .systemFont(ofSize: 12, weight: .medium)
+        mainCaption.alignment = .center
+        mainCaption.textColor = .secondaryLabelColor
+        start.primary = true
+        for button in [start, stop] { button.isBordered = false; button.setButtonType(.momentaryPushIn) }
+        let buttons = NSStackView(views: [start, stop])
         buttons.spacing = 12
-        buttons.distribution = .fill
-        buttons.translatesAutoresizingMaskIntoConstraints = false
-        window.contentView!.addSubview(buttons)
+        buttons.distribution = .fillEqually
+        for view in [heading, settingsButton, mainStatus, mainCaption, buttons] {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            content.addSubview(view)
+        }
         NSLayoutConstraint.activate([
-            start.widthAnchor.constraint(equalTo: stop.widthAnchor),
+            heading.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: 24),
+            heading.topAnchor.constraint(equalTo: content.topAnchor, constant: 17),
+            settingsButton.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -20),
+            settingsButton.centerYAnchor.constraint(equalTo: heading.centerYAnchor),
             settingsButton.widthAnchor.constraint(equalToConstant: 28),
             settingsButton.heightAnchor.constraint(equalToConstant: 28),
-            buttons.leadingAnchor.constraint(equalTo: window.contentView!.leadingAnchor, constant: 20),
-            buttons.trailingAnchor.constraint(equalTo: window.contentView!.trailingAnchor, constant: -20),
-            buttons.centerYAnchor.constraint(equalTo: window.contentView!.centerYAnchor)
+            mainStatus.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: 20),
+            mainStatus.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -20),
+            mainStatus.topAnchor.constraint(equalTo: content.topAnchor, constant: 61),
+            mainCaption.centerXAnchor.constraint(equalTo: content.centerXAnchor),
+            mainCaption.topAnchor.constraint(equalTo: mainStatus.bottomAnchor, constant: 5),
+            buttons.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: 24),
+            buttons.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -24),
+            buttons.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -24),
+            start.heightAnchor.constraint(equalToConstant: 42),
+            stop.heightAnchor.constraint(equalToConstant: 42)
         ])
         settingsWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 700, height: 750), styleMask: [.titled, .closable], backing: .buffered, defer: false)
+        settingsWindow.appearance = NSAppearance(named: .darkAqua)
+        settingsWindow.backgroundColor = receiverBackground
+        settingsWindow.titlebarAppearsTransparent = true
         settingsWindow.title = "LAN Audio Receiver — 設定"
         settingsWindow.isReleasedWhenClosed = false
         settingsWindow.delegate = self
@@ -123,6 +176,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     }
     func showError(_ message: String) {
         status.stringValue = message
+        updateMainStatus("ERROR", caption: "設定を確認してください", active: false)
         showSettings()
     }
     func loadDevices() {
@@ -226,7 +280,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let prefs = UserDefaults.standard
         for (key,value) in [("multicastGroup",multicastGroup.stringValue),("multicastInterface",multicastInterface.stringValue),("device",device),("source",source.stringValue),("port",port.stringValue),("channel",channel.stringValue),("delay",delay.stringValue),("gain",gain.stringValue),("scheduling",scheduling.indexOfSelectedItem == 0 ? "realtime" : "qos"),("hardwareBuffer",hardwareBuffer.titleOfSelectedItem ?? "128 frames"),("buffer",buffer.titleOfSelectedItem ?? "20 ms")] {prefs.set(value,forKey:key)}
     }
+    func updateMainStatus(_ title: String, caption: String, active: Bool) {
+        mainStatus.stringValue = title
+        mainStatus.textColor = active ? receiverAccent : NSColor(white: 0.60, alpha: 1)
+        mainCaption.stringValue = caption
+    }
     func setRunning(_ running:Bool) {
+        updateMainStatus(running ? "WAITING" : "STOPPED", caption: running ? "音声を待っています" : "受信停止中", active: false)
         start.isEnabled = !running;stop.isEnabled = running
         refresh.isEnabled = !running
         window.title = running ? "LAN Audio Receiver — 受信中" : "LAN Audio Receiver"
@@ -248,6 +308,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 details.stringValue += realtime ? " • 低遅延受信" : " • 通常QoS受信"
             }
             if let playout = d["playout"] as? [String:Any] {
+                if stop.isEnabled {
+                    let receiving = d["status"] as? String == "receiving"
+                    updateMainStatus(receiving ? "RECEIVING" : "WAITING", caption: receiving ? "受信・再生中" : "音声を待っています", active: receiving)
+                }
                 status.stringValue = d["status"] as? String == "receiving" ? "受信・再生中  \(d["peer"] ?? "")" : "Windowsからの音声を待っています"
                 let fill = (playout["fill_ms"] as? NSNumber)?.doubleValue ?? 0
                 let ppm = (playout["drift_ppm"] as? NSNumber)?.doubleValue ?? 0
@@ -259,7 +323,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             }
         }
     }
-    @objc func end(){process?.interrupt();stop.isEnabled = false;status.stringValue = "停止しています…"}
+    @objc func end(){updateMainStatus("STOPPING", caption: "停止しています…", active: false);process?.interrupt();stop.isEnabled = false;status.stringValue = "停止しています…"}
     @objc func showLog(){if let logURL {NSWorkspace.shared.activateFileViewerSelecting([logURL])}}
     func applicationShouldTerminate(_ sender:NSApplication)->NSApplication.TerminateReply {
         if process != nil {terminating = true;end();return .terminateLater};return .terminateNow
