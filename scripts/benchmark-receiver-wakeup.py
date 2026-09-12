@@ -10,7 +10,7 @@ p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--buffer-
 a=p.parse_args()
 if not math.isfinite(a.seconds) or not 1 <= a.seconds <= 3600: p.error("seconds must be 1..3600")
 if not math.isfinite(a.buffer_ms) or not 2 <= a.buffer_ms <= 100: p.error("buffer-ms must be 2..100")
-if a.frames not in (64,128,256,512): p.error("frames must be 64,128,256,512")
+if a.frames not in (16,32,64,128,256,512): p.error("frames must be 16,32,64,128,256,512")
 a.output_dir.mkdir(parents=True,exist_ok=True)
 root=Path(__file__).resolve().parents[1]
 results=[]

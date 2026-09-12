@@ -1,7 +1,7 @@
 # macOS受信アプリ
 
 2026-09-12。WindowsからMac/RMEへの実音声を受信・再生し、ユーザーの聴取確認まで完了。
-Windowsの送信コード・wire形式は変更していない。
+受信実装は既存LNAU v1 wire形式と互換。以後Windows側にも追加の計測機能が実装された。
 
 **受信スレッドの追加改善:** リアルタイム方式を既定にし、受信待ちp99を約1.9〜2.7msから約0.195msへ改善。[比較結果と制約](receiver-wakeup.md)。5msでの完全な安定動作はまだ未達。
 
@@ -18,7 +18,9 @@ Rust stable、Xcode Command Line Tools/Swiftが必要。エンジンはRust、Co
 - Windowsの宛先: このMacでは **192.168.11.65 / UDP 40100**。
 - Windows IP: 空欄なら、その起動で最初に受けた正しいstream 1の送信元IPへ固定。必要なら明示指定する。
 - 出力: **Fireface UCX II (24100500)、再生チャンネル1/2**。
-- 現時点の常用設定: **受信20ms、CoreAudio 128 frames（48kHzで2.667ms）、映像同期追加0ms、ゲイン−12dB**。
+- この環境で採用した実用設定: **受信10ms、CoreAudio 16 frames（48kHzで約0.333ms）、映像同期追加0ms、ゲイン−12dB**。
+- Windows HDMI → Epson EF21投影時、上記設定でユーザーが映像・音声の体感上の同期を確認（2026-09-12）。長時間ゼロ欠落や物理総遅延の測定とは別。
+- 新規GUIの初期値は20ms／128frames。保存済み設定を優先する。実用設定を使う場合はGUIで選択する。
 - 「受信開始」「停止」で制御。設定は次回へ保存される。受信中の設定変更には一旦停止が必要。
 - 送信元のNIC/IPが切り替わったときは、Windows IP欄を空欄または新IPにして停止→開始する。
 - ログは `~/Library/Logs/LAN-Audio-Receiver/`。PCMは保存せず、設定と数値のみをJSONL保存。
@@ -34,8 +36,8 @@ target/release/receiver-macos --list-devices
 # 現在の有線LAN送信元を明示した60秒測定。出力JSONLの既存ファイルは上書きしない。
 mkdir -p runs
 target/release/receiver-macos --source 192.168.11.29 \
-  --device 'Fireface UCX II' --channel 1 --buffer-frames 128 \
-  --buffer-ms 20 --av-sync-delay-ms 0 --gain-db -12 \
+  --device 'Fireface UCX II' --channel 1 --buffer-frames 16 \
+  --buffer-ms 10 --av-sync-delay-ms 0 --gain-db -12 \
   --seconds 60 --events --output runs/mac-example.jsonl
 
 # 音声出力なしのネットワーク診断。dummy sinkは通常スレッドなのでCoreAudio評価には使わない。
@@ -47,6 +49,18 @@ python3 scripts/analyze-receiver.py runs/mac-example.jsonl
 `--seconds 0` は停止まで連続動作。CLIの `--buffer-frames 0` は既存設定を維持する。
 `--no-asrc` はクロック微調整を無効化するが、送受信の公称レートが異なる場合のレート変換は残る。
 GUIは受信2/5/10/20/40ms、CLIは2〜100ms。映像同期追加は0〜250ms。
+CoreAudioのGUI選択肢は現在値維持、16/32/64/128/256/512frames。起動時の読戻し値と実callback framesをログに記録する。
+
+## 最終の小バッファ試験と視聴確認
+
+16frames／5msの90秒試験では35,912packet受信、実callback 16frames、
+callback処理時間最大0.020167ms、間隔最大0.411667ms、callback discontinuity 0。
+再生不足は2,531出力frames（合計52.729ms）、166callback、遅着26packet。
+callback数はサイズによって変わるため、異なるサイズの比較では欠落frames・継続時間も見る。
+[集約JSON](results/2026-09-12-16frames.json)。この試験だけで16framesの長時間安定を保証しない。
+
+その後、ユーザーが16frames／10msでEF21へのHDMI投影とRME音声が体感上同期することを確認し、現段階の実用設定として採用した。
+数値による両端比較は別条件（128frames／10ms）の[10分間同時計測](paired-lan-measurement.md)を参照。
 
 ## 実装
 
@@ -72,7 +86,7 @@ GUIは受信2/5/10/20/40ms、CLIは2〜100ms。映像同期追加は0〜250ms。
 ASRCは差し替え可能な線形補間の初期実装。追加の長いフィルタ待ちはないが、帯域制限型の高品質SRCではない。
 特に44.1/48kHz間などの大きなレート変換の音質保証は未実施。今回の実機は両側48kHz。
 
-## 実測：有線LAN
+## 初期実測：有線LAN（CoreAudio 128frames）
 
 WindowsをWi-Fiの192.168.11.28から有線LANの192.168.11.29へ変更したことをユーザーから確認。
 Macの受信インターフェースはen8。変更後、同じ音声送信を各60秒ずつ順番に測定した。
@@ -86,7 +100,7 @@ Macの受信インターフェースはen8。変更後、同じ音声送信を�
 | 5ms | 23,916 | 64 | 5,748 | 61 | 31.341ms | 2.760ms |
 | 2ms | 23,916 | 1,861 | 66,781 | 1,859 | 24.396ms | 2.751ms |
 
-20msを常用初期設定とする。これは60秒試験の結果であり、長時間ゼロ欠落を保証するものではない。
+この初期試験から20msをGUI初期値にした。これは60秒試験の結果であり、長時間ゼロ欠落を保証するものではない。
 10ms以下は実装済み・実測済みだが、この実測条件では安定合格にしない。
 詳細な数値、receive→renderの区間、送信間隔とカーネル待ち時間は[集約JSON](results/2026-09-12-macos-wired.json)。
 
@@ -112,6 +126,6 @@ cargo run --release --locked -p receiver-core --example simulate -- --seconds 60
 - 1時間の疑似ネットワーク（48kHz、Windows同様480-frameを4分割、±0.2ms jitter、sender +12ppm、receiver −5ppm、loss 0）は欠落0、深さ12.27〜27.65ms、有界。シミュレータのin-flight最大4packet。
 - 10分の障害注入では226packetの意図的破棄、246重複、30ms burst、20ms callback stallを注入。欠落を計数し、59回のcallback停止を検出して古い音声を残さず復帰。深さ2.96〜25.98ms。
 - GUI起動／受信開始／停止／再開／終了、実際のRME再生メーター、ユーザーの聴取確認を実施。
-- RMEで30分〜数時間の実連続運用、DACループバック、プロジェクターのflash/click同期、高品質ASRC評価は未実施。
+- EF21投影との同期はユーザーがテスト動画で目視・聴取確認済み。RMEで30分〜数時間の連続運用の定量評価、DACループバック、録画等によるプロジェクター同期の数値測定、高品質ASRC評価は未実施。
 - Windows QPCとMac時刻は同期していない。**物理の端から端までの遅延／20ms未満の総遅延は未確定**。既存のChrome取得まで約67〜80msという上流実測は、Mac側実装で消えるものではない。
 - Windowsを再起動してQPCがリセットされた場合はMacの受信を停止→開始する。ネットワーク認証・暗号化・複数送信元混合は対象外。

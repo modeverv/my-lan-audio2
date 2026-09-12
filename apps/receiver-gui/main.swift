@@ -43,7 +43,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let refresh = NSButton(title:"デバイス一覧を更新",target:self,action:#selector(refreshDevices));stack.addArrangedSubview(refresh)
         row("Windows IP（空欄で自動）",source);row("UDPポート",port);row("出力チャンネル先頭（1始まり）",channel)
         buffer.addItems(withTitles:["2 ms","5 ms","10 ms","20 ms","40 ms"]);buffer.selectItem(withTitle:UserDefaults.standard.string(forKey:"buffer") ?? "20 ms")
-        hardwareBuffer.addItems(withTitles:["現在の設定を維持", "64 frames", "128 frames", "256 frames", "512 frames"]);hardwareBuffer.selectItem(withTitle:UserDefaults.standard.string(forKey:"hardwareBuffer") ?? "128 frames")
+        hardwareBuffer.addItems(withTitles:["現在の設定を維持", "16 frames", "32 frames", "64 frames", "128 frames", "256 frames", "512 frames"]);hardwareBuffer.selectItem(withTitle:UserDefaults.standard.string(forKey:"hardwareBuffer") ?? "128 frames")
         row("CoreAudioバッファ（停止時に復元）",hardwareBuffer)
         scheduling.addItems(withTitles:["低遅延（リアルタイム）", "標準（比較用）"])
         scheduling.selectItem(at:UserDefaults.standard.string(forKey:"scheduling") == "qos" ? 1 : 0)

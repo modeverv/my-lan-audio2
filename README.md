@@ -1,25 +1,43 @@
 # Windows → macOS low-latency network audio
 
-**Mac受信アプリを実装済み:** Windows → 有線LAN → Mac → RMEで再生・聴取確認済みです。[Macの起動手順・実測](docs/macos-receiver.md)。
+**2026-09-12：現段階の実装を完了。** Windows → 有線LAN → Mac → RMEの音声と、HDMI → Epson EF21の投影映像について、ユーザーが体感上の同期を確認しました。[Macの起動手順・実測](docs/macos-receiver.md)。
 
 ```sh
 scripts/build-macos.sh
 open "dist/LAN Audio Receiver.app"
 ```
 
-このMacの宛先は192.168.11.65:40100。RME再生1/2、受信20ms、CoreAudio 128 framesを初期設定とします。
+この環境での実用設定は次のとおりです。GUIで設定して「受信開始」を押してください。
+
+| 項目 | 設定 |
+|---|---|
+| Windows送信先 | 192.168.11.65:40100（MacのLAN IP） |
+| Mac出力 | Fireface UCX II、再生1/2、48kHz |
+| CoreAudioバッファ | **16 frames（約0.33ms）** |
+| 受信バッファ | **10ms** |
+| 映像同期の追加遅延 | **0ms** |
+| 再生ゲイン | −12dB |
+| 映像経路 | Windows HDMI → Epson EF21 |
+
+これはこの機材での視聴確認に基づく設定です。新規起動のGUI初期値は従来の20ms／128framesで、保存済み設定があればそれを使います。
+CoreAudioは「現在の設定を維持」または16/32/64/128/256/512framesから選べます。機器が対応する値を使用してください。
 受信方式はリアルタイムを既定にし、GUIで標準QoSと切り替えられます。[受信待ち改善の実測](docs/receiver-wakeup.md)。
-有線LANで20msの60秒試験は欠落0。10/5/2msは同じ条件で欠落が出たため実験設定です。総遅延の20ms未満を証明した値ではありません。
+16frames／10msでEF21の映像と音声が合うという確認は、目視・聴取によるものです。長時間ゼロ欠落や音源から耳まで10msという意味ではありません。
+5msは低遅延の試験設定で、16framesの90秒試験でも再生不足が残りました。音切れが気になる場合は受信バッファを20msへ増やして比較できます。
+
+[両端同時計測](docs/paired-lan-measurement.md)では、10分間の239,992packetすべてが到着する一方、
+送信API復帰後→Macカーネル到着の間隔が最大約13.8ms拡大しました。共有LAN・両端OS・NICの内訳は未分離です。
+16frames／5msの[短時間試験結果](docs/results/2026-09-12-16frames.json)も保存しています。
 
 ## ダブルクリックで起動
 
-[LAN-Audio-Sender.exe](dist/LAN-Audio-Sender.exe)を起動してください。
+Windowsでビルドした `dist/LAN-Audio-Sender.exe` を起動してください。
 送信先IP・ポートを入力し、Chrome／ChromeアプリまたはSpotifyを選択して「送信開始」。停止は「停止」ボタンです。
 起動中の対象アプリを自動検索します。ChromeとChromeアプリは同じ親プロセス配下をまとめて取得します。送信エンジンはexe内に同梱済みです。[GUIの詳細](docs/windows-gui.md)
 exeはGit対象外のローカル成果物です。新しいWindowsチェックアウトでは `scripts/build-gui.ps1` で生成してください。
 
 現在の実装は **Windowsキャプチャ診断・UDP PCM送信とmacOS CoreAudio受信再生** です。
-Chromeの取得にはprocess-includeを採用し、localhost受信まで実測しました。
+Chromeの取得にはprocess-includeを採用し、有線LANでの両端同時計測・RME再生まで実測しました。
 PCMはファイルに保存しません。`--udp-to`を指定した場合だけネットワーク送信します。
 
 ```powershell
@@ -119,7 +137,7 @@ APIが要求を受理しても、実際のイベント周期が同じとは限�
 - キャプチャスレッドのCPU時間、開始から最初のイベントまでの時間
 
 イベント間隔・音声ブロック長・先頭サンプル経過時間は別物です。
-ネットワーク、macOS、DACまでの総遅延はこの段階では測っていません。
+ネットワークとmacOSの区間計測は実施済みです。DACを含む物理的な端から端までの総遅延は未測定です。
 
 ## 検証
 
