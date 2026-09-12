@@ -1431,3 +1431,25 @@ small bounded wait
 ```
 
 Everything should be designed around preserving that model.
+
+---
+
+# 31. Windows progress — 2026-09-12
+
+Chrome capture selection and the initial UDP sender are implemented in this workspace.
+Use process-include with the Chrome parent PID for the current VB-Audio routing.
+The final PRE/process-exclude/minimum-period/POST comparison did not establish a better usable route;
+VB direct KS opened but delivered no notifications or PCM during the Chrome test.
+This is an implementation choice for the measured environment, not a Windows latency lower bound.
+
+The sender copies available f32 PCM into a preallocated bounded pool, immediately splits to MTU-safe
+datagrams, and uses 1..3 nonblocking MMCSS network workers. Default is one worker and a 5ms send-age deadline.
+In the 32-second one-worker localhost test, all 12,792 datagrams arrived; acquisition-to-send-call
+p50/p99/max were 0.0835/0.1776/0.2898ms. This excludes Chrome's upstream generation/capture latency.
+The Node diagnostic receive side had larger scheduling outliers and is not a production audio receiver.
+
+Read `docs/udp-sender.md` for selection evidence and all worker comparisons, and `docs/protocol.md`
+plus `docs/protocol-v1-golden.hex` before implementing the macOS receiver.
+Network PCM is opt-in with `--udp-to IP:PORT`; no LAN destination was used in these tests.
+Next: macOS diagnostic receive, sample-index placement, session reset/loss/reorder handling,
+then the single receiver buffer and Core Audio output. No macOS output or LAN end-to-end latency is claimed.

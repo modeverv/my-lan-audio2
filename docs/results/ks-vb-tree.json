@@ -1,0 +1,79 @@
+{
+  "adapters": [
+    {
+      "adapter_id": "{2}.\\\\?\\root#media#0000#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\vbaudiovacwdm2022_out1_topo_e51a78a01fb100001",
+      "pins": [
+        {
+          "category": "6994AD04-93EF-11D0-A3CC-00A0C9223196",
+          "category_error": null,
+          "dataflow": 1,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "指定されたプロパティ セットはオブジェクト上に存在しません。 (0x80070492)",
+          "pin": 0
+        },
+        {
+          "category": "DFF21CE1-F70F-11D0-B917-00A0C9223196",
+          "category_error": null,
+          "dataflow": 2,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "指定されたプロパティ セットはオブジェクト上に存在しません。 (0x80070492)",
+          "pin": 1
+        },
+        {
+          "category": "DFF21FE3-F70F-11D0-B917-00A0C9223196",
+          "category_error": null,
+          "dataflow": 2,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "指定されたプロパティ セットはオブジェクト上に存在しません。 (0x80070492)",
+          "pin": 2
+        }
+      ]
+    },
+    {
+      "adapter_id": "{0.0.0.00000000}.{ae1a9901-775d-4b89-b33b-5666dd2f3435}",
+      "ks_activation_error": "インターフェイスがサポートされていません (0x80004002)"
+    },
+    {
+      "adapter_id": "{0.0.0.00000000}.{e1175993-725f-41fa-afa0-6548cd17a010}",
+      "ks_activation_error": "インターフェイスがサポートされていません (0x80004002)"
+    },
+    {
+      "adapter_id": "{2}.\\\\?\\root#media#0000#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\vbaudiovacwdm2022_out1_wave_e51a78a01fb100001",
+      "pins": [
+        {
+          "category": "6994AD04-93EF-11D0-A3CC-00A0C9223196",
+          "category_error": null,
+          "dataflow": 1,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "指定されたプロパティ セットはオブジェクト上に存在しません。 (0x80070492)",
+          "pin": 0
+        },
+        {
+          "category": "8F42C0B2-91CE-4BCF-9CCD-0E599037AB35",
+          "category_error": null,
+          "dataflow": 2,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "指定されたプロパティ セットはオブジェクト上に存在しません。 (0x80070492)",
+          "pin": 1
+        },
+        {
+          "category": "6994AD04-93EF-11D0-A3CC-00A0C9223196",
+          "category_error": null,
+          "dataflow": 2,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "指定されたプロパティ セットはオブジェクト上に存在しません。 (0x80070492)",
+          "pin": 2
+        }
+      ]
+    }
+  ],
+  "endpoint": "スピーカー (2- VB-Audio Virtual Cable)",
+  "event": "ks_inspection",
+  "note": "Read-only filter pin queries through IKsControl; no streaming pin opened, no kernel capture latency measurement"
+}

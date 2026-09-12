@@ -1,0 +1,116 @@
+{
+  "gui_sha256": "36E7A2034882554047DE21D6CCD6E47EC96B0C15C59B451D5155C3A22DAF4974",
+  "receiver": {
+    "endpoint": "127.0.0.1:40100",
+    "invalid": 0,
+    "count": 29292
+  },
+  "runs": [
+    {
+      "log": "20260912-130228-535-774bdb329c1d475cb0996891181955cf.log",
+      "capture_success": true,
+      "udp": {
+        "acquire_to_publish_us": {
+          "count": 14136,
+          "max": 136,
+          "min": 0,
+          "overflow_ge_10000us": 0,
+          "p50": 6,
+          "p99": 21
+        },
+        "pool_drops": 0,
+        "pool_slots": 64,
+        "published_packets": 14136,
+        "session_restarts": 0,
+        "workers": [
+          {
+            "acquire_to_send_us": {
+              "count": 14136,
+              "max": 264,
+              "min": 4,
+              "overflow_ge_10000us": 0,
+              "p50": 81,
+              "p99": 180
+            },
+            "bytes": 14588352,
+            "deadline_drops": 0,
+            "last_os_error": null,
+            "mmcss_error": null,
+            "publish_to_send_us": {
+              "count": 14136,
+              "max": 255,
+              "min": 4,
+              "overflow_ge_10000us": 0,
+              "p50": 73,
+              "p99": 165
+            },
+            "send_call_us": {
+              "count": 14136,
+              "max": 222,
+              "min": 4,
+              "overflow_ge_10000us": 0,
+              "p50": 7,
+              "p99": 104
+            },
+            "send_errors": 0,
+            "sent": 14136,
+            "would_block_drops": 0
+          }
+        ]
+      }
+    },
+    {
+      "log": "20260912-130328-206-f8077d8c85814ce99e59d80f895f324a.log",
+      "capture_success": true,
+      "udp": {
+        "acquire_to_publish_us": {
+          "count": 15156,
+          "max": 135,
+          "min": 0,
+          "overflow_ge_10000us": 0,
+          "p50": 6,
+          "p99": 21
+        },
+        "pool_drops": 0,
+        "pool_slots": 64,
+        "published_packets": 15156,
+        "session_restarts": 0,
+        "workers": [
+          {
+            "acquire_to_send_us": {
+              "count": 15156,
+              "max": 266,
+              "min": 7,
+              "overflow_ge_10000us": 0,
+              "p50": 82,
+              "p99": 174
+            },
+            "bytes": 15640992,
+            "deadline_drops": 0,
+            "last_os_error": null,
+            "mmcss_error": null,
+            "publish_to_send_us": {
+              "count": 15156,
+              "max": 254,
+              "min": 5,
+              "overflow_ge_10000us": 0,
+              "p50": 74,
+              "p99": 160
+            },
+            "send_call_us": {
+              "count": 15156,
+              "max": 222,
+              "min": 4,
+              "overflow_ge_10000us": 0,
+              "p50": 7,
+              "p99": 102
+            },
+            "send_errors": 0,
+            "sent": 15156,
+            "would_block_drops": 0
+          }
+        ]
+      }
+    }
+  ]
+}

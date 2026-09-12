@@ -1,0 +1,1168 @@
+[
+  {
+    "file": "spotify-paused.jsonl",
+    "sha256": "882737C20E3CA20A7FB5A26800473DFEBEC31F433EC33FD46C013CAF448FFAFA",
+    "records": [
+      {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{e1175993-725f-41fa-afa0-6548cd17a010}",
+        "device_minimum_period_100ns": 20000,
+        "device_name": "スピーカー (2- VB-Audio Virtual Cable)",
+        "duration_requested_seconds": 5,
+        "endpoint_mute_during_run": false,
+        "endpoint_mute_original": false,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 3280,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d473adb9b2ae04-39e4",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 1,
+          "maximum_frames": 480,
+          "minimum_frames": 128
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false
+      },
+      {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 15.625,
+        "capture_thread_cpu_one_core_percent": 0.3123913627796797,
+        "captured_frames": 239040,
+        "captured_packets": 498,
+        "elapsed_seconds": 5.0017388,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19675582106240,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d473adb9b2ae04-39e4",
+        "start_qpc_100ns": 19675532088549,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 21603,
+        "trailing_no_event_us": 9309,
+        "wait_timeouts": 2,
+        "wake_count": 498
+      },
+      {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 498,
+          "max": 48,
+          "mean": 12.082329317269076,
+          "min": 5,
+          "p50": 10,
+          "p95": 25,
+          "p99": 29
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 497,
+          "max": 11533,
+          "mean": 10001.283702213279,
+          "min": 8410,
+          "p50": 10014,
+          "p95": 11195,
+          "p99": 11474
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 498,
+          "max": 17,
+          "mean": 1.251004016064257,
+          "min": 0,
+          "p50": 1,
+          "p95": 2,
+          "p99": 15
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 498,
+          "max": 12355,
+          "mean": 11298.357429718875,
+          "min": 10465,
+          "p50": 11247,
+          "p95": 12111,
+          "p99": 12291
+        },
+        "frames_per_callback": {
+          "count": 498,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 498,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 498,
+          "max": 43,
+          "mean": 6.178714859437751,
+          "min": 3,
+          "p50": 5,
+          "p95": 19,
+          "p99": 21
+        },
+        "level_packets": 498,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 497,
+          "max": 11533,
+          "mean": 10001.283702213279,
+          "min": 8410,
+          "p50": 10014,
+          "p95": 11195,
+          "p99": 11474
+        },
+        "nonzero_packets": 0,
+        "observed_frames": 239040,
+        "observed_packets": 498,
+        "packet_audio_duration_us": {
+          "count": 498,
+          "max": 10000,
+          "mean": 10000.0,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.0,
+        "schema_version": 1,
+        "session_id": "18d473adb9b2ae04-39e4",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "unavailable_device_positions": 498
+      }
+    ]
+  },
+  {
+    "file": "spotify-process.jsonl",
+    "sha256": "D45F6BF4A210A308251E8D6CD66BF970995F5CC822D9F9F2092AC65E2FB9C211",
+    "records": [
+      {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{e1175993-725f-41fa-afa0-6548cd17a010}",
+        "device_minimum_period_100ns": 20000,
+        "device_name": "スピーカー (2- VB-Audio Virtual Cable)",
+        "duration_requested_seconds": 20,
+        "endpoint_mute_during_run": false,
+        "endpoint_mute_original": false,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 3280,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d4738c1567ac08-2654",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 1,
+          "maximum_frames": 480,
+          "minimum_frames": 128
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false
+      },
+      {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 15.625,
+        "capture_thread_cpu_one_core_percent": 0.07812130173757574,
+        "captured_frames": 959040,
+        "captured_packets": 1998,
+        "elapsed_seconds": 20.0009468,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19674287207910,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d4738c1567ac08-2654",
+        "start_qpc_100ns": 19674087198333,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 20848,
+        "trailing_no_event_us": 9756,
+        "wait_timeouts": 1,
+        "wake_count": 1998
+      },
+      {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 1998,
+          "max": 189,
+          "mean": 11.645145145145145,
+          "min": 5,
+          "p50": 10,
+          "p95": 24,
+          "p99": 27
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 1997,
+          "max": 12024,
+          "mean": 9999.720580871306,
+          "min": 8115,
+          "p50": 10075,
+          "p95": 11178,
+          "p99": 11499
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 1998,
+          "max": 17,
+          "mean": 1.1976976976976976,
+          "min": 0,
+          "p50": 1,
+          "p95": 2,
+          "p99": 15
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 1998,
+          "max": 12000,
+          "mean": 10941.164164164164,
+          "min": 9978,
+          "p50": 10945,
+          "p95": 11714,
+          "p99": 11836
+        },
+        "frames_per_callback": {
+          "count": 1998,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 1998,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 1998,
+          "max": 29,
+          "mean": 5.782282282282282,
+          "min": 2,
+          "p50": 5,
+          "p95": 18,
+          "p99": 21
+        },
+        "level_packets": 1998,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 1997,
+          "max": 12024,
+          "mean": 9999.720580871306,
+          "min": 8115,
+          "p50": 10075,
+          "p95": 11178,
+          "p99": 11499
+        },
+        "nonzero_packets": 1995,
+        "observed_frames": 959040,
+        "observed_packets": 1998,
+        "packet_audio_duration_us": {
+          "count": 1998,
+          "max": 10000,
+          "mean": 10000.0,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.7872360944747925,
+        "schema_version": 1,
+        "session_id": "18d4738c1567ac08-2654",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "unavailable_device_positions": 1998
+      }
+    ]
+  },
+  {
+    "file": "spotify-tap-final.jsonl",
+    "sha256": "C7334A45766E233C944FFADEFD1022FF52C344F09181DCC3314842455287E873",
+    "records": [
+      {
+        "event": "tap_summary",
+        "pid": 3280,
+        "installed": true,
+        "finished": true,
+        "error": 0,
+        "calls": 2994,
+        "packets": 2994,
+        "frames": 1323441,
+        "nonzero": 2994,
+        "peak_max": 0.79067272,
+        "release_failures": 0,
+        "unknown_format_or_buffer": 0,
+        "dropped": 0,
+        "producer_busy": 0,
+        "qpc_frequency": 10000000,
+        "collector_mmcss": true,
+        "io_after_capture": true,
+        "entry_to_collector_us": {
+          "count": 2994,
+          "p50": 17.3,
+          "p99": 44.4,
+          "max": 151.2
+        },
+        "entry_to_copy_us": {
+          "count": 2994,
+          "p50": 1.3,
+          "p99": 15.4,
+          "max": 34.0
+        },
+        "original_release_call_us": {
+          "count": 2994,
+          "p50": 1.0,
+          "p99": 4.2,
+          "max": 17.3
+        },
+        "release_interval_us": {
+          "count": 2993,
+          "p50": 9996.5,
+          "p99": 11660.5,
+          "max": 20980.7
+        },
+        "frames_per_block": {
+          "count": 2994,
+          "p50": 441.0,
+          "p99": 441.0,
+          "max": 882.0
+        }
+      }
+    ]
+  },
+  {
+    "file": "spotify-tap-mmcss.jsonl",
+    "sha256": "8F6FD5E03119BA0E0EFD4DE60076032F977DD168FC841F4DE5EE8B9ACCC5979F",
+    "records": [
+      {
+        "event": "tap_summary",
+        "pid": 3280,
+        "installed": true,
+        "finished": true,
+        "error": 0,
+        "calls": 1943,
+        "packets": 1943,
+        "frames": 856863,
+        "nonzero": 1943,
+        "peak_max": 0.7816872,
+        "release_failures": 0,
+        "unknown_format_or_buffer": 0,
+        "dropped": 0,
+        "producer_busy": 0,
+        "qpc_frequency": 10000000,
+        "collector_mmcss": true,
+        "io_after_capture": true,
+        "entry_to_collector_us": {
+          "count": 1943,
+          "p50": 17.6,
+          "p99": 45.8,
+          "max": 98.8
+        },
+        "entry_to_copy_us": {
+          "count": 1943,
+          "p50": 1.4,
+          "p99": 17.1,
+          "max": 40.2
+        },
+        "original_release_call_us": {
+          "count": 1943,
+          "p50": 1.1,
+          "p99": 3.4,
+          "max": 17.2
+        },
+        "release_interval_us": {
+          "count": 1942,
+          "p50": 9992.0,
+          "p99": 11649.6,
+          "max": 12055.8
+        },
+        "frames_per_block": {
+          "count": 1943,
+          "p50": 441.0,
+          "p99": 441.0,
+          "max": 441.0
+        }
+      }
+    ]
+  },
+  {
+    "file": "spotify-tap-paused.jsonl",
+    "sha256": "B6A14A041407D3A42B9C560181E4B4259EBFBE08621F273D75CD5D2850C5528A",
+    "records": [
+      {
+        "event": "tap_summary",
+        "pid": 3280,
+        "installed": true,
+        "finished": true,
+        "error": 0,
+        "calls": 0,
+        "packets": 0,
+        "frames": 0,
+        "nonzero": 0,
+        "peak_max": 0.0,
+        "release_failures": 0,
+        "unknown_format_or_buffer": 0,
+        "dropped": 0,
+        "producer_busy": 0,
+        "qpc_frequency": 10000000,
+        "collector_mmcss": true,
+        "io_after_capture": true,
+        "entry_to_collector_us": null,
+        "entry_to_copy_us": null,
+        "original_release_call_us": null,
+        "release_interval_us": null,
+        "frames_per_block": null
+      }
+    ]
+  },
+  {
+    "file": "spotify-tap.jsonl",
+    "sha256": "2C4F0D582BDC2915FE16740246E9BA2F6195B42F67F523D6F3B386491EE4CB77",
+    "records": [
+      {
+        "event": "tap_summary",
+        "pid": 3280,
+        "installed": true,
+        "finished": true,
+        "error": 0,
+        "calls": 3769,
+        "packets": 3769,
+        "frames": 1664962,
+        "nonzero": 3769,
+        "peak_max": 0.78978717,
+        "release_failures": 0,
+        "unknown_format_or_buffer": 0,
+        "dropped": 0,
+        "producer_busy": 0,
+        "qpc_frequency": 10000000,
+        "entry_to_collector_us": {
+          "count": 3769,
+          "p50": 17.5,
+          "p99": 908.3,
+          "max": 31461.0
+        },
+        "entry_to_copy_us": {
+          "count": 3769,
+          "p50": 1.3,
+          "p99": 13.6,
+          "max": 26.5
+        },
+        "original_release_call_us": {
+          "count": 3769,
+          "p50": 1.0,
+          "p99": 3.4,
+          "max": 17.0
+        },
+        "release_interval_us": {
+          "count": 3768,
+          "p50": 10020.3,
+          "p99": 11663.2,
+          "max": 20657.2
+        },
+        "frames_per_block": {
+          "count": 3769,
+          "p50": 441.0,
+          "p99": 441.0,
+          "max": 1036.0
+        }
+      }
+    ]
+  },
+  {
+    "file": "tap-self.jsonl",
+    "sha256": "B9D644B41BF19659419C52E3E62AC71E2B7E47AEAAA4F5FF8446EEA68D71255C",
+    "records": [
+      {
+        "event": "tap_summary",
+        "pid": 22324,
+        "installed": true,
+        "finished": true,
+        "error": 0,
+        "calls": 501,
+        "packets": 501,
+        "frames": 385056,
+        "nonzero": 501,
+        "peak_max": 0.005,
+        "release_failures": 0,
+        "unknown_format_or_buffer": 0,
+        "dropped": 0,
+        "producer_busy": 0,
+        "qpc_frequency": 10000000,
+        "entry_to_collector_us": {
+          "count": 501,
+          "p50": 25.0,
+          "p99": 665.5,
+          "max": 2009.4
+        },
+        "entry_to_copy_us": {
+          "count": 501,
+          "p50": 2.2,
+          "p99": 34.5,
+          "max": 72.7
+        },
+        "original_release_call_us": {
+          "count": 501,
+          "p50": 2.2,
+          "p99": 6.7,
+          "max": 106.9
+        },
+        "release_interval_us": {
+          "count": 500,
+          "p50": 16080.4,
+          "p99": 16817.1,
+          "max": 17510.8
+        },
+        "frames_per_block": {
+          "count": 501,
+          "p50": 960.0,
+          "p99": 960.0,
+          "max": 1056.0
+        }
+      }
+    ]
+  },
+  {
+    "file": "youtube-existing-process.jsonl",
+    "sha256": "EC3BF858C780A61F4209C38E14B58DFBCC40C36A8F80EA6B6D02C4D8A5BEF312",
+    "records": [
+      {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{e1175993-725f-41fa-afa0-6548cd17a010}",
+        "device_minimum_period_100ns": 20000,
+        "device_name": "スピーカー (2- VB-Audio Virtual Cable)",
+        "duration_requested_seconds": 10,
+        "endpoint_mute_during_run": false,
+        "endpoint_mute_original": false,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 17844,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d473c9dd87ae58-4740",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 1,
+          "maximum_frames": 480,
+          "minimum_frames": 128
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false
+      },
+      {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 15.625,
+        "capture_thread_cpu_one_core_percent": 0.15622223306029587,
+        "captured_frames": 479040,
+        "captured_packets": 998,
+        "elapsed_seconds": 10.0017774,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19676840862806,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d473c9dd87ae58-4740",
+        "start_qpc_100ns": 19676740844824,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 23407,
+        "trailing_no_event_us": 8167,
+        "wait_timeouts": 1,
+        "wake_count": 998
+      },
+      {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 998,
+          "max": 103,
+          "mean": 11.850701402805612,
+          "min": 5,
+          "p50": 10,
+          "p95": 25,
+          "p99": 43
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 997,
+          "max": 11945,
+          "mean": 9999.774322968906,
+          "min": 7941,
+          "p50": 10043,
+          "p95": 11038,
+          "p99": 11602
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 998,
+          "max": 17,
+          "mean": 1.0701402805611222,
+          "min": 0,
+          "p50": 1,
+          "p95": 2,
+          "p99": 3
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 998,
+          "max": 11286,
+          "mean": 9416.597194388778,
+          "min": 8577,
+          "p50": 9415,
+          "p95": 10192,
+          "p99": 10561
+        },
+        "frames_per_callback": {
+          "count": 998,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 998,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 998,
+          "max": 97,
+          "mean": 5.751503006012024,
+          "min": 2,
+          "p50": 5,
+          "p95": 17,
+          "p99": 20
+        },
+        "level_packets": 998,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 997,
+          "max": 11945,
+          "mean": 9999.774322968906,
+          "min": 7941,
+          "p50": 10043,
+          "p95": 11038,
+          "p99": 11602
+        },
+        "nonzero_packets": 995,
+        "observed_frames": 479040,
+        "observed_packets": 998,
+        "packet_audio_duration_us": {
+          "count": 998,
+          "max": 10000,
+          "mean": 10000.0,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.5291746854782104,
+        "schema_version": 1,
+        "session_id": "18d473c9dd87ae58-4740",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "unavailable_device_positions": 998
+      }
+    ]
+  },
+  {
+    "file": "youtube-process.jsonl",
+    "sha256": "3F51B7D609975A7CD9A6D1A8F4574CD2BABB5B19959A7DF9F90FBB378C9F1373",
+    "records": [
+      {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{e1175993-725f-41fa-afa0-6548cd17a010}",
+        "device_minimum_period_100ns": 20000,
+        "device_name": "スピーカー (2- VB-Audio Virtual Cable)",
+        "duration_requested_seconds": 20,
+        "endpoint_mute_during_run": false,
+        "endpoint_mute_original": false,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 17844,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d4739e8bcb2408-2ff0",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 1,
+          "maximum_frames": 480,
+          "minimum_frames": 128
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false
+      },
+      {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 0.0,
+        "capture_thread_cpu_one_core_percent": 0.0,
+        "captured_frames": 959520,
+        "captured_packets": 1999,
+        "elapsed_seconds": 20.0010696,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19675080180567,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d4739e8bcb2408-2ff0",
+        "start_qpc_100ns": 19674880169545,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 12178,
+        "trailing_no_event_us": 8210,
+        "wait_timeouts": 1,
+        "wake_count": 1999
+      },
+      {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 1999,
+          "max": 45,
+          "mean": 11.604802401200601,
+          "min": 3,
+          "p50": 10,
+          "p95": 24,
+          "p99": 28
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 1998,
+          "max": 11894,
+          "mean": 9999.91991991992,
+          "min": 8228,
+          "p50": 10012,
+          "p95": 11246,
+          "p99": 11536
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 1999,
+          "max": 17,
+          "mean": 1.1875937968984491,
+          "min": 0,
+          "p50": 1,
+          "p95": 2,
+          "p99": 10
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 1999,
+          "max": 12085,
+          "mean": 10998.981490745373,
+          "min": 10057,
+          "p50": 11034,
+          "p95": 11771,
+          "p99": 11898
+        },
+        "frames_per_callback": {
+          "count": 1999,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 1999,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 1999,
+          "max": 29,
+          "mean": 5.790895447723862,
+          "min": 1,
+          "p50": 5,
+          "p95": 13,
+          "p99": 20
+        },
+        "level_packets": 1999,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 1998,
+          "max": 11894,
+          "mean": 9999.91991991992,
+          "min": 8228,
+          "p50": 10012,
+          "p95": 11246,
+          "p99": 11536
+        },
+        "nonzero_packets": 0,
+        "observed_frames": 959520,
+        "observed_packets": 1999,
+        "packet_audio_duration_us": {
+          "count": 1999,
+          "max": 10000,
+          "mean": 10000.0,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.0,
+        "schema_version": 1,
+        "session_id": "18d4739e8bcb2408-2ff0",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "unavailable_device_positions": 1999
+      }
+    ]
+  },
+  {
+    "file": "ytmusic-process.jsonl",
+    "sha256": "0FD58CDD9B7ADD1CB7CDA61028DF1A9A4762069B8633B6436C64A867C1154B12",
+    "records": [
+      {
+        "accepted_period_frames": null,
+        "capture_buffer_frames": 480,
+        "current_engine_period_error": "インターフェイスがサポートされていません (0x80004002)",
+        "current_engine_period_frames": null,
+        "device_default_period_100ns": 100000,
+        "device_id": "{0.0.0.00000000}.{e1175993-725f-41fa-afa0-6548cd17a010}",
+        "device_minimum_period_100ns": 20000,
+        "device_name": "スピーカー (2- VB-Audio Virtual Cable)",
+        "duration_requested_seconds": 20,
+        "endpoint_mute_during_run": false,
+        "endpoint_mute_original": false,
+        "event": "startup",
+        "fallback_reason": null,
+        "format": {
+          "bits_per_sample": 32,
+          "block_align": 8,
+          "channels": 2,
+          "format_tag": 65534,
+          "sample_format": "f32_le",
+          "sample_rate": 48000,
+          "subformat": "00000003-0000-0010-8000-00AA00389B71"
+        },
+        "format_source": "requested endpoint-reference format; AUTOCONVERTPCM enabled",
+        "measure_level": true,
+        "mmcss_error": null,
+        "mmcss_task": "Pro Audio",
+        "pre_volume_pre_mute_verified": false,
+        "process_target_pid": 17844,
+        "qpc_frequency": 10000000,
+        "reported_stream_latency_100ns": null,
+        "requested_backend": "ProcessInclude",
+        "requested_period_frames": null,
+        "schema_version": 1,
+        "selected_backend": "process loopback",
+        "session_id": "18d4732c6070bec0-ff4",
+        "shared_engine_period_query_error": null,
+        "shared_engine_periods": {
+          "default_frames": 480,
+          "fundamental_frames": 1,
+          "maximum_frames": 480,
+          "minimum_frames": 128
+        },
+        "tap_mode": "Default",
+        "tap_note": "Pre requests stream options NONE; Post requests POST_VOLUME_LOOPBACK (0x8). Verify behavior with measured levels.",
+        "telemetry_queue_capacity": 32768,
+        "test_tone": false
+      },
+      {
+        "cancelled": false,
+        "capture_thread_cpu_ms": 0.0,
+        "capture_thread_cpu_one_core_percent": 0.0,
+        "captured_frames": 959040,
+        "captured_packets": 1998,
+        "elapsed_seconds": 20.0020899,
+        "empty_wakes": 0,
+        "end_qpc_100ns": 19670176639018,
+        "event": "capture_end",
+        "max_packets_per_wake": 1,
+        "schema_version": 1,
+        "session_id": "18d4732c6070bec0-ff4",
+        "start_qpc_100ns": 19669976618045,
+        "telemetry_dropped": 0,
+        "time_to_first_wake_us": 21073,
+        "trailing_no_event_us": 10898,
+        "wait_timeouts": 2,
+        "wake_count": 1998
+      },
+      {
+        "audio_blocks_ge_500ms": 0,
+        "callback_drain_us": {
+          "count": 1998,
+          "max": 380,
+          "mean": 11.945945945945946,
+          "min": 3,
+          "p50": 10,
+          "p95": 24,
+          "p99": 27
+        },
+        "callback_gaps_ge_100ms": 0,
+        "callback_gaps_ge_500ms": 0,
+        "callback_interval_us": {
+          "count": 1997,
+          "max": 11596,
+          "mean": 9999.619429143715,
+          "min": 8213,
+          "p50": 9989,
+          "p95": 10929,
+          "p99": 11341
+        },
+        "callbacks_containing_ge_500ms_audio": 0,
+        "capture_overrun_count": null,
+        "capture_overrun_note": "No reliable overrun count; KS cursor mode also cannot resolve whole-ring wraps. See capture_end.audio_timeline_valid and cursor gap counters.",
+        "capture_success": true,
+        "capture_to_record_us": {
+          "count": 1998,
+          "max": 17,
+          "mean": 1.2442442442442443,
+          "min": 0,
+          "p50": 1,
+          "p95": 2,
+          "p99": 15
+        },
+        "complete_telemetry": true,
+        "device_position_gap_frames": 0,
+        "device_position_regressions": 0,
+        "discontinuities": 0,
+        "event": "summary",
+        "first_packet_discontinuities": 0,
+        "first_sample_age_us": {
+          "count": 1998,
+          "max": 11948,
+          "mean": 10618.253253253253,
+          "min": 9688,
+          "p50": 10635,
+          "p95": 11285,
+          "p99": 11502
+        },
+        "frames_per_callback": {
+          "count": 1998,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "frames_per_packet": {
+          "count": 1998,
+          "max": 480,
+          "mean": 480.0,
+          "min": 480,
+          "p50": 480,
+          "p95": 480,
+          "p99": 480
+        },
+        "get_buffer_us": {
+          "count": 1998,
+          "max": 74,
+          "mean": 6.021521521521522,
+          "min": 2,
+          "p50": 5,
+          "p95": 19,
+          "p99": 20
+        },
+        "level_packets": 1998,
+        "negative_first_sample_ages": 0,
+        "nonempty_callback_interval_us": {
+          "count": 1997,
+          "max": 11596,
+          "mean": 9999.619429143715,
+          "min": 8213,
+          "p50": 9989,
+          "p95": 10929,
+          "p99": 11341
+        },
+        "nonzero_packets": 1947,
+        "observed_frames": 959040,
+        "observed_packets": 1998,
+        "packet_audio_duration_us": {
+          "count": 1998,
+          "max": 10000,
+          "mean": 10000.0,
+          "min": 10000,
+          "p50": 10000,
+          "p95": 10000,
+          "p99": 10000
+        },
+        "peak_max": 0.9874017238616943,
+        "schema_version": 1,
+        "session_id": "18d4732c6070bec0-ff4",
+        "silent_frames": 0,
+        "telemetry_dropped": 0,
+        "test_tone_success": true,
+        "timestamp_errors": 0,
+        "unavailable_device_positions": 1998
+      }
+    ]
+  },
+  {
+    "file": "ytmusic-tap.jsonl",
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "records": []
+  }
+]

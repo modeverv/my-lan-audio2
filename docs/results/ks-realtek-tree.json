@@ -1,0 +1,75 @@
+{
+  "adapters": [
+    {
+      "adapter_id": "{2}.\\\\?\\intelaudio#func_01&ven_10ec&dev_0287&subsys_17aa381b&rev_1000#5&32dcb3ff&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\rearlineouttoposst",
+      "pins": [
+        {
+          "category": "6994AD04-93EF-11D0-A3CC-00A0C9223196",
+          "category_error": null,
+          "dataflow": 1,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "指定されたプロパティ セットはオブジェクト上に存在しません。 (0x80070492)",
+          "pin": 0
+        },
+        {
+          "category": "DFF21CE1-F70F-11D0-B917-00A0C9223196",
+          "category_error": null,
+          "dataflow": 2,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "指定されたプロパティ セットはオブジェクト上に存在しません。 (0x80070492)",
+          "pin": 1
+        }
+      ]
+    },
+    {
+      "adapter_id": "{0.0.0.00000000}.{07dce926-d0c4-42c5-810f-6dd7c0408d89}",
+      "ks_activation_error": "インターフェイスがサポートされていません (0x80004002)"
+    },
+    {
+      "adapter_id": "{2}.\\\\?\\intelaudio#func_01&ven_10ec&dev_0287&subsys_17aa381b&rev_1000#5&32dcb3ff&0&0001#{6994ad04-93ef-11d0-a3cc-00a0c9223196}\\rearlineoutwavesst",
+      "pins": [
+        {
+          "category": "6994AD04-93EF-11D0-A3CC-00A0C9223196",
+          "category_error": null,
+          "dataflow": 1,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "この要求はサポートされていません。 (0x80070032)",
+          "pin": 0
+        },
+        {
+          "category": "6994AD04-93EF-11D0-A3CC-00A0C9223196",
+          "category_error": null,
+          "dataflow": 2,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "この要求はサポートされていません。 (0x80070032)",
+          "pin": 1
+        },
+        {
+          "category": "6994AD04-93EF-11D0-A3CC-00A0C9223196",
+          "category_error": null,
+          "dataflow": 1,
+          "dataflow_error": null,
+          "loopback_tap_caps": null,
+          "loopback_tap_caps_error": "この要求はサポートされていません。 (0x80070032)",
+          "pin": 2
+        },
+        {
+          "category": "8F42C0B2-91CE-4BCF-9CCD-0E599037AB35",
+          "category_error": null,
+          "dataflow": 2,
+          "dataflow_error": null,
+          "loopback_tap_caps": 1,
+          "loopback_tap_caps_error": null,
+          "pin": 3
+        }
+      ]
+    }
+  ],
+  "endpoint": "スピーカー (Realtek(R) Audio)",
+  "event": "ks_inspection",
+  "note": "Read-only filter pin queries through IKsControl; no streaming pin opened, no kernel capture latency measurement"
+}
