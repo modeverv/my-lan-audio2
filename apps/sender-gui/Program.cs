@@ -23,7 +23,9 @@ namespace LanAudio {
     sealed class Source {
         public int Pid;
         public string ProcessName;
-        public override string ToString() { return (ProcessName == "chrome" ? "Chrome／Chromeアプリ（YouTube Music等）" : "Spotify") + "  —  PID " + Pid; }
+        public bool IsMix { get { return Pid == 0; } }
+        public string CaptureArguments { get { return IsMix ? "--backend process-exclude" : "--backend process-include --pid " + Pid; } }
+        public override string ToString() { return IsMix ? "ミックス済み音声（全アプリ）" : (ProcessName == "chrome" ? "Chrome／Chromeアプリ（YouTube Music等）" : "Spotify") + "  —  PID " + Pid; }
     }
     sealed class SenderForm : Form {
         readonly TextBox host = new TextBox();
@@ -42,6 +44,9 @@ namespace LanAudio {
 
         public SenderForm() {
             Text = "LAN Audio Sender";
+            using (Stream iconStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("AppIcon.ico"))
+            using (Icon appIcon = new Icon(iconStream, 64, 64))
+                Icon = (Icon)appIcon.Clone();
             Font = new Font("Yu Gothic UI", 10F);
             AutoScaleMode = AutoScaleMode.Dpi;
             ClientSize = new Size(640, 430);
@@ -50,7 +55,7 @@ namespace LanAudio {
             StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.FromArgb(246, 248, 251);
             AddLabel("LAN Audio Sender", 28, 22, 570, 38, 21, Color.FromArgb(23, 41, 67));
-            AddLabel("Chrome・Chromeアプリ・Spotifyの音声をLANへ送信します。", 30, 67, 570, 26, 10, Color.DimGray);
+            AddLabel("アプリの音声やミックス済み音声をLANへ送信します。", 30, 67, 570, 26, 10, Color.DimGray);
             AddLabel("送信先 IPアドレス", 30, 113, 365, 24, 10, Color.Black);
             AddLabel("ポート", 425, 113, 180, 24, 10, Color.Black);
             host.SetBounds(30, 142, 365, 30); host.AccessibleName = "送信先 IPアドレス";
@@ -99,6 +104,7 @@ namespace LanAudio {
             if (child != null || refreshing) return;
             refreshing = true; refresh.Enabled = start.Enabled = false;
             int selected = source.SelectedItem is Source ? ((Source)source.SelectedItem).Pid : 0;
+            source.Items.Clear(); source.Items.Add(new Source()); source.SelectedIndex = 0;
             try {
                 List<Source> found = await Task.Run(delegate {
                     Dictionary<int,int> parents = new Dictionary<int,int>();
@@ -117,19 +123,18 @@ namespace LanAudio {
                     list.Sort(delegate(Source a, Source b) { int order = String.CompareOrdinal(a.ProcessName,b.ProcessName); return order != 0 ? order : a.Pid.CompareTo(b.Pid); }); return list;
                 });
                 if (IsDisposed) return;
-                source.Items.Clear(); foreach (Source item in found) source.Items.Add(item);
-                if (found.Count > 0) {
-                    source.SelectedIndex = 0;
-                    for (int i=0;i<found.Count;i++) if (found[i].Pid == selected) source.SelectedIndex=i;
-                    DescribeSource();
-                } else detail.Text = "ChromeまたはSpotifyを起動して「再検索」を押してください。";
-            } catch (Exception e) { if (!IsDisposed) detail.Text = "アプリを検索できませんでした: " + e.Message; }
+                foreach (Source item in found) source.Items.Add(item);
+                for (int i=0;i<found.Count;i++) if (found[i].Pid == selected) source.SelectedIndex=i+1;
+                DescribeSource();
+            } catch (Exception e) { if (!IsDisposed) detail.Text = "ミックス済み音声は利用できます。アプリ検索エラー: " + e.Message; }
             finally { refreshing = false; if (!IsDisposed) { refresh.Enabled = true; start.Enabled = source.Items.Count > 0; } }
         }
         void DescribeSource() {
             Source selected = source.SelectedItem as Source;
             if (selected == null) return;
-            detail.Text = selected.ProcessName == "chrome"
+            detail.Text = selected.IsMix
+                ? "出力先をまたいで全アプリの音声を取得します（送信エンジン自身とその子を除外）。48kHz・ステレオ。"
+                : selected.ProcessName == "chrome"
                 ? "同じChromeのタブとChromeアプリをまとめて取得します。"
                 : "Spotifyデスクトップアプリの音声を取得します。";
         }
@@ -158,14 +163,15 @@ namespace LanAudio {
             if (selected == null) { RefreshSources(); return; }
             Process process = null;
             try {
-                using (Process target = Process.GetProcessById(selected.Pid)) if (!target.ProcessName.Equals(selected.ProcessName,StringComparison.OrdinalIgnoreCase)) throw new Exception("取得するアプリを再検索してください。");
+                if (!selected.IsMix)
+                    using (Process target = Process.GetProcessById(selected.Pid)) if (!target.ProcessName.Equals(selected.ProcessName,StringComparison.OrdinalIgnoreCase)) throw new Exception("取得するアプリを再検索してください。");
                 SaveSettings();
                 string engine = ExtractEngine();
                 string logs = Path.Combine(folder,"logs"); Directory.CreateDirectory(logs);
                 currentLog = Path.Combine(logs,DateTime.Now.ToString("yyyyMMdd-HHmmss-fff") + "-" + Guid.NewGuid().ToString("N") + ".log");
                 lock(gate) { log = new StreamWriter(currentLog,false,new UTF8Encoding(false)); lastError = ""; pendingProgress = null; }
                 string destination = new IPEndPoint(ip,(int)port.Value).ToString();
-                ProcessStartInfo info = new ProcessStartInfo(engine,"--backend process-include --pid " + selected.Pid + " --udp-to " + destination + " --seconds 86400 --control-stdin");
+                ProcessStartInfo info = new ProcessStartInfo(engine,selected.CaptureArguments + " --udp-to " + destination + " --seconds 86400 --control-stdin");
                 info.UseShellExecute = false; info.CreateNoWindow = true;
                 info.RedirectStandardInput = info.RedirectStandardOutput = info.RedirectStandardError = true;
                 info.StandardOutputEncoding = info.StandardErrorEncoding = Encoding.UTF8;

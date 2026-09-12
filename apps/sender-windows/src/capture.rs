@@ -139,6 +139,26 @@ impl Drop for EventHandle {
 }
 
 struct MixFormat(*mut WAVEFORMATEX);
+impl MixFormat {
+    fn process_mix() -> Result<Self> {
+        // Process loopback accepts a requested format independently of render endpoints.
+        let ptr =
+            unsafe { CoTaskMemAlloc(std::mem::size_of::<WAVEFORMATEX>()) }.cast::<WAVEFORMATEX>();
+        anyhow::ensure!(!ptr.is_null(), "allocate process mix format");
+        unsafe {
+            ptr.write(WAVEFORMATEX {
+                wFormatTag: 3, // WAVE_FORMAT_IEEE_FLOAT
+                nChannels: 2,
+                nSamplesPerSec: 48_000,
+                nAvgBytesPerSec: 48_000 * 8,
+                nBlockAlign: 8,
+                wBitsPerSample: 32,
+                cbSize: 0,
+            });
+        }
+        Ok(Self(ptr))
+    }
+}
 impl Drop for MixFormat {
     fn drop(&mut self) {
         unsafe {
@@ -521,7 +541,11 @@ pub fn run(options: &Options, shared: &Arc<Shared>, startup: Sender<Value>) -> R
             None
         };
         let mut client: IAudioClient = device.Activate(CLSCTX_ALL, None)?;
-        let format = MixFormat(client.GetMixFormat()?);
+        let format = if matches!(options.backend, Backend::ProcessExclude) {
+            MixFormat::process_mix()?
+        } else {
+            MixFormat(client.GetMixFormat()?)
+        };
         let (mut default_period, mut minimum_period) = (0, 0);
         client.GetDevicePeriod(Some(&mut default_period), Some(&mut minimum_period))?;
         let periods = (|| -> Result<Value> {
@@ -638,7 +662,7 @@ pub fn run(options: &Options, shared: &Arc<Shared>, startup: Sender<Value>) -> R
             "udp_events":options.events,"udp_destination":options.udp_to.map(|v|v.to_string()),"udp_workers":options.udp_workers,
             "udp_deadline_ms":options.udp_deadline_ms,"udp_max_frames":options.udp_frames,"udp_protocol_version":1,
             "requested_backend":format!("{:?}",options.backend),"selected_backend":if process {"process loopback"} else if requested.is_some(){"IAudioClient3 minimum"}else{"legacy endpoint loopback"},
-            "process_target_pid":target_pid,"format_source":if process {"requested endpoint-reference format; AUTOCONVERTPCM enabled"}else{"native endpoint mix"},
+            "process_target_pid":target_pid,"format_source":if matches!(options.backend, Backend::ProcessExclude) {"fixed 48000 Hz stereo float32; AUTOCONVERTPCM enabled"}else if process {"requested endpoint-reference format; AUTOCONVERTPCM enabled"}else{"native endpoint mix"},
             "fallback_reason":fallback_reason,"format":format_info(&format),
             "device_default_period_100ns":default_period,"device_minimum_period_100ns":minimum_period,
             "shared_engine_periods":periods.as_ref().ok(),"shared_engine_period_query_error":periods.as_ref().err().map(|e|format!("{e:#}")),
