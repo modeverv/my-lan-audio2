@@ -20,6 +20,8 @@ cat > "$app/Contents/Info.plist" <<'PLIST'
 <plist version="1.0"><dict>
 <key>CFBundleIdentifier</key><string>local.seijiro.LANAudioReceiver</string>
 <key>CFBundleName</key><string>LAN Audio Receiver</string>
+<key>CFBundleDisplayName</key><string>LAN Audio Receiver</string>
+<key>CFBundleVersion</key><string>2</string>
 <key>CFBundleExecutable</key><string>LAN Audio Receiver</string>
 <key>CFBundleIconFile</key><string>AppIcon.icns</string>
 <key>CFBundlePackageType</key><string>APPL</string>
@@ -28,6 +30,6 @@ cat > "$app/Contents/Info.plist" <<'PLIST'
 <key>NSLocalNetworkUsageDescription</key><string>WindowsからLAN経由の音声を受信します。</string>
 </dict></plist>
 PLIST
-codesign --force --sign - "$app/Contents/Resources/receiver-macos"
-codesign --force --sign - "$app"
+codesign --force --sign "${SIGNING_IDENTITY:--}" "$app/Contents/Resources/receiver-macos"
+codesign --force --sign "${SIGNING_IDENTITY:--}" "$app"
 printf '%s\n' "Built: $app"

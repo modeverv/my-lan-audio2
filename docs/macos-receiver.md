@@ -129,3 +129,33 @@ cargo run --release --locked -p receiver-core --example simulate -- --seconds 60
 - EF21投影との同期はユーザーがテスト動画で目視・聴取確認済み。RMEで30分〜数時間の連続運用の定量評価、DACループバック、録画等によるプロジェクター同期の数値測定、高品質ASRC評価は未実施。
 - Windows QPCとMac時刻は同期していない。**物理の端から端までの遅延／20ms未満の総遅延は未確定**。既存のChrome取得まで約67〜80msという上流実測は、Mac側実装で消えるものではない。
 - Windowsを再起動してQPCがリセットされた場合はMacの受信を停止→開始する。ネットワーク認証・暗号化・複数送信元混合は対象外。
+# IPv4マルチキャスト受信（2026-09-12追加）
+
+Windowsの送信先が `239.255.0.1:40100` の場合、MacのGUIで次を指定します。
+
+- UDPポート: `40100`（Windowsと同じ値）
+- マルチキャストIP: `239.255.0.1`
+- 受信LAN（MacのIPv4）: 受信するLANのMac自身のIP。今回の有線LANは `192.168.11.65`。空欄ならOSが選択します。
+- Windows IP: 空欄で自動。指定する場合はWindows自身のIPで、グループIPではありません。
+
+「受信開始」でグループへ参加し、停止時のソケット破棄で参加を解除します。Wi-Fiと有線LANが同時に有効なら受信LANを明示してください。ユニキャストへ戻す場合はマルチキャストIPと受信LANを両方空欄にします。設定は保存されます。
+
+マルチキャスト有効時も同じポートへのユニキャストは受け取れます。既存の送信元固定・stream/session検証は継続します。対象はIPv4のLNAU v1 PCMです。
+
+```sh
+target/release/receiver-macos --multicast-group 239.255.0.1 \
+  --multicast-interface 192.168.11.65 --bind 0.0.0.0:40100
+# 音声出力なしのネットワーク検証
+target/release/receiver-macos --diagnostic --seconds 10 \
+  --multicast-group 239.255.0.1 --multicast-interface 192.168.11.65
+# 別の一時ポートでユニキャスト／マルチキャストの実ソケット回帰試験
+python3 scripts/test-multicast-macos.py
+```
+
+`--multicast-interface`の既定は`0.0.0.0`（OS選択）です。`--bind`は`0.0.0.0:PORT`のまま使い、グループIPやLAN IPをbind先にしないでください。起動ログに`multicast_group`と`multicast_interface`を記録し、参加失敗時には理由を表示します。
+
+ローカル実ソケット試験で両方式30/30パケット、CLI診断でWindows `192.168.11.29`から有線LAN経由で10秒4,000パケット（invalid 0）を確認しました。ログ: `runs/multicast-live-20260912.jsonl`。
+
+**このMacで残っている制約:** GUIから起動するとグループ参加には成功するものの受信0のままです。同梱エンジンのCLI診断では受信でき、GUIアプリがローカルネットワーク許可一覧に現れない状態を確認しました。GUI再生の検証は未完了です。受信開始時には、OSのLAN許可要求のためグループのUDP discardポートへconnectします（データ送信なし）。
+
+[Apple TN3179](https://developer.apple.com/documentation/technotes/tn3179-understanding-local-network-privacy)は、macOSのローカルネットワーク権限を安定して識別させるためApple発行の署名を推奨しています。現環境は有効な署名証明書0件・アドホック署名で、署名が原因かは未確定です。証明書がある環境では `SIGNING_IDENTITY='証明書名' scripts/build-macos.sh` で署名できます。権限ダイアログが出たらLANアクセスを許可してください。

@@ -1,4 +1,5 @@
 import AppKit
+import Darwin
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
@@ -11,13 +12,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let scheduling = NSPopUpButton()
     let source = NSTextField(string: UserDefaults.standard.string(forKey: "source") ?? "")
     let port = NSTextField(string: UserDefaults.standard.string(forKey: "port") ?? "40100")
+    let multicastGroup = NSTextField(string: UserDefaults.standard.string(forKey: "multicastGroup") ?? "")
+    let multicastInterface = NSTextField(string: UserDefaults.standard.string(forKey: "multicastInterface") ?? "")
     let channel = NSTextField(string: UserDefaults.standard.string(forKey: "channel") ?? "1")
     let delay = NSTextField(string: UserDefaults.standard.string(forKey: "delay") ?? "0")
     let gain = NSTextField(string: UserDefaults.standard.string(forKey: "gain") ?? "-12")
     let start = NSButton(title: "受信開始", target: nil, action: nil)
     let stop = NSButton(title: "停止", target: nil, action: nil)
     let status = NSTextField(labelWithString: "停止中")
-    let details = NSTextField(wrappingLabelWithString: "Windowsの送信先に、このMacのLAN IPとUDPポートを指定してください。\n受信開始で、選択したCoreAudioデバイスへ再生します。")
+    let details = NSTextField(wrappingLabelWithString: "Windowsの送信先はMacのLAN IP、または下記のマルチキャストIPです。\n受信開始で、選択したCoreAudioデバイスへ再生します。")
     let metrics = NSTextField(wrappingLabelWithString: "受信待機")
     let logLabel = NSTextField(wrappingLabelWithString: "ログ: 未開始")
     var logURL: URL?
@@ -32,7 +35,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let appMenu = NSMenuItem(); menu.addItem(appMenu)
         let submenu = NSMenu(); submenu.addItem(withTitle: "LAN Audio Receiverを終了", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q");appMenu.submenu = submenu
         NSApp.mainMenu = menu
-        window = NSWindow(contentRect: NSRect(x: 0,y: 0,width: 670,height: 710),styleMask: [.titled,.closable,.miniaturizable],backing: .buffered,defer: false)
+        window = NSWindow(contentRect: NSRect(x: 0,y: 0,width: 670,height: 790),styleMask: [.titled,.closable,.miniaturizable],backing: .buffered,defer: false)
         window.title = "LAN Audio Receiver"
         let stack = NSStackView();stack.orientation = .vertical;stack.alignment = .leading;stack.spacing = 15
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +49,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         row("出力デバイス",devices)
         let refresh = NSButton(title:"デバイス一覧を更新",target:self,action:#selector(refreshDevices));stack.addArrangedSubview(refresh)
         row("Windows IP（空欄で自動）",source);row("UDPポート",port);row("出力チャンネル先頭（1始まり）",channel)
+        multicastGroup.placeholderString = "空欄: ユニキャスト / 例: 239.255.0.1"
+        multicastInterface.placeholderString = "空欄: 自動 / 例: 192.168.11.65"
+        row("マルチキャストIP",multicastGroup)
+        row("受信LAN（MacのIPv4）",multicastInterface)
         buffer.addItems(withTitles:["2 ms","5 ms","10 ms","20 ms","40 ms"]);buffer.selectItem(withTitle:UserDefaults.standard.string(forKey:"buffer") ?? "20 ms")
         hardwareBuffer.addItems(withTitles:["現在の設定を維持", "16 frames", "32 frames", "64 frames", "128 frames", "256 frames", "512 frames"]);hardwareBuffer.selectItem(withTitle:UserDefaults.standard.string(forKey:"hardwareBuffer") ?? "128 frames")
         row("CoreAudioバッファ（停止時に復元）",hardwareBuffer)
@@ -77,8 +84,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let udpPort = UInt16(port.stringValue),udpPort>0,let ch = UInt32(channel.stringValue),ch>0,
               let av = Double(delay.stringValue),av.isFinite,(0...250).contains(av),
               let db = Double(gain.stringValue),db.isFinite,(-96...0).contains(db) else {status.stringValue = "ポート・チャンネル・遅延・ゲインの入力を確認してください";return}
+        multicastGroup.stringValue = multicastGroup.stringValue.trimmingCharacters(in:.whitespacesAndNewlines)
+        multicastInterface.stringValue = multicastInterface.stringValue.trimmingCharacters(in:.whitespacesAndNewlines)
+        func ipv4(_ text:String)->[UInt8]? {
+            let parts = text.split(separator:".",omittingEmptySubsequences:false)
+            guard parts.count == 4 else {return nil}
+            let bytes = parts.compactMap {UInt8($0)}
+            return bytes.count == 4 ? bytes : nil
+        }
+        if !multicastGroup.stringValue.isEmpty {
+            guard let group = ipv4(multicastGroup.stringValue),(224...239).contains(Int(group[0])) else {
+                status.stringValue = "マルチキャストIPは224.0.0.0〜239.255.255.255を指定してください";return
+            }
+            if !multicastInterface.stringValue.isEmpty {
+                guard let address = ipv4(multicastInterface.stringValue),address[0]<224 else {
+                    status.stringValue = "受信LANにはMacのIPv4アドレスを指定してください";return
+                }
+            }
+        } else if !multicastInterface.stringValue.isEmpty {
+            status.stringValue = "受信LANを指定する場合はマルチキャストIPも入力してください";return
+        }
         let prefs = UserDefaults.standard
-        for (key,value) in [("device",device),("source",source.stringValue),("port",port.stringValue),("channel",channel.stringValue),("delay",delay.stringValue),("gain",gain.stringValue),("scheduling",scheduling.indexOfSelectedItem == 0 ? "realtime" : "qos"),("hardwareBuffer",hardwareBuffer.titleOfSelectedItem ?? "128 frames"),("buffer",buffer.titleOfSelectedItem ?? "20 ms")] {prefs.set(value,forKey:key)}
+        for (key,value) in [("multicastGroup",multicastGroup.stringValue),("multicastInterface",multicastInterface.stringValue),("device",device),("source",source.stringValue),("port",port.stringValue),("channel",channel.stringValue),("delay",delay.stringValue),("gain",gain.stringValue),("scheduling",scheduling.indexOfSelectedItem == 0 ? "realtime" : "qos"),("hardwareBuffer",hardwareBuffer.titleOfSelectedItem ?? "128 frames"),("buffer",buffer.titleOfSelectedItem ?? "20 ms")] {prefs.set(value,forKey:key)}
         let directory = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Logs/LAN-Audio-Receiver",isDirectory:true)
         do {
             try FileManager.default.createDirectory(at:directory,withIntermediateDirectories:true)
@@ -86,6 +113,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             let p = Process();p.executableURL = engine
             p.arguments = ["--network-scheduling",scheduling.indexOfSelectedItem == 0 ? "realtime" : "qos","--device",device,"--bind","0.0.0.0:\(udpPort)","--channel",String(ch),"--buffer-frames",hardwareBuffer.indexOfSelectedItem == 0 ? "0" : (hardwareBuffer.titleOfSelectedItem ?? "128 frames").components(separatedBy:" ")[0],"--buffer-ms",(buffer.titleOfSelectedItem ?? "20 ms").components(separatedBy:" ")[0],"--av-sync-delay-ms",String(av),"--gain-db",String(db),"--output",log.path]
             if !source.stringValue.isEmpty {p.arguments! += ["--source",source.stringValue]}
+            if !multicastGroup.stringValue.isEmpty {
+                p.arguments! += ["--multicast-group",multicastGroup.stringValue]
+                if !multicastInterface.stringValue.isEmpty {p.arguments! += ["--multicast-interface",multicastInterface.stringValue]}
+            }
             let stdout = Pipe();let stderr = Pipe();p.standardOutput = stdout;p.standardError = stderr;pending.removeAll()
             stdout.fileHandleForReading.readabilityHandler = { [weak self] handle in
                 let data = handle.availableData
@@ -102,12 +133,36 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 self.process = nil;self.setRunning(false);self.status.stringValue = child.terminationStatus == 0 ? "停止中" : "受信エラー (\(child.terminationStatus))"
                 if self.terminating {NSApp.reply(toApplicationShouldTerminate:true)}
             }}
+            if !multicastGroup.stringValue.isEmpty {
+                // Receive-only BSD sockets may stay silent without prompting for local
+                // network access. A foreground UDP connect to the group discard port requests
+                // access for this app; no audio or user data is sent by the probe.
+                let fd = socket(AF_INET, SOCK_DGRAM, 0)
+                if fd >= 0 {
+                    var destination = sockaddr_in()
+                    destination.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+                    destination.sin_family = sa_family_t(AF_INET)
+                    destination.sin_port = UInt16(9).bigEndian
+                    inet_pton(AF_INET, multicastGroup.stringValue, &destination.sin_addr)
+                    if !multicastInterface.stringValue.isEmpty {
+                        var interface = in_addr()
+                        inet_pton(AF_INET, multicastInterface.stringValue, &interface)
+                        setsockopt(fd, IPPROTO_IP, IP_MULTICAST_IF, &interface, socklen_t(MemoryLayout<in_addr>.size))
+                    }
+                    withUnsafePointer(to:&destination) { pointer in
+                        pointer.withMemoryRebound(to:sockaddr.self,capacity:1) {
+                            _ = connect(fd,$0,socklen_t(MemoryLayout<sockaddr_in>.size))
+                        }
+                    }
+                    close(fd)
+                }
+            }
             try p.run();process = p;metrics.stringValue = "受信待機";setRunning(true);status.stringValue = "受信を開始しています…"
         } catch {status.stringValue = "起動失敗: \(error.localizedDescription)"}
     }
     func setRunning(_ running:Bool) {
         start.isEnabled = !running;stop.isEnabled = running
-        for control in [devices,buffer,hardwareBuffer,scheduling,source,port,channel,delay,gain] as [NSControl] {control.isEnabled = !running}
+        for control in [devices,buffer,hardwareBuffer,scheduling,source,port,multicastGroup,multicastInterface,channel,delay,gain] as [NSControl] {control.isEnabled = !running}
     }
     func consume(_ data:Data) {
         pending.append(data)
@@ -116,6 +171,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             guard let d = try? JSONSerialization.jsonObject(with:Data(line)) as? [String:Any] else {continue}
             if d["event"] as? String == "receiver_start", let dev = d["device"] as? [String:Any] {
                 details.stringValue = "\(dev["name"] ?? "") • \(dev["sample_rate"] ?? "") Hz • CoreAudio \(dev["buffer_frames"] ?? "") frames\n出力 \(channel.stringValue)/\((Int(channel.stringValue) ?? 1)+1) • ASRC有効 • ログにPCMは保存しません"
+            }
+            if d["event"] as? String == "receiver_start",let group = d["multicast_group"] as? String {
+                details.stringValue += " • Multicast \(group)"
             }
             if d["event"] as? String == "receiver_scheduling" {
                 let realtime = d["requested"] as? String == "Realtime" && (d["set_status"] as? Int) == 0 && (d["get_status"] as? Int) == 0 && (d["is_default"] as? Bool) == false

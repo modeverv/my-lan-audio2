@@ -31,6 +31,8 @@ CoreAudioは「現在の設定を維持」または16/32/64/128/256/512framesか
 
 ## ダブルクリックで起動
 
+Windowsが `239.255.0.1:40100` へ送信する場合も受信できます。Macの「マルチキャストIP」に `239.255.0.1`、「受信LAN」にMacの有線IPv4を入力してください。[設定手順](docs/macos-receiver.md)。
+
 Windowsでビルドした `dist/LAN-Audio-Sender.exe` を起動してください。
 送信先IP・ポートを入力し、「ミックス済み音声（全アプリ）」、Chrome／ChromeアプリまたはSpotifyを選択して「送信開始」。停止は「停止」ボタンです。
 起動中の対象アプリを自動検索します。ChromeとChromeアプリは同じ親プロセス配下をまとめて取得します。送信エンジンはexe内に同梱済みです。[GUIの詳細](docs/windows-gui.md)

@@ -26,6 +26,12 @@ struct Args {
     bind: SocketAddr,
     #[arg(long)]
     source: Option<IpAddr>,
+    /// IPv4 multicast group to join (for example 239.255.0.1).
+    #[arg(long)]
+    multicast_group: Option<Ipv4Addr>,
+    /// Local Mac IPv4 address for group membership; 0.0.0.0 lets the OS choose.
+    #[arg(long, default_value = "0.0.0.0", requires = "multicast_group")]
+    multicast_interface: Ipv4Addr,
     #[arg(long, default_value_t = 1)]
     stream: u32,
     #[arg(long)]
@@ -297,6 +303,7 @@ pub fn run() -> anyhow::Result<()> {
         a.seconds.is_finite() && a.seconds >= 0.,
         "seconds must be nonnegative"
     );
+    validate_multicast(&a)?;
     let matches: Vec<_> = devices
         .iter()
         .filter(|d| d.name().contains(&a.device) || d.id.to_string() == a.device)
@@ -379,10 +386,14 @@ pub fn run() -> anyhow::Result<()> {
     };
     // Bind after AUHAL startup: otherwise the kernel queues initialization-time PCM.
     let socket = UdpSocket::bind(a.bind).with_context(|| format!("Cannot bind {}", a.bind))?;
+    if let Some(group) = a.multicast_group {
+        socket.join_multicast_v4(&group, &a.multicast_interface)
+            .with_context(|| format!("Cannot join multicast group {group} on {}; specify this Mac's LAN IPv4 with --multicast-interface", a.multicast_interface))?;
+    }
     socket.set_read_timeout(Some(Duration::from_millis(100)))?;
     let timestamp_status = unsafe { lan_prepare_socket(socket.as_raw_fd()) };
     emit(
-        json!({"event":"receiver_start","schema_version":1,"kernel_timestamp_status":timestamp_status,"network_scheduling":format!("{:?}",a.network_scheduling),"bind":a.bind.to_string(),"source_filter":a.source.map(|p|p.to_string()),"device":device.json(),"channel_pair":[a.channel,a.channel+1],"target_buffer_ms":a.buffer_ms,"av_sync_delay_ms":a.av_sync_delay_ms,"gain_db":a.gain_db,"asrc":!a.no_asrc,"asrc_quality":"linear baseline","diagnostic":a.diagnostic,"one_way_latency_ms":null}),
+        json!({"event":"receiver_start","schema_version":1,"kernel_timestamp_status":timestamp_status,"network_scheduling":format!("{:?}",a.network_scheduling),"bind":a.bind.to_string(),"source_filter":a.source.map(|p|p.to_string()),"multicast_group":a.multicast_group.map(|p|p.to_string()),"multicast_interface":a.multicast_group.map(|_|a.multicast_interface.to_string()),"device":device.json(),"channel_pair":[a.channel,a.channel+1],"target_buffer_ms":a.buffer_ms,"av_sync_delay_ms":a.av_sync_delay_ms,"gain_db":a.gain_db,"asrc":!a.no_asrc,"asrc_quality":"linear baseline","diagnostic":a.diagnostic,"one_way_latency_ms":null}),
         &mut file,
     )?;
     let net_thread = {
@@ -623,4 +634,93 @@ pub fn run() -> anyhow::Result<()> {
         bail!("CoreAudio callbacks stopped. Reconnect the selected device and restart reception.");
     }
     Ok(())
+}
+
+fn validate_multicast(a: &Args) -> anyhow::Result<()> {
+    if let Some(group) = a.multicast_group {
+        ensure!(
+            group.is_multicast(),
+            "multicast-group must be an IPv4 multicast address (224.0.0.0–239.255.255.255)"
+        );
+        ensure!(
+            a.bind.ip() == IpAddr::V4(Ipv4Addr::UNSPECIFIED),
+            "Multicast reception requires --bind 0.0.0.0:PORT; use --multicast-interface for this Mac's LAN IPv4"
+        );
+        ensure!(
+            a.multicast_interface.is_unspecified()
+                || (!a.multicast_interface.is_multicast()
+                    && a.multicast_interface != Ipv4Addr::BROADCAST),
+            "multicast-interface must be this Mac's unicast IPv4 address or 0.0.0.0"
+        );
+        ensure!(
+            a.source
+                .is_none_or(|ip| ip.is_ipv4() && !ip.is_multicast() && !ip.is_unspecified()),
+            "--source must be the Windows sender's unicast IPv4, not the multicast group"
+        );
+    }
+    Ok(())
+}
+
+#[cfg(test)]
+mod multicast_tests {
+    use super::*;
+
+    #[test]
+    fn accepts_unicast_and_multicast_configuration() {
+        for args in [
+            vec!["receiver"],
+            vec!["receiver", "--multicast-group", "239.255.0.1"],
+            vec![
+                "receiver",
+                "--multicast-group",
+                "239.255.0.1",
+                "--multicast-interface",
+                "192.168.11.65",
+                "--source",
+                "192.168.11.10",
+            ],
+        ] {
+            validate_multicast(&Args::try_parse_from(args).unwrap()).unwrap();
+        }
+    }
+
+    #[test]
+    fn rejects_invalid_membership_before_audio_start() {
+        for args in [
+            vec!["receiver", "--multicast-group", "192.168.11.65"],
+            vec![
+                "receiver",
+                "--multicast-group",
+                "239.255.0.1",
+                "--bind",
+                "[::]:40100",
+            ],
+            vec![
+                "receiver",
+                "--multicast-group",
+                "239.255.0.1",
+                "--bind",
+                "192.168.11.65:40100",
+            ],
+            vec![
+                "receiver",
+                "--multicast-group",
+                "239.255.0.1",
+                "--source",
+                "239.255.0.1",
+            ],
+            vec![
+                "receiver",
+                "--multicast-group",
+                "239.255.0.1",
+                "--multicast-interface",
+                "239.255.0.1",
+            ],
+        ] {
+            assert!(validate_multicast(&Args::try_parse_from(args).unwrap()).is_err());
+        }
+        assert!(
+            Args::try_parse_from(["receiver", "--multicast-interface", "192.168.11.65"]).is_err()
+        );
+    }
 }
