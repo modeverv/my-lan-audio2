@@ -1,8 +1,10 @@
 import AppKit
 import Darwin
 
-final class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     var window: NSWindow!
+    var settingsWindow: NSWindow!
+    let refresh = NSButton(title: "デバイス一覧を更新", target: nil, action: nil)
     var process: Process?
     var terminating = false
     var pending = Data()
@@ -33,21 +35,52 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         let menu = NSMenu()
         let appMenu = NSMenuItem(); menu.addItem(appMenu)
-        let submenu = NSMenu(); submenu.addItem(withTitle: "LAN Audio Receiverを終了", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q");appMenu.submenu = submenu
+        let submenu = NSMenu()
+        let settingsItem = submenu.addItem(withTitle: "設定…", action: #selector(showSettings), keyEquivalent: ",")
+        settingsItem.target = self
+        submenu.addItem(.separator())
+        submenu.addItem(withTitle: "LAN Audio Receiverを終了", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q");appMenu.submenu = submenu
         NSApp.mainMenu = menu
-        window = NSWindow(contentRect: NSRect(x: 0,y: 0,width: 670,height: 790),styleMask: [.titled,.closable,.miniaturizable],backing: .buffered,defer: false)
+        window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 260, height: 82), styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
         window.title = "LAN Audio Receiver"
-        let stack = NSStackView();stack.orientation = .vertical;stack.alignment = .leading;stack.spacing = 15
+        window.isReleasedWhenClosed = false
+        window.delegate = self
+        start.target = self; start.action = #selector(begin)
+        stop.target = self; stop.action = #selector(end); stop.isEnabled = false
+        let settingsButton = NSButton(image: NSImage(systemSymbolName: "gearshape", accessibilityDescription: "設定")!, target: self, action: #selector(showSettings))
+        settingsButton.isBordered = false
+        settingsButton.contentTintColor = .secondaryLabelColor
+        settingsButton.symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 20, weight: .regular)
+        settingsButton.toolTip = "設定（⌘,）"
+        settingsButton.setAccessibilityLabel("設定")
+        let buttons = NSStackView(views: [start, stop, settingsButton])
+        buttons.spacing = 12
+        buttons.distribution = .fill
+        buttons.translatesAutoresizingMaskIntoConstraints = false
+        window.contentView!.addSubview(buttons)
+        NSLayoutConstraint.activate([
+            start.widthAnchor.constraint(equalTo: stop.widthAnchor),
+            settingsButton.widthAnchor.constraint(equalToConstant: 28),
+            settingsButton.heightAnchor.constraint(equalToConstant: 28),
+            buttons.leadingAnchor.constraint(equalTo: window.contentView!.leadingAnchor, constant: 20),
+            buttons.trailingAnchor.constraint(equalTo: window.contentView!.trailingAnchor, constant: -20),
+            buttons.centerYAnchor.constraint(equalTo: window.contentView!.centerYAnchor)
+        ])
+        settingsWindow = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 700, height: 750), styleMask: [.titled, .closable], backing: .buffered, defer: false)
+        settingsWindow.title = "LAN Audio Receiver — 設定"
+        settingsWindow.isReleasedWhenClosed = false
+        settingsWindow.delegate = self
+        let stack = NSStackView();stack.orientation = .vertical;stack.alignment = .leading;stack.spacing = 12
         stack.translatesAutoresizingMaskIntoConstraints = false
-        window.contentView!.addSubview(stack)
-        NSLayoutConstraint.activate([stack.leadingAnchor.constraint(equalTo:window.contentView!.leadingAnchor,constant:24),stack.trailingAnchor.constraint(equalTo:window.contentView!.trailingAnchor,constant:-24),stack.topAnchor.constraint(equalTo:window.contentView!.topAnchor,constant:22)])
-        let title = NSTextField(labelWithString: "Windows → Mac Audio");title.font = .systemFont(ofSize:25,weight:.semibold);stack.addArrangedSubview(title)
+        settingsWindow.contentView!.addSubview(stack)
+        NSLayoutConstraint.activate([stack.leadingAnchor.constraint(equalTo:settingsWindow.contentView!.leadingAnchor,constant:24),stack.trailingAnchor.constraint(equalTo:settingsWindow.contentView!.trailingAnchor,constant:-24),stack.topAnchor.constraint(equalTo:settingsWindow.contentView!.topAnchor,constant:22)])
+        let title = NSTextField(labelWithString: "設定");title.font = .systemFont(ofSize:25,weight:.semibold);stack.addArrangedSubview(title)
         status.font = .systemFont(ofSize:15,weight:.medium);stack.addArrangedSubview(status)
         details.font = .systemFont(ofSize:12);details.textColor = .secondaryLabelColor;stack.addArrangedSubview(details)
-        func row(_ label:String,_ view:NSView) {let text = NSTextField(labelWithString:label);text.widthAnchor.constraint(equalToConstant:180).isActive = true;view.widthAnchor.constraint(equalToConstant:395).isActive = true;let r = NSStackView(views:[text,view]);r.spacing = 12;stack.addArrangedSubview(r)}
+        func row(_ label:String,_ view:NSView) {let text = NSTextField(labelWithString:label);text.widthAnchor.constraint(equalToConstant:240).isActive = true;view.widthAnchor.constraint(equalToConstant:395).isActive = true;let r = NSStackView(views:[text,view]);r.spacing = 12;stack.addArrangedSubview(r)}
         loadDevices()
         row("出力デバイス",devices)
-        let refresh = NSButton(title:"デバイス一覧を更新",target:self,action:#selector(refreshDevices));stack.addArrangedSubview(refresh)
+        refresh.target = self;refresh.action = #selector(refreshDevices);stack.addArrangedSubview(refresh)
         row("Windows IP（空欄で自動）",source);row("UDPポート",port);row("出力チャンネル先頭（1始まり）",channel)
         multicastGroup.placeholderString = "空欄: ユニキャスト / 例: 239.255.0.1"
         multicastInterface.placeholderString = "空欄: 自動 / 例: 192.168.11.65"
@@ -60,11 +93,37 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         scheduling.selectItem(at:UserDefaults.standard.string(forKey:"scheduling") == "qos" ? 1 : 0)
         row("受信方式",scheduling)
         row("受信バッファ",buffer);row("映像同期の追加遅延 (0–250 ms)",delay);row("再生ゲイン (-96–0 dB)",gain)
-        start.target = self;start.action = #selector(begin);stop.target = self;stop.action = #selector(end);stop.isEnabled = false
-        let buttons = NSStackView(views:[start,stop,NSButton(title:"ログを開く",target:self,action:#selector(showLog))]);buttons.spacing = 12;stack.addArrangedSubview(buttons)
+        let hint = NSTextField(labelWithString: "変更は次の受信開始時に反映されます。受信中は設定を変更できません。")
+        hint.font = .systemFont(ofSize: 12); hint.textColor = .secondaryLabelColor
+        stack.addArrangedSubview(hint)
+        stack.addArrangedSubview(NSButton(title: "ログを開く", target: self, action: #selector(showLog)))
         metrics.font = .monospacedSystemFont(ofSize:12,weight:.regular);metrics.maximumNumberOfLines = 5;stack.addArrangedSubview(metrics)
         logLabel.font = .systemFont(ofSize:10);logLabel.textColor = .secondaryLabelColor;logLabel.maximumNumberOfLines = 2;stack.addArrangedSubview(logLabel)
+        for label in [status, details, metrics, logLabel] {
+            label.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+            label.lineBreakMode = .byWordWrapping
+            label.maximumNumberOfLines = 0
+        }
+        settingsWindow.center()
         window.center();window.makeKeyAndOrderFront(nil);NSApp.activate(ignoringOtherApps:true)
+    }
+    @objc func showSettings() {
+        settingsWindow.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+    func windowWillClose(_ notification: Notification) {
+        if let closed = notification.object as? NSWindow, closed === settingsWindow {
+            settingsWindow.makeFirstResponder(nil)
+            saveSettings()
+        }
+    }
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        if sender === window { NSApp.terminate(nil); return false }
+        return true
+    }
+    func showError(_ message: String) {
+        status.stringValue = message
+        showSettings()
     }
     func loadDevices() {
         let current = devices.titleOfSelectedItem ?? UserDefaults.standard.string(forKey:"device")
@@ -78,12 +137,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             else if let rme = devices.itemTitles.first(where:{$0.contains("Fireface UCX II")}){devices.selectItem(withTitle:rme)}
         } catch {status.stringValue = "デバイス取得失敗: \(error.localizedDescription)"}
     }
-    @objc func refreshDevices(){loadDevices()}
+    @objc func refreshDevices(){if process == nil {loadDevices()}}
     @objc func begin() {
-        guard process == nil,let device = devices.titleOfSelectedItem else {return}
+        guard process == nil else {return}
+        settingsWindow.makeFirstResponder(nil)
+        guard let device = devices.titleOfSelectedItem else {showError("出力デバイスを選択してください");return}
         guard let udpPort = UInt16(port.stringValue),udpPort>0,let ch = UInt32(channel.stringValue),ch>0,
               let av = Double(delay.stringValue),av.isFinite,(0...250).contains(av),
-              let db = Double(gain.stringValue),db.isFinite,(-96...0).contains(db) else {status.stringValue = "ポート・チャンネル・遅延・ゲインの入力を確認してください";return}
+              let db = Double(gain.stringValue),db.isFinite,(-96...0).contains(db) else {showError("ポート・チャンネル・遅延・ゲインの入力を確認してください");return}
         multicastGroup.stringValue = multicastGroup.stringValue.trimmingCharacters(in:.whitespacesAndNewlines)
         multicastInterface.stringValue = multicastInterface.stringValue.trimmingCharacters(in:.whitespacesAndNewlines)
         func ipv4(_ text:String)->[UInt8]? {
@@ -94,18 +155,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         if !multicastGroup.stringValue.isEmpty {
             guard let group = ipv4(multicastGroup.stringValue),(224...239).contains(Int(group[0])) else {
-                status.stringValue = "マルチキャストIPは224.0.0.0〜239.255.255.255を指定してください";return
+                showError("マルチキャストIPは224.0.0.0〜239.255.255.255を指定してください");return
             }
             if !multicastInterface.stringValue.isEmpty {
                 guard let address = ipv4(multicastInterface.stringValue),address[0]<224 else {
-                    status.stringValue = "受信LANにはMacのIPv4アドレスを指定してください";return
+                    showError("受信LANにはMacのIPv4アドレスを指定してください");return
                 }
             }
         } else if !multicastInterface.stringValue.isEmpty {
-            status.stringValue = "受信LANを指定する場合はマルチキャストIPも入力してください";return
+            showError("受信LANを指定する場合はマルチキャストIPも入力してください");return
         }
-        let prefs = UserDefaults.standard
-        for (key,value) in [("multicastGroup",multicastGroup.stringValue),("multicastInterface",multicastInterface.stringValue),("device",device),("source",source.stringValue),("port",port.stringValue),("channel",channel.stringValue),("delay",delay.stringValue),("gain",gain.stringValue),("scheduling",scheduling.indexOfSelectedItem == 0 ? "realtime" : "qos"),("hardwareBuffer",hardwareBuffer.titleOfSelectedItem ?? "128 frames"),("buffer",buffer.titleOfSelectedItem ?? "20 ms")] {prefs.set(value,forKey:key)}
+        saveSettings()
         let directory = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Library/Logs/LAN-Audio-Receiver",isDirectory:true)
         do {
             try FileManager.default.createDirectory(at:directory,withIntermediateDirectories:true)
@@ -131,6 +191,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             p.terminationHandler = { [weak self] child in DispatchQueue.main.async {
                 guard let self else {return}
                 self.process = nil;self.setRunning(false);self.status.stringValue = child.terminationStatus == 0 ? "停止中" : "受信エラー (\(child.terminationStatus))"
+                if child.terminationStatus != 0 && !self.terminating {self.showSettings()}
                 if self.terminating {NSApp.reply(toApplicationShouldTerminate:true)}
             }}
             if !multicastGroup.stringValue.isEmpty {
@@ -158,10 +219,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
             try p.run();process = p;metrics.stringValue = "受信待機";setRunning(true);status.stringValue = "受信を開始しています…"
-        } catch {status.stringValue = "起動失敗: \(error.localizedDescription)"}
+        } catch {showError("起動失敗: \(error.localizedDescription)")}
+    }
+    func saveSettings() {
+        guard let device = devices.titleOfSelectedItem else { return }
+        let prefs = UserDefaults.standard
+        for (key,value) in [("multicastGroup",multicastGroup.stringValue),("multicastInterface",multicastInterface.stringValue),("device",device),("source",source.stringValue),("port",port.stringValue),("channel",channel.stringValue),("delay",delay.stringValue),("gain",gain.stringValue),("scheduling",scheduling.indexOfSelectedItem == 0 ? "realtime" : "qos"),("hardwareBuffer",hardwareBuffer.titleOfSelectedItem ?? "128 frames"),("buffer",buffer.titleOfSelectedItem ?? "20 ms")] {prefs.set(value,forKey:key)}
     }
     func setRunning(_ running:Bool) {
         start.isEnabled = !running;stop.isEnabled = running
+        refresh.isEnabled = !running
+        window.title = running ? "LAN Audio Receiver — 受信中" : "LAN Audio Receiver"
         for control in [devices,buffer,hardwareBuffer,scheduling,source,port,multicastGroup,multicastInterface,channel,delay,gain] as [NSControl] {control.isEnabled = !running}
     }
     func consume(_ data:Data) {
