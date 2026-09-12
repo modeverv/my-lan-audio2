@@ -22,7 +22,8 @@ namespace LanAudio {
     }
     sealed class Source {
         public int Pid;
-        public override string ToString() { return "Chrome  —  PID " + Pid; }
+        public string ProcessName;
+        public override string ToString() { return (ProcessName == "chrome" ? "Chrome／Chromeアプリ（YouTube Music等）" : "Spotify") + "  —  PID " + Pid; }
     }
     sealed class SenderForm : Form {
         readonly TextBox host = new TextBox();
@@ -49,16 +50,17 @@ namespace LanAudio {
             StartPosition = FormStartPosition.CenterScreen;
             BackColor = Color.FromArgb(246, 248, 251);
             AddLabel("LAN Audio Sender", 28, 22, 570, 38, 21, Color.FromArgb(23, 41, 67));
-            AddLabel("Chromeの音声を、同じLANの受信先へ送信します。", 30, 67, 570, 26, 10, Color.DimGray);
+            AddLabel("Chrome・Chromeアプリ・Spotifyの音声をLANへ送信します。", 30, 67, 570, 26, 10, Color.DimGray);
             AddLabel("送信先 IPアドレス", 30, 113, 365, 24, 10, Color.Black);
             AddLabel("ポート", 425, 113, 180, 24, 10, Color.Black);
             host.SetBounds(30, 142, 365, 30); host.AccessibleName = "送信先 IPアドレス";
             port.SetBounds(425, 142, 180, 30); port.Minimum = 1; port.Maximum = 65535; port.Value = 40100;
             port.AccessibleName = "送信先ポート";
             Controls.Add(host); Controls.Add(port);
-            AddLabel("取得するChrome", 30, 189, 365, 24, 10, Color.Black);
+            AddLabel("取得するアプリ", 30, 189, 365, 24, 10, Color.Black);
             source.SetBounds(30, 217, 455, 32); source.DropDownStyle = ComboBoxStyle.DropDownList;
-            source.AccessibleName = "取得するChrome"; Controls.Add(source);
+            source.AccessibleName = "取得するアプリ"; Controls.Add(source);
+            source.SelectedIndexChanged += delegate { if (child == null) DescribeSource(); };
             refresh.Text = "再検索"; refresh.SetBounds(505, 216, 100, 34); refresh.Click += delegate { RefreshSources(); }; Controls.Add(refresh);
             start.Text = "送信開始"; start.SetBounds(30, 275, 275, 47); start.BackColor = Color.FromArgb(29, 91, 198);
             start.ForeColor = Color.White; start.FlatStyle = FlatStyle.Flat; start.FlatAppearance.BorderSize = 0;
@@ -100,25 +102,36 @@ namespace LanAudio {
             try {
                 List<Source> found = await Task.Run(delegate {
                     Dictionary<int,int> parents = new Dictionary<int,int>();
-                    using (ManagementObjectSearcher search = new ManagementObjectSearcher("SELECT ProcessId, ParentProcessId FROM Win32_Process WHERE Name='chrome.exe'"))
+                    Dictionary<int,string> names = new Dictionary<int,string>();
+                    using (ManagementObjectSearcher search = new ManagementObjectSearcher("SELECT Name, ProcessId, ParentProcessId FROM Win32_Process WHERE Name='chrome.exe' OR Name='Spotify.exe'"))
                     using (ManagementObjectCollection results = search.Get()) {
                         foreach (ManagementObject item in results) using (item) {
                             parents[Convert.ToInt32(item["ProcessId"])] = Convert.ToInt32(item["ParentProcessId"]);
+                            names[Convert.ToInt32(item["ProcessId"])] = Path.GetFileNameWithoutExtension(Convert.ToString(item["Name"])).ToLowerInvariant();
                         }
                     }
                     List<Source> list = new List<Source>();
-                    foreach (KeyValuePair<int,int> pair in parents) if (!parents.ContainsKey(pair.Value)) list.Add(new Source { Pid = pair.Key });
-                    list.Sort(delegate(Source a, Source b) { return a.Pid.CompareTo(b.Pid); }); return list;
+                    foreach (KeyValuePair<int,int> pair in parents)
+                        if (!names.ContainsKey(pair.Value) || names[pair.Value] != names[pair.Key])
+                            list.Add(new Source { Pid = pair.Key, ProcessName = names[pair.Key] });
+                    list.Sort(delegate(Source a, Source b) { int order = String.CompareOrdinal(a.ProcessName,b.ProcessName); return order != 0 ? order : a.Pid.CompareTo(b.Pid); }); return list;
                 });
                 if (IsDisposed) return;
                 source.Items.Clear(); foreach (Source item in found) source.Items.Add(item);
                 if (found.Count > 0) {
                     source.SelectedIndex = 0;
                     for (int i=0;i<found.Count;i++) if (found[i].Pid == selected) source.SelectedIndex=i;
-                    detail.Text = "選択したChromeのタブ・YouTube Musicの音声を取得します。";
-                } else detail.Text = "Chromeを起動して「再検索」を押してください。";
-            } catch (Exception e) { if (!IsDisposed) detail.Text = "Chromeを検索できませんでした: " + e.Message; }
+                    DescribeSource();
+                } else detail.Text = "ChromeまたはSpotifyを起動して「再検索」を押してください。";
+            } catch (Exception e) { if (!IsDisposed) detail.Text = "アプリを検索できませんでした: " + e.Message; }
             finally { refreshing = false; if (!IsDisposed) { refresh.Enabled = true; start.Enabled = source.Items.Count > 0; } }
+        }
+        void DescribeSource() {
+            Source selected = source.SelectedItem as Source;
+            if (selected == null) return;
+            detail.Text = selected.ProcessName == "chrome"
+                ? "同じChromeのタブとChromeアプリをまとめて取得します。"
+                : "Spotifyデスクトップアプリの音声を取得します。";
         }
         string ExtractEngine() {
             byte[] bytes;
@@ -145,7 +158,7 @@ namespace LanAudio {
             if (selected == null) { RefreshSources(); return; }
             Process process = null;
             try {
-                using (Process target = Process.GetProcessById(selected.Pid)) if (!target.ProcessName.Equals("chrome",StringComparison.OrdinalIgnoreCase)) throw new Exception("Chromeを再検索してください。");
+                using (Process target = Process.GetProcessById(selected.Pid)) if (!target.ProcessName.Equals(selected.ProcessName,StringComparison.OrdinalIgnoreCase)) throw new Exception("取得するアプリを再検索してください。");
                 SaveSettings();
                 string engine = ExtractEngine();
                 string logs = Path.Combine(folder,"logs"); Directory.CreateDirectory(logs);

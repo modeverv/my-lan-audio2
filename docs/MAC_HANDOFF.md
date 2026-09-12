@@ -12,7 +12,8 @@ Windows側の今回の範囲（Chrome取得、UDP送信、開始／停止GUI、l
 
 ## 接続条件
 
-- Windows: `dist/LAN-Audio-Sender.exe`を起動し、MacのLAN IPと受信ポートを入力、Chromeを選んで開始。
+- Windows: `dist/LAN-Audio-Sender.exe`を起動し、MacのLAN IPと受信ポートを入力、Chrome／ChromeアプリまたはSpotifyを選んで開始。
+- Spotifyも通常process-includeを使う。Chrome／Chromeアプリは親プロセスを共有する場合まとめて取得する。UDP形式は共通。
 - 既定ポート40100。Mac側はUDPのbind先・ポートを設定可能にする。
 - WindowsはChrome親PIDのprocess-include。今回の形式は48kHz、2ch、f32 LE。
 - 480フレーム取得時は128/128/128/96フレームの4データグラムを即送信。1データグラム最大1400バイト。

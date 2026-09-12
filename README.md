@@ -5,8 +5,8 @@
 ## ダブルクリックで起動
 
 [LAN-Audio-Sender.exe](dist/LAN-Audio-Sender.exe)を起動してください。
-送信先IP・ポートを入力し、取得するChromeを選択して「送信開始」。停止は「停止」ボタンです。
-Chromeは自動検索します。送信エンジンはexe内に同梱済みです。[GUIの詳細](docs/windows-gui.md)
+送信先IP・ポートを入力し、Chrome／ChromeアプリまたはSpotifyを選択して「送信開始」。停止は「停止」ボタンです。
+起動中の対象アプリを自動検索します。ChromeとChromeアプリは同じ親プロセス配下をまとめて取得します。送信エンジンはexe内に同梱済みです。[GUIの詳細](docs/windows-gui.md)
 exeはGit対象外のローカル成果物です。新しいWindowsチェックアウトでは `scripts/build-gui.ps1` で生成してください。
 
 現在の実装は **Windowsキャプチャ経路の比較診断とUDP PCM送信** です。
