@@ -153,3 +153,9 @@ cargo clippy --workspace --all-targets --locked -- -D warnings
 
 [実機結果](docs/experiments.md) / [構造と次の工程](docs/architecture.md) /
 [テレメトリ定義](docs/telemetry.md) / [プロトコル状態](docs/protocol.md)
+
+## macOS送信アプリ
+
+Macからも送信できます。`scripts/build-macos-sender.sh`で`dist/LAN Audio Sender.app`を生成します。BlackHole・オーディオインターフェース・マイクの入力選択、チャンネル選択、ユニキャスト／マルチキャスト、入力メーター、開始／停止に対応しています。
+
+設定と制約は[macOS Sender](docs/macos-sender.md)を参照してください。Macの再生音はBlackHole経由です。

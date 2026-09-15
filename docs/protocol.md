@@ -43,3 +43,7 @@ UDP is enabled only by explicit `--udp-to IP:PORT`. One connected, nonblocking s
 
 The JSONL diagnostic schema_version remains 1 and is separate from this wire format. Its textual session_id is a log-run identifier, not the binary audio session_id.
 The [shared golden datagram](protocol-v1-golden.hex) contains one stereo frame (1.0, -0.5), rate 48000, stream 1, session 3, sequence 4, first_sample 5 and QPC values 6/7/8. Rust encoding and the Node probe check the same fixture. The exact header layout, packet splitting, exact PCM preservation, silence, pool overflow, deadline dropping and discontinuity restart have dedicated tests. Node's independent decoder validates real datagrams in `scripts/udp-loopback-test.mjs`.
+
+## macOS sender clock
+
+The macOS sender uses the same v1 layout. Its three timestamp fields are CoreAudio host time converted to 100 ns units (capture completion, preparation, send attempt), not Windows QPC or UTC. Clock calibration is still required for cross-machine comparisons. It increments the session on input sample-time discontinuity or recovery from an input render error. Its first_sample counts delivered input frames; device sample time is used only to detect discontinuities.
